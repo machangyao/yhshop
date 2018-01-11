@@ -18,10 +18,6 @@ Route::get('/', function () {
 
 
 
-Route::get('/stu/index', 'StuController@index');
 
-Route::get('/user/create', 'UserController@create');
-=======
-    return view('welcome');
-});
+
 
