@@ -41,6 +41,7 @@
         },
         {
             "name": "doctrine/inflector",
+<<<<<<< HEAD
             "version": "v1.3.0",
             "source": {
                 "type": "git",
@@ -55,6 +56,22 @@
             },
             "require": {
                 "php": "^7.1"
+=======
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/inflector.git",
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/e11d84c6e018beedd929cff5220969a3c6d1d462",
+                "reference": "e11d84c6e018beedd929cff5220969a3c6d1d462",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+>>>>>>> origin/machangyao
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.2"
@@ -62,7 +79,11 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
+<<<<<<< HEAD
                     "dev-master": "1.3.x-dev"
+=======
+                    "dev-master": "1.2.x-dev"
+>>>>>>> origin/machangyao
                 }
             },
             "autoload": {
@@ -104,7 +125,11 @@
                 "singularize",
                 "string"
             ],
+<<<<<<< HEAD
             "time": "2018-01-09T20:05:19+00:00"
+=======
+            "time": "2017-07-22T12:18:28+00:00"
+>>>>>>> origin/machangyao
         },
         {
             "name": "doctrine/lexer",
