@@ -16,3 +16,6 @@ Route::get('/', function () {
 });
 
 Route::resource('/user','UserController');
+    	retuen 'aaa';
+    // return view('welcome');
+});
