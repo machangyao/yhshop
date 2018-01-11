@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    	retuen 'aaa';
-    // return view('welcome');
-
+    	return view('welcome');
 });
+
+
+
+Route::get('/stu/index', 'StuController@index');
+
+Route::get('/user/create', 'UserController@create');
