@@ -11,8 +11,28 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::resource('/user','UserController');
+// 前台
+
+// 首页路由
+Route::get('/','Home\IndexController@index');
+
+// 列表页路由
+Route::get('/list','Home\ListController@list');
+
+// 商品详情页
+Route::get('/show','Home\ShowController@show');
+
+
+// 后台
+
+// 分类路由
+Route::resource('/category','Admin\CategoryController');
+
+// 商品路由
+
+// 品牌路由
+
