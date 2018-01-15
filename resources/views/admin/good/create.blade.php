@@ -37,14 +37,21 @@
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form action="/category" method="post" class="form-horizontal">   
+                        <form action="/good" method="post" class="form-horizontal" enctype="multipart/form-data">   
                             {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">分类</label>
                                     <div class="col-sm-2">
-                                        <select name="pid" class="form-control">
+                                        <select name="id" class="form-control">
                                             <option value="0">==请选择==</option>
+                                            @foreach($cates as $v)
+                                            <?php
+                                                $arr = explode(',',$v->path);
+                                                $n = count($arr) - 1;
+                                            ?>
+                                            <option value="{{ $v->id }}">{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -63,7 +70,7 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">货号</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+                                        <input type="text" name="sn" class="form-control" id="inputEmail3" placeholder="请输入商品货号">
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +79,16 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">价格</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+                                        <input type="text" name="price" class="form-control" id="inputEmail3" placeholder="请输入商品价格">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">市场价格</label>
+
+                                    <div class="col-sm-2">
+                                        <input type="text" name="market_price" class="form-control" id="inputEmail3" placeholder="请输入商品市场价格">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +97,12 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">品牌</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+                                        <select name="brand" class="form-control">
+                                            <option value="0">==请选择==</option>
+                                            @foreach($brands as $v)
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -90,7 +111,7 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">库存</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+                                        <input type="text" name="number" class="form-control" id="inputEmail3" placeholder="请输入商品库存">
                                     </div>
                                 </div>
                             </div>
@@ -99,13 +120,31 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">图片</label>
 
                                     <div class="col-sm-4">
-                                        <input type="file" name="name" id="inputEmail3" placeholder="请输入商品名称">
+                                        <input type="file" name="pic" id="inputEmail3" placeholder="请上传商品图片">
                                     </div>
                                 </div>
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">详情</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">关键字</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" name="keyword" class="form-control" id="inputEmail3" placeholder="请输入商品关键字">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">描述</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="text" name="description" class="form-control" id="inputEmail3" placeholder="请输入商品描述">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">商品详情</label>
 
                                     <div class="col-sm-9">
 										<!-- 加载编辑器的容器 -->
