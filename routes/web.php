@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//首页路由
+Route::get('/','Home\IndexController@index');
+
+//后台
+Route::get('/admin','admin\IndexController@index');
+
+//轮播图路由
+Route::resource('/admin/slide', 'admin\SlideController');
+
+
+
