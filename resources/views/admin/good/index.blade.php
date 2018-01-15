@@ -42,19 +42,21 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @foreach($data as $v)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{ $v->id }}</td>
+                                    <td>{{ $v->name }}</td>
+                                    <td>{{ $v->sn }}</td>
+                                    <td><img style="width:50px" src="./uploads/{{ $v->pic }}"></td>
+                                    <td>{{ $v->price }}</td>
+                                    <td>{{ $v->cid }}</td>
+                                    <td>{{ $v->bid }}</td>
+                                    <td>{{ $v->number }}</td>
+                                    <td>{{ $v->status }}</td>
+                                    <td>{{ $v->created_at }}</td>
                                     <td>修改 删除</td>
                                 </tr>
+                                @endforeach
                             </table>
                         </div>
                         <!-- /.box-body -->

@@ -32,7 +32,8 @@ class GoodController extends Controller
     {
         //
         $title = "商品列表";
-        return view('admin.good.index',['title'=>$title]);
+        $data = Goods::all();
+        return view('admin.good.index',['title'=>$title,'data'=>$data]);
     }
 
     /**
@@ -60,15 +61,55 @@ class GoodController extends Controller
     {
         // 获取提交的数据
         $input = $request->except('_token');
-        // 添加到数据库
+        // 添加到商品数据库
         $data = new Goods;
         $data->cid = $input['id'];
         $data->name = $input['name'];
         $data->price = $input['price'];
         $data->market_price = $input['market_price'];
-        $data->brand = $input['brand'];
+        $data->bid = $input['bid'];
+        $data->sn = $input['sn'];
+        $data->number = $input['number'];
+        $data->pic = $input['pic'];
+        $data->keyword = $input['keyword'];
+        $data->description = $input['description'];
+        $data->desc = $input['content'];
 
-        dd($data);
+
+        //判断是否上传文件
+        if($request->hasFile('pic'))
+        {
+            //判断是否上传成功
+            $file = $request->file('pic');
+            if($file->isValid())
+            {
+                //获取文件扩展名
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().mt_rand(100000,999999).'.'.$ext;
+                $res = $file->move('./uploads',$filename);
+                if($res)
+                {
+                    $data->pic = $filename;
+                }else{
+                    $data->pic = 'default.jpg';
+                }
+            }else{
+                $data->pic = 'default.jpg';
+            }
+        }else{
+            $data->pic = 'default.jpg';
+        }
+
+
+        $res = $data->save();
+        if($res)
+        {
+            return redirect('good/')->with('info','商品添加成功');
+        }else{
+            return back()->with('info','商品添加失败');
+        }
+
+
 
     }
 

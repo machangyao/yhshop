@@ -97,7 +97,7 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">品牌</label>
 
                                     <div class="col-sm-2">
-                                        <select name="brand" class="form-control">
+                                        <select name="bid" class="form-control">
                                             <option value="0">==请选择==</option>
                                             @foreach($brands as $v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
