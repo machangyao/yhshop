@@ -16,9 +16,17 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $title = '浏览分类';
+        $title = '分类列表';
         $keyword = $request -> input('keyword','');
-        $data = Categorys::where('name','like','%'. $keyword .'%')->get();
+        // $data = Categorys::where('name','like','%'. $keyword .'%')->orderBy("concat(path,id,',')",'asc')->get();
+        if($keyword)
+        {
+            $data = \DB::select("select *,concat(path,id,',') path from categorys where name like '{$keyword}' order by path");
+        }else{
+            $data = \DB::select("select *,concat(path,id,',') path from categorys  order by path");
+        }
+        
+        // $data = Categorys::where('name','like','%'. $keyword .'%')->orderBy('path','asc')->orderBy('id','asc')->get();
         return view('admin.category.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword]]);
     }
 
@@ -30,7 +38,11 @@ class CategoryController extends Controller
     public function create()
     {
         $title = '添加分类';
-        return view('admin.category.create',['title'=>$title]);
+        $id = $_GET['id'];
+        // $cates = Categorys::get();
+        $cates =  \DB::select("select *,concat(path,id,',') path from categorys  order by path");
+
+        return view('admin.category.create',['title'=>$title,'cates'=>$cates,'id'=>$id]);
     }
 
     /**
@@ -44,17 +56,24 @@ class CategoryController extends Controller
         $this->validate($request, [
                 'name' => 'required|min:2|max:8'
             ], [
-                'name.required' => '用户名不能为空',
-                'name.min' => '用户名最少2位',
-                'name.max' => '用户名最多8位'
+                'name.required' => '分类名称不能为空',
+                'name.min' => '分类名称最少2位',
+                'name.max' => '分类名称最多8位'
             ]);
         $input = $request->except('_token');
 
-        $cate = new Categorys;
-        $cate->name = $input['name'];
-        $cate->pid = 0;
-        $cate->path = '0,';
-        $res = $cate->save();
+        $data = new Categorys;
+        $data->name = $input['name'];
+        $data->pid = $input['pid'];
+        if($data->pid == '0'){
+            $data->path = '0,';
+        }else{
+            //取出父类的所有信息，其中肯定有父类的path路径
+            $cate = Categorys::where('id',$data->pid)->first();
+            $data->path = $cate->path.$data->pid.',';
+        }
+        
+        $res = $data->save();
 
         if($res)
         {

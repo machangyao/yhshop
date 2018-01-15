@@ -1,6 +1,9 @@
 @extends('layouts.admin.layout')
 
 @section('content')
+<style type="text/css">
+    .form-group{ margin-bottom: 0;}
+</style>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -22,12 +25,38 @@
                     <!-- Horizontal Form -->
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Horizontal Form</h3>
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form action="/category" method="post" class="form-horizontal">
+                        <form action="/category" method="post" class="form-horizontal">   
                             {{ csrf_field() }}
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">选择分类</label>
+
+                                    <div class="col-sm-4">
+                                        <select name="pid" class="form-control">
+                                            <option value="0">根分类</option>
+                                            @foreach($cates as $v)
+                                                <?php
+                                                    $arr = explode(',',$v->path);
+                                                    $n = count($arr) - 1;
+                                                ?>
+                                                <option @if ( $v->id == $id ) selected @endif value="{{ $v->id }}">{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">分类名称</label>

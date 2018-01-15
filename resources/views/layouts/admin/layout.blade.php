@@ -24,6 +24,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="/yh/layer/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="/yh/layer/layer.js"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -335,31 +337,31 @@
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>分类</span>
+                        <i class="fa fa-dashboard"></i> <span>分类管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="{{ url('/category/create') }}"><i class="fa fa-circle-o"></i>添加分类</a></li>
-                        <li><a href="{{ url('/category') }}"><i class="fa fa-circle-o"></i>浏览分类</a></li>
+                        <li><a href="{{ url('/category/create/?id=0') }}"><i class="fa fa-circle-o"></i>添加分类</a></li>
+                        <li><a href="{{ url('/category') }}"><i class="fa fa-circle-o"></i>分类列表</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>商品</span>
+                        <i class="fa fa-dashboard"></i> <span>商品管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../../index.html"><i class="fa fa-circle-o"></i>添加商品</a></li>
-                        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i>浏览商品</a></li>
+                        <li><a href="{{ url('/good/create') }}"><i class="fa fa-circle-o"></i>添加商品</a></li>
+                        <li><a href="{{ url('/good') }}"><i class="fa fa-circle-o"></i>浏览商品</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>品牌</span>
+                        <i class="fa fa-dashboard"></i> <span>品牌管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

@@ -53,15 +53,27 @@
                                 <tbody>
                                 @foreach($data as $v)
                                 <tr>
-                                    <td>{{ $v->id }}</td>
-                                    <td>{{ $v->name }}</td>
+                                    <td class="ids">{{ $v->id }}</td>
+                                    <?php
+                                        $arr = explode(',',$v->path);
+                                        $n = count($arr) - 1;
+                                    ?>
+                                    
+                                    <td>{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</td>
                                     <td>{{ $v->pid }}</td>
                                     <td>{{ $v->path }}</td>
-                                    <td><a href="">添加子分类</a> <a href="{{ url('/category/') }}/{{ $v->id }}/edit">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                    <td><a class="del-link" href="javascript:;">添加子分类</a> <a href="{{ url('/category/') }}/{{ $v->id }}/edit">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                 </tr>
+
                                 @endforeach
                                 </tfoot>
                             </table>
+
+                            <form style="display: none;" id="delForm" action="/category/create" method="get">
+                            <input type="hidden" id="dd" name="id" value="">
+                            </form>
+
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -73,21 +85,42 @@
         </section>
         <!-- /.content -->
     </div>
+
     <!-- /.content-wrapper -->
     <script type="text/javascript">
         function del(id)
         {
-            $.ajax({
-                url:'{{ url('/category/') }}/'+id,
-                data:{'_method':'delete','_token':'{{ csrf_token() }}'},
-                type:'post',
-                success:function(data){
-                    if(data.status == 1)
-                    {
-                        window.location.href = location.href;
+            //询问框
+            layer.confirm('您确定要删除吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                //ajax
+                $.ajax({
+                    url:'{{ url('/category/') }}/'+id,
+                    data:{'_method':'delete','_token':'{{ csrf_token() }}'},
+                    type:'post',
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            layer.msg(data.message, {icon: 6});
+                            window.location.href = location.href;
+                        }else{
+                            layer.msg(data.message, {icon: 5});
+                            window.location.href = location.href;  
+                        }
                     }
-                }
+                }); 
+
             });
+
         }
+
+
+        //添加子分类
+        $(".del-link").on('click', function() {
+            var id = $(this).parents('tr').find('.ids').html();
+            $("#dd").val(id);
+            $("#delForm").submit();
+        })
     </script>
 @stop

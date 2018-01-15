@@ -33,6 +33,8 @@ Route::get('/show','Home\ShowController@show');
 Route::resource('/category','Admin\CategoryController');
 
 // 商品路由
+Route::resource('/good','Admin\GoodController');
 
-// 品牌路由
+// 品牌路由oute
+Route::resource('/brand','Admin\BrandController');
 
