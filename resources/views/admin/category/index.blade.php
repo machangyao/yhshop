@@ -46,7 +46,7 @@
                                     <th>ID编号</th>
                                     <th>分类名称</th>
                                     <th>父ID</th>
-                                    <th>Path路径</th>
+                                    <!-- <th>Path路径</th> -->
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -59,9 +59,15 @@
                                         $n = count($arr) - 1;
                                     ?>
                                     
-                                    <td>{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</td>
+                                    <td>
+                                        @if($v->pid == 0)
+                                            {{ str_repeat('&nbsp;',($n*11)-22) }}{{ $v->name }}
+                                        @else
+                                            {{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}
+                                        @endif
+                                    </td>
                                     <td>{{ $v->pid }}</td>
-                                    <td>{{ $v->path }}</td>
+                                    <!-- <td>{{ $v->path }}</td> -->
                                     <td><a class="del-link" href="javascript:;">添加子分类</a> <a href="{{ url('/category/') }}/{{ $v->id }}/edit">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                 </tr>
 

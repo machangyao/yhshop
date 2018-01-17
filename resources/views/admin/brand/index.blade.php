@@ -32,6 +32,7 @@
                                     <th>ID编号</th>
                                     <th>名称</th>
                                     <th>网址</th>
+                                    <th>时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -42,6 +43,7 @@
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->name }}</td>
                                         <td>{{ $v->url }}</td>
+                                        <td>{{ $v->created_at }}</td>
                                         <td> <a href="{{ url('brand/'.$v->id.'/edit') }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                     </tr>
                                     @endforeach

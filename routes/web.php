@@ -48,6 +48,8 @@ Route::get('/show','Home\ShowController@show');
 Route::resource('/category','Admin\CategoryController');
 // 商品路由
 Route::resource('/good','Admin\GoodController');
+//商品上下架
+Route::get('/good/jia/{id}','Admin\GoodController@jia');
 // 品牌路由oute
 Route::resource('/brand','Admin\BrandController');
 

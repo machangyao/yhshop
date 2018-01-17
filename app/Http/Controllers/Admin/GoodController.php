@@ -6,9 +6,34 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Models\Admin\Goods;
+use App\Http\Models\Admin\Categorys;
+
+use Intervention\Image\ImageManagerStatic as Image;
 
 class GoodController extends Controller
 {
+    //商品上下架
+    public function jia($id)
+    {
+        $data = Goods::find($id);
+        if($data->status == 1){
+            $data->status = 0;
+        }elseif($data->status == 0){
+            $data->status = 1;
+        }
+
+        $res = $data->save();
+        if($res)
+        {
+            $data = ['status' => 1,'message'=>'成功'];
+        }else{
+            $data = ['status' => 0,'message'=>'失败'];
+        }
+
+        return $data;
+    }
+
+
     public function upload()
     {
         //获取上传的文件对象
@@ -34,7 +59,10 @@ class GoodController extends Controller
         $title = "商品列表";
         $keyword = $request->input('keyword','');
         $num = $request->input('num',2);
-        $data = Goods::where('name','like','%' .$keyword. '%')->paginate($num);
+
+        //取商品分类信息
+        $catess = new categorys;
+        $data = Goods::where('name','like','%' .$keyword. '%')->with('categorys','brands')->paginate($num);
         return view('admin.good.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
     }
 
@@ -104,6 +132,9 @@ class GoodController extends Controller
                 $ext = $file->getClientOriginalExtension();
                 $filename = time().mt_rand(100000,999999).'.'.$ext;
                 $res = $file->move('./uploads',$filename);
+                //图片缩放
+                $img = Image::make("./uploads/".$filename)->resize(218,218);
+                $img->save("./uploads/s_".$filename);
                 if($res)
                 {
                     $data->pic = $filename;
@@ -198,6 +229,9 @@ class GoodController extends Controller
                 $ext = $file->getClientOriginalExtension();
                 $filename = time().mt_rand(100000,999999).'.'.$ext;
                 $res = $file->move('./uploads',$filename);
+                //图片缩放
+                $img = Image::make("./uploads/".$filename)->resize(218,218);
+                $img->save("./uploads/s_".$filename);
                 if($res)
                 {
                     $data->pic = $filename;

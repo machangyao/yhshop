@@ -68,14 +68,32 @@
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->name }}</td>
                                         <td>{{ $v->sn }}</td>
-                                        <td><img style="width:50px" src="./uploads/{{ $v->pic }}"></td>
+                                        <td><img style="width:20px;height:20px;" src="./uploads/s_{{ $v->pic }}"></td>
                                         <td>{{ $v->price }}</td>
-                                        <td>{{ $v->cid }}</td>
-                                        <td>{{ $v->bid }}</td>
-                                        <td>{{ $v->number }}</td>
-                                        <td>{{ $v->status }}</td>
+                                        <td>{{ $v->categorys->name }}</td>
+                                        <td>{{ $v->brands->name }}</td>
+                                        <td>
+                                            @if($v->number <= 0)
+                                                已售完
+                                            @else
+                                                {{ $v->number }}
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($v->status == 1)
+                                                上架
+                                            @else
+                                                下架
+                                            @endif
+                                        </td>
                                         <td>{{ $v->created_at }}</td>
-                                        <td><a href="{{ url('/good').'/'.$v->id }}">详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                        <td>
+                                        @if($v->status == 1 )
+                                        <a href="javascript:;" onclick="jia({{$v->id}})">下架</a>
+                                        @else
+                                        <a href="javascript:;" onclick="jia({{$v->id}})">上架</a>
+                                        @endif
+                                         <a href="{{ url('/good').'/'.$v->id }}">详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                     </tr>
                                     @endforeach
                                 @else
@@ -125,5 +143,26 @@
             });
 
         }
+
+        // 商品上下架
+        function jia(id)
+        {
+            $.ajax({
+                url:'{{ url('/good/jia') }}/'+id,
+                data:{'_token':'{{ csrf_token() }}'},
+                success:function(data){
+                    if(data.status == 1)
+                    {
+                        // layer.msg(data.message, {icon: 6});
+                        window.location.href = location.href;
+                    }else{
+                        // layer.msg(data.message, {icon: 5});
+                        window.location.href = location.href;
+                    }
+                }
+            });
+        }
+
+
 </script>
 @stop
