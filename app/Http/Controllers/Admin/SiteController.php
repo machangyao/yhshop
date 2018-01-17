@@ -41,10 +41,10 @@ class SiteController extends Controller
 
         //提示信息
         $mess = [
-            'site_keyword'=>'网站关键字不能为空',
-            'site_describe'=>'网站描述不能为空',
-            'site_copyright'=>'网站版权声明不能为空',
-            'site_logo'=>'网站logo图不能为空',
+            'site_keyword.required'=>'网站关键字不能为空',
+            'site_describe.required'=>'网站描述不能为空',
+            'site_copyright.required'=>'网站版权声明不能为空',
+            'site_logo.required'=>'网站logo图不能为空',
         ];
 
         $Validator = Validator::make($input, $rule, $mess);

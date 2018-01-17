@@ -28,6 +28,23 @@
                             <h3 class="box-title">网站信息</h3>
                         </div>
                         <!-- /.box-header -->
+
+
+                        @if (count($errors) > 0)
+                            <div >
+                                <ul>
+                                    @if(is_object($errors))
+                                        @foreach ($errors->all() as $error)
+                                            <li style="color:red">{{ $error }}</li>
+                                        @endforeach
+                                    @else
+                                            <li style="color:red">{{ $errors }}</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+
+
                         <form role="form" action="{{ url('/admin/site') }}" method="post">
                         {{ csrf_field() }}
                             <div class="box-body">
