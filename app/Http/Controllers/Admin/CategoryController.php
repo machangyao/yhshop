@@ -143,9 +143,19 @@ class CategoryController extends Controller
         $res = Categorys::find($id)->delete();
         if($res)
         {
-            return response()->json(['status'=>1]);
+            // return response()->json(['status'=>1]);
+            $data = [
+                'status' => 1,
+                'message' => '删除成功'
+            ];
         }else{
-            return response()->json(['stauts'=>0]);
+            // return response()->json(['stauts'=>0]);
+            $data = [
+                'status' => 0,
+                'message' => '删除失败'
+            ];
         }
+
+        return $data;
     }
 }

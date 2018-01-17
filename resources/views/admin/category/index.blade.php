@@ -25,7 +25,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
 						
-							<form action="/category" method="get">
+							<form action="{{ url('/category') }}" method="get">
 								<div class="row">
 									<div class="col-xs-8"></div>
 									<div class="col-xs-4">

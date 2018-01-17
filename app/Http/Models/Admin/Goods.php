@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goods extends Model
 {
-	// protected $primaryKey = 'id';
- //    //去掉laravel自动维护的字段
- //    // public $timestamps = false;
+	
+	public $table = "Goods";
 
- //    //不批量添加字段
- //    public $guarded = [];
+	// 商品表与分类表的动态属性,查找所属分类id的分类名
+	public function Categorys()
+	{
+		return $this->belongsTo('Models\Admin\Categorys','cid','id');
+	}
 }
