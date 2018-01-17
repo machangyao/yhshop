@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Slide;
+use App\Models\Home\Slides;
 class SlideController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 轮播图
      *
      * @return \Illuminate\Http\Response
      */
@@ -16,9 +17,9 @@ class SlideController extends Controller
     {
         //
 
-        $slide = Slide::get();
+        $slide = Slides::get();
 
-        return view('admin/slide1' , ['slide'=>$slide]);
+        return view('admin/slide/slide1' , ['slide'=>$slide]);
     }
 
     /**
@@ -29,18 +30,48 @@ class SlideController extends Controller
     public function create()
     {
         //添加
-        return view('admin/slide_add');
+        return view('admin/slide/slide_add');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 执行添加
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //执行添加
     public function store(Request $request)
     {
-        //
+        //获取提交数据
+        $input = $request->except('_token');
+        
+        //验证数据
+        $rule = [
+            'slide_url'=>'required',
+            'slide_text'=>'required',
+            'slide_mig'=>'required',
+        ];
+
+        //提示信息
+        $mess = [
+            'slide_url.required'=>'连接不能为空',
+            'slide_text.required'=>'文字描述不能为空',
+            'slide_mig.required'=>'图片不能为空',
+        ];
+
+        $Validator = Validator::make($input, $rule, $mess);
+
+        if($Validator->fails()){
+            return redirect('admin/slide/create')
+                ->withErrors($Validator)
+                ->withInput(); 
+        }
+
+
+
+        //添加操作
+        $res = Slides::create($input);
+        return redirect('admin/slide');
     }
 
     /**
@@ -60,11 +91,13 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //跳转到修改页面
     public function edit($id)
     {
         //编辑
 
-        return view('admin/slide_edit');
+        $slide = Slides::find($id);
+        return view('admin/slide/slide_edit',compact('slide'));
     }
 
     /**
@@ -74,9 +107,47 @@ class SlideController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    //执行修改
     public function update(Request $request, $id)
     {
-        //
+        //获取表单
+        $input = $request->except('_token');
+
+        
+
+         //验证数据
+        $rule = [
+            'slide_url'=>'required',
+            'slide_text'=>'required',
+            'slide_mig'=>'required',
+        ];
+
+        //提示信息
+        $mess = [
+            'slide_url.required'=>'连接不能为空',
+            'slide_text.required'=>'文字描述不能为空',
+            'slide_mig.required'=>'图片不能为空',
+        ];
+
+        $Validator = Validator::make($input, $rule, $mess);
+
+        if($Validator->fails()){
+            return redirect('admin/slide/'.$id.'/edit')
+                ->withErrors($Validator)
+                ->withInput(); 
+        }
+
+        //修改记录
+        $slide = Slides::find($id);
+        $res = $slide->update($input);
+
+        
+        if($res){
+            return redirect('admin/slide');
+        }else{
+            return back()->with('msg','修改失败');
+
+        }
     }
 
     /**
@@ -87,6 +158,20 @@ class SlideController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除
+        $res = Slides::find($id)->delete();
+
+        if($res){
+            $data = [
+                'status'=>0,
+                'message'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>1,
+                'message'=>'删除失败'
+            ];
+        }
+        return $data;
     }
 }

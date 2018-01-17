@@ -386,6 +386,65 @@
                         <li><a href="{{ url('/admin/slide') }}"><i class="fa fa-circle-o"></i>浏览轮播图</a></li>
                     </ul>
                 </li>
+
+
+            <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>网站配置信息</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/site') }}"><i class="fa fa-circle-o"></i>浏览网站配置信息</a></li>
+                        <li><a href="{{ url('/admin/site/edit') }}"><i class="fa fa-circle-o"></i>编辑网站配置信息</a></li>
+                    </ul>
+                </li>
+
+            
+
+            <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>广告管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/ads') }}"><i class="fa fa-circle-o"></i>浏览广告信息</a></li>
+                        <li><a href="{{ url('/admin/ads/create') }}"><i class="fa fa-circle-o"></i>添加广告信息</a></li>
+                    </ul>
+                </li>
+
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>友情链接管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/link') }}"><i class="fa fa-circle-o"></i>浏览友情链接</a></li>
+                        <li><a href="{{ url('/admin/link/create') }}"><i class="fa fa-circle-o"></i>添加友情链接</a></li>
+                    </ul>
+                </li>
+
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>文章管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/article') }}"><i class="fa fa-circle-o"></i>浏览文章</a></li>
+                        <li><a href="{{ url('/admin/article/create') }}"><i class="fa fa-circle-o"></i>添加文章</a></li>
+                    </ul>
+                </li>
+
             </ul>
         </section>
         <!-- /.sidebar -->
