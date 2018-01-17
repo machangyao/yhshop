@@ -4,10 +4,11 @@ namespace App\Http\Models\Home;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Addr extends Model
 {
-      //用户表模型
-	public $table = 'users';
-	public $primaryket = 'id';
+	//地址表模型
+    public $table = 'addrs';
+    public $primaryket = 'id';
 	public $timestamps = false;
+
 }

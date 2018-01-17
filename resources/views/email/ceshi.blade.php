@@ -3,8 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<style type="text/css">
+		h2{
+			color:red;
+		}
+	</style>
 </head>
 <body>
-	<a href="{{url('/fgedit')}}/{{$email}}">修改密码</a>
+	<h2>I Love U</h2>
 </body>
 </html>

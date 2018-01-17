@@ -38,7 +38,7 @@
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-active">
 
-									<form name='form1' method="post" action="{{url('/fgedit')}}">
+									<form name='form1' method="post" action="{{url('/dofgedit')}}">
 									{{ csrf_field() }}
 									
 							   <div class="user-email">
@@ -49,7 +49,7 @@
 										<label for="email"><i class="am-icon-envelope-o"></i></label>
 										<input type="password" name="repassword" id="repassword" placeholder="请输入确认密码" >
                  </div>						
-                 									
+                 		<input type="hidden" name='email' value="{{$email}}">				
                  
                  
                  </form>
@@ -60,7 +60,7 @@
 										</label>
 							  	</div> -->
 										<div class="am-cf">
-											<input type="submit" id='submit' disabled='false' value="确认修改" class="am-btn am-btn-primary am-btn-sm am-fl">
+											<input type="submit" id='submit'  value="确认修改" class="am-btn am-btn-primary am-btn-sm am-fl">
 										</div>
 
 								</div>
@@ -68,12 +68,7 @@
 								
 
 								<script>
-									var a = null;
-									$.ajaxSetup({
-			                headers: {
-			                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			                }
-			            });
+									
 									$(function() {
 									    $('#doc-my-tabs').tabs();
 									  });
