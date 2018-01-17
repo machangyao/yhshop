@@ -48,8 +48,11 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
 
+<<<<<<< HEAD
            
 
+=======
+>>>>>>> master
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
 
