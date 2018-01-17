@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\home;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Session;
+use Illuminate\Support\Facades\Crypt;
+use App\Http\Models\Home\User;
 
-class UserController extends Controller
+class UserPasswordController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //显示页面
-        $data = \DB::table('a')->get();
-        return view('index',['data'=>$data]);
+        //返回修改密码页面
+        return view('home.user.password');
     }
 
     /**
@@ -25,9 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //添加页面
-        return view('add');
-
+        //
     }
 
     /**
@@ -38,13 +39,28 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $data = $request->except('_token');
-        $res = \DB::table('a')->insert([['name'=>$data['name'],'password'=>$data['password']]]);
+        //执行修改密码
+
+        $this->validate($request, [
+            'newpassword' => 'required|',
+            'oldpassword' => 'required|',
+            'repassword' => 'required|same:newpassword',
+        ],$messages = [
+            'oldpassword.required'     => '原密码不能为空',
+            'newpassword.required'      => '新密码不能为空',
+            'repassword.required'      => '确认密码不能为空',
+            'repassword.same'      => '确认密码不正确',
+        ]);
+        $data = $request->input('newpassword');
+        if(!Crypt::decrypt(session('user_info')['user_password']) == $data){
+            return back()->with('psw','原密码不正确');
+        }
+        $data = Crypt::encrypt($data);
+        $res = User::where('id',session('user_info')['id'])->update(['user_password'=>$data]);
         if($res){
-            return redirect('/user');
+            return redirect('/user/lgout');
         }else{
-            return back();
+            return back()->with('psw','修改失败');
         }
     }
 
@@ -57,7 +73,6 @@ class UserController extends Controller
     public function show($id)
     {
         //
-        return 'show';
     }
 
     /**
@@ -69,8 +84,6 @@ class UserController extends Controller
     public function edit($id)
     {
         //
-        $user = \DB::table('a')->where('id',$id)->first();
-        return view('edit',['user'=>$user]);
     }
 
     /**
@@ -83,13 +96,6 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = $request->input();
-        $res = \DB::table('a')->where('id',$id)->update(['name'=>$data['name']]);
-        if($res){
-            return redirect('/user');
-        }else{
-            return back();
-        }
     }
 
     /**
@@ -101,11 +107,5 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
-        $res = \DB::table('a')->where('id',$id)->delete();
-        if($res){
-            return redirect('/user');
-        }else{
-            return back();
-        }
     }
 }

@@ -37,17 +37,17 @@
 								        </ul>
 								    </div>
 								@endif
-								<p>{{session('yzm')}}{{session('yz')}}</p>
+								<p>{{session('yzm')}}{{session('yz')}}{{session('msg')}}</p>
 						<div class="login-form">
 								<form name='form1' method="post" action="{{url('/login')}}">
 									{{ csrf_field() }}
 							   <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
-								    <input type="text" name="user_name" id="user" placeholder="邮箱/手机/用户名" value="{{Cookie::get('user_name')}}">
+								    <input type="text" name="user_name" id="user" placeholder="邮箱/手机/用户名" value="{{old('user_name')}}">
                  </div>
                  <div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>
-								    <input type="password" name="user_password" id="password" placeholder="请输入密码" value="{{Cookie::get('user_password')}}">
+								    <input type="password" name="user_password" id="password" placeholder="请输入密码" value="{{old('user_password')}}">
                  </div>
                  <div class="user-pass" style='height:auto'>
                   	<label for="password"><i class="am-icon-lock"></i></label>
