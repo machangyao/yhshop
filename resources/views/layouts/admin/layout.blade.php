@@ -379,8 +379,8 @@
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="../../index.html"><i class="fa fa-circle-o"></i>添加品牌</a></li>
-                        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i>浏览品牌</a></li>
+                        <li><a href="{{ url('/brand/create') }}"><i class="fa fa-circle-o"></i>添加品牌</a></li>
+                        <li><a href="{{ url('/brand') }}"><i class="fa fa-circle-o"></i>浏览品牌</a></li>
                     </ul>
                 </li>
             </ul>
