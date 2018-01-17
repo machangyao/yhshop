@@ -97,12 +97,12 @@
                 layer.msg(data.message,{icon:6});
                 setTimeout(function(){
                     window.location.href = location.href;
-                },2000);
+                },1000);
             }else{
                 layer.msg(data.message,{icon:5});
                  setTimeout(function(){
                      window.location.href = location.href;
-                        },2000);
+                        },1000);
             }
         })
     },function(){});

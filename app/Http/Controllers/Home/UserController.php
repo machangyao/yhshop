@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        //用户详情页
     }
 
     /**
@@ -55,11 +55,10 @@ class UserController extends Controller
      * @return 返回一个前台的提交注册
      */
         $this->validate($request, [
-                'user_name' => 'required|max:20',
-                'user_password' => 'required|',
-                'user_email' => 'required|email',
-                'user_tel' => 'required|numeric',
-                'repassword' => 'required|same:user_password',
+            'user_password' => 'required|',
+            'user_email' => 'required|email',
+            'user_tel' => 'required|numeric',
+            'repassword' => 'required|same:user_password',
         ],$messages = [
             'user_name.required'     => '账号不能为空',
             // 'user_name.min'      => '账号最小5',
@@ -72,7 +71,7 @@ class UserController extends Controller
             'repassword.required'      => '确认密码不能为空',
             'repassword.same'      => '确认密码不正确',
         ]);
-
+        
 
         $data = $request->except('_token','repassword');
         $tel = User::where('user_tel',$data['user_tel'])->first();
@@ -86,10 +85,11 @@ class UserController extends Controller
         $data['create_at'] = date('Y-m-d H:i:s',time());
         $data['user_status'] = 1;
         $data['user_password'] = Crypt::encrypt($data['user_password']);
+        $data['avatar'] = '/yh/home/images/getAvatar.do.jpg';
         $res = User::insert($data);
 
         if($res){
-            // return view();
+            return redirect('/login')->with('msg','注册成功');
         }else{
             return back()->with('msg','注册失败');
         }
@@ -156,12 +156,15 @@ class UserController extends Controller
         //     Session::put('user_info',Cookie::get('user_info'));
         //     return back();
         // }
+        if(session('user_info')){
+            return redirect('/');
+        }
         return view('Home.login');
     }
 
     public function dologin(Request $request){
 
-
+        $data = $request->except('_token','captcha');
         $this->validate($request, [
                 'user_name' => 'required|',
                 'user_password' => 'required|',
@@ -171,10 +174,10 @@ class UserController extends Controller
             'captcha.required'      => '验证码不能为空',
             'user_password.required'      => '密码不能为空',
         ]);
+
         if(strtolower($request->input('captcha')) != strtolower(session('code'))){
             return back()->with('yzm','验证码错误')->with('user_name',$request->input('user_name'));
         }
-        $data = $request->except('_token','captcha');
         $res = User::where('user_name',$data['user_name'])->first();
         $res2 = User::where('user_tel',$data['user_name'])->first();
         $res3 = User::where('user_email',$data['user_name'])->first();
@@ -185,26 +188,38 @@ class UserController extends Controller
                     cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res);
-                return '登陆成功';
+                return redirect('/mycenter');
+                if(session('back')){
+                    return redirect(session('back'));
+                }else{
+                    return redirect('/');
+                }
             }
         }elseif($res2){
             if(Crypt::decrypt($res2['user_password'])==$data['user_password']){
                 if($data['remember']=='yes'){
-                    cookie::make("user_name",$data['user_name'],time()+3600*24*365);
-                    cookie::make("user_password",$data['user_password'],time()+3600*24*365);
-
+                    cookie::queue("user_name",$data['user_name'],time()+3600*24*365);
+                    cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res2);
-                return back();
+                if(session('back')){
+                    return redirect(session('back'));
+                }else{
+                    return redirect('/');
+                }
             }
         }elseif($res3){
             if(Crypt::decrypt($res3['user_password'])==$data['user_password']){
                 if($request->input('remember')=='yes'){
-                    cookie::make("user_name",$data['user_name'],time()+3600*24*365);
-                    cookie::make("user_password",$data['user_password'],time()+3600*24*365);
+                    cookie::queue("user_name",$data['user_name'],time()+3600*24*365);
+                    cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res3);
-                return back();
+                if(session('back')){
+                    return redirect(session('back'));
+                }else{
+                    return redirect('/');
+                }
             }
         }
         

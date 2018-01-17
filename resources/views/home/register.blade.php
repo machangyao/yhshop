@@ -86,12 +86,7 @@
 								
 
 								<script>
-									var a = null;
-									$.ajaxSetup({
-			                headers: {
-			                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-			                }
-			            });
+									
 									$(function() {
 									    $('#doc-my-tabs').tabs();
 									  });
@@ -105,7 +100,7 @@
 										$.ajax({
 											url:"{{ url('/user/ajax')}}",
 											type:'post',
-											data:{'user_name':val},
+											data:{'user_name':val,'_token':'{{csrf_token()}}'},
 											success:function(data){
 												var a = parseInt(data);
 												if(a){
