@@ -10,9 +10,9 @@
                 <small>列表</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-                <li><a href="#">用户管理</a></li>
-                <li class="active">列表</li>
+                <li>管理员: {{ session('user') }}</li>
+                <li><a href="#">修改密码</a></li>
+                <li><a href="{{ url('admin/logout') }}">退出</a></li>
             </ol>
         </section>
 
@@ -32,17 +32,16 @@
                             		<div class="col-md-2">
                             		      
                             		</div>
-                            		<div class="col-md-4">
+                            		<div class="col-md-6">
                             				
                             			
                             		</div>
                             		<div class="col-md-4">
-                            			
-					<div class="input-group input-group">
-	                                		
-	                                		<span class="input-group-btn">
-	                      				<button class="btn btn-info btn-flat">搜索一下!</button>
-	                    			</span>
+                            			<input type="text"  name="keywords" value="{{ $input }}" class="form-control">
+                                                                <button class="btn btn-info btn-flat">查询</button>
+				<div class="input-group input-group">
+	                      				
+	                    			
                             		</div>
 			
                             		</div>
@@ -55,16 +54,25 @@
                                     <th>邮箱</th>
                                     <th>头像</th>
                                     <th>手机号</th>
-                                    <th>状态</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                            
+                                @foreach($data as $k=>$v)
+                                    <tr>
+                                        <td>{{ $v->id }}</td>
+                                        <td>{{ $v->nickname }}</td>
+                                        <td>{{ $v->email }}</td>
+                                        <td>{{ $v->avatar }}</td>
+                                        <td>{{ $v->tel }}</td>
+                                        <td>编辑   删除</td>
+                                    </tr>
+                                 @endforeach
                                 </tbody>
+                                      
 
                             </table>
-
+                                      {!! $data->appends(['keywords'=>$input])->render() !!}
                         </div>
                         <!-- /.box-body -->
                     </div>

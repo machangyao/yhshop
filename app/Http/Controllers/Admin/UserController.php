@@ -14,9 +14,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.user.list');
+        //1.获取所有的数据,显示到列表中
+        // $data = User::get();
+
+
+        //2.获取分页数据
+
+        $data = User::orderBy('id','asc') -> paginate(3);
+        // return view('admin.user.list',compact('data'));
+        //3.单条件搜索
+        $input = $request -> input('keywords');
+        $data = User::where('nickname' , 'like' , '%' .$input. '%') -> paginate(2);
+        return view('admin.user.list',compact('data','input'));
     }
 
     /**

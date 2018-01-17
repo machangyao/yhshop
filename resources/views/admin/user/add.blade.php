@@ -10,9 +10,9 @@
                 <small>添加</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> 主页</a></li>
-                <li><a href="#">用户管理</a></li>
-                <li class="active">添加</li>
+                <li>管理员: {{ session('user') }}</li>
+                <li><a href="#">修改密码</a></li>
+                <li><a href="{{ url('admin/logout') }}">退出</a></li>
             </ol>
         </section>
 
