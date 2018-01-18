@@ -13,6 +13,7 @@ return [
     |
     */
 
+
     'name' => env('APP_NAME', '有货商城'),
 
     /*
@@ -64,6 +65,7 @@ return [
     | ahead and set this to a sensible default for you out of the box.
     |
     */
+
 
     'timezone' => 'PRC',
 

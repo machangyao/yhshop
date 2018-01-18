@@ -337,6 +337,18 @@
             <ul class="sidebar-menu">
                 <li class="treeview">
                     <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>用户管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/user/create') }}"><i class="fa fa-circle-o"></i>添加用户</a></li>
+                        <li><a href="{{ url('/admin/user') }}"><i class="fa fa-circle-o"></i>用户列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-dashboard"></i> <span>分类管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>

@@ -11,6 +11,34 @@
 |
 */
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+//登录页面路由
+Route::get('admin/login','Admin\LoginController@login');
+
+//登陆页面的验证码
+Route::get('admin/yzm','Admin\LoginController@yzm');
+
+Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
+
+
+//登陆页面的处理逻辑
+Route::post('admin/dologin','Admin\LoginController@dologin');
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
+//后台首页
+    Route::get('index','LoginController@index');
+
+//退出登录
+    Route::get('logout','LoginController@logout');
+
+
+//用户模块
+	Route::resource('user','UserController');
+	
+});
 
 
 //前台
@@ -66,5 +94,3 @@ Route::resource('/good','Admin\GoodController');
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
 // 品牌路由oute
 Route::resource('/brand','Admin\BrandController');
-
-
