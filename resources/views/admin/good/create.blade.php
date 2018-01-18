@@ -50,7 +50,7 @@
                                                 $arr = explode(',',$v->path);
                                                 $n = count($arr) - 1;
                                             ?>
-                                            <option value="{{ $v->id }}">
+                                            <option value="{{ $v->id }}" @if(in_array($v->id,$pid)) disabled @endif>
                                             @if($v->pid == 0)
                                                 {{ str_repeat('&nbsp;',($n*11)-22) }}
                                             @else

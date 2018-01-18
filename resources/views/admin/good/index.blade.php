@@ -81,9 +81,9 @@
                                         </td>
                                         <td>
                                             @if($v->status == 1)
-                                                上架
+                                                <img src="./images/yes.gif">
                                             @else
-                                                下架
+                                                <img src="./images/no.gif">
                                             @endif
                                         </td>
                                         <td>{{ $v->created_at }}</td>
@@ -93,7 +93,7 @@
                                         @else
                                         <a href="javascript:;" onclick="jia({{$v->id}})">上架</a>
                                         @endif
-                                         <a href="{{ url('/good').'/'.$v->id }}">详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                         <a href="{{ url('/good').'/'.$v->id }}">查看详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                     </tr>
                                     @endforeach
                                 @else

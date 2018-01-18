@@ -24,6 +24,25 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+                            <form action="{{ url('/brand') }}" method="get">
+                                <div class="row">
+                                    <div class="col-xs-2">
+                                            <select name="num" class="form-control">
+                                                <option @if($where['num'] == 2) selected @endif>2</option>
+                                                <option @if($where['num'] == 4) selected @endif>4</option>
+                                            </select>
+                                    </div>
+                                    <div class="col-xs-6"></div>
+                                    <div class="col-xs-4">
+                                        <div class="input-group input-group">
+                                              <input type="text" name="keyword" value="{{ $where['keyword'] }}" class="form-control" placeholder="请输入搜索条件">
+                                              <span class="input-group-btn">
+                                              <button class="btn btn-info btn-flat">搜索</button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
 							<br>
 
                             <table id="example2" class="table table-bordered table-hover">
@@ -54,8 +73,7 @@
                                 @endif
                                 </tfoot>
                             </table>
-
-
+                            {!! $data->appends($where)->render() !!}
                         </div>
                         <!-- /.box-body -->
                     </div>

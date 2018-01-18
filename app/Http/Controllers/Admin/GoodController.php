@@ -78,7 +78,12 @@ class GoodController extends Controller
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
 
-        return view('admin.good.create',['title'=>$title,'cates'=>$cates,'brands'=>$brands]);
+        //从分类数组中取出pid列
+        $pid = array_column($cates,'pid');
+        //去除重复
+        $pid = array_unique($pid);
+        
+        return view('admin.good.create',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'pid'=>$pid]);
     }
 
     /**
@@ -190,7 +195,13 @@ class GoodController extends Controller
         $data = Goods::find($id);
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
-        return view('admin.good.edit',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'data'=>$data,'cid'=>$cid,'bid'=>$bid]);
+
+        //从分类数组中取出一列pid
+        $pid = array_column($cates,'pid');
+        //去除重复
+        $pid = array_unique($pid);
+
+        return view('admin.good.edit',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'data'=>$data,'cid'=>$cid,'bid'=>$bid,'pid'=>$pid]);
     }
 
     /**
