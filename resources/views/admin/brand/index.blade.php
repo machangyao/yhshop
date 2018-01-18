@@ -32,19 +32,26 @@
                                     <th>ID编号</th>
                                     <th>名称</th>
                                     <th>网址</th>
+                                    <th>时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($data as $v)
-                                <tr>
-                                    <td>{{ $v->id }}</td>
-                                    <td>{{ $v->name }}</td>
-                                    <td>{{ $v->url }}</td>
-                                    <td> <a href="">修改</a> <a href="javascript:;">删除</a></td>
-                                </tr>
-
-                                @endforeach
+                                @if($data)
+                                    @foreach($data as $v)
+                                    <tr>
+                                        <td>{{ $v->id }}</td>
+                                        <td>{{ $v->name }}</td>
+                                        <td>{{ $v->url }}</td>
+                                        <td>{{ $v->created_at }}</td>
+                                        <td> <a href="{{ url('brand/'.$v->id.'/edit') }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                    </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td style="text-align:center;" colspan="11">暂无品牌信息</td>
+                                    </tr>
+                                @endif
                                 </tfoot>
                             </table>
 
@@ -62,4 +69,32 @@
     </div>
 
     <!-- /.content-wrapper -->
+<script type="text/javascript">
+        function del(id)
+        {
+            //询问框
+            layer.confirm('您确定要删除吗？', {
+                btn: ['确定','取消'] //按钮
+            }, function(){
+                //ajax
+                $.ajax({
+                    url:'{{ url('/brand') }}/'+id,
+                    data:{'_method':'delete','_token':'{{ csrf_token() }}'},
+                    type:'post',
+                    success:function(data){
+                        if(data.status == 1)
+                        {
+                            layer.msg(data.message, {icon: 6});
+                            window.location.href = location.href;
+                        }else{
+                            layer.msg(data.message, {icon: 5});
+                            window.location.href = location.href;
+                        }
+                    }
+                }); 
+
+            });
+
+        }
+</script>
 @stop

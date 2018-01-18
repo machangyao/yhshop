@@ -77,6 +77,9 @@ class BrandController extends Controller
     public function edit($id)
     {
         //
+        $title = '修改品牌';
+        $data = Brands::find($id);
+        return view('admin.brand.edit',['title'=>$title,'data'=>$data]);
     }
 
     /**
@@ -89,6 +92,15 @@ class BrandController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $input = $request->except('_token','_method');
+        $data = Brands::find($id);
+        $res = $data->update($input);
+        if($res)
+        {
+            return redirect('brand/')->with('info','修改成功');
+        }else{
+            return back()->with('info','修改失败');
+        }
     }
 
     /**
@@ -99,6 +111,21 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除
+        $res = Brands::find($id)->delete();
+        if($res)
+        {
+            $data = [
+                'status'=>1,
+                'message'=>'删除成功'
+            ];
+        }else{
+            $data = [
+                'status'=>0,
+                'message'=>'删除失败'
+            ];
+        }
+
+        return $data;
     }
 }

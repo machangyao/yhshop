@@ -83,7 +83,7 @@
 										</select>
 									</div>
 								</div>
-								<div id="province"></div>
+								<!-- <div id="province"></div> -->
 								<div class="am-form-group">
 									<label for="user-intro" class="am-form-label">详细地址</label>
 									<div class="am-form-content">

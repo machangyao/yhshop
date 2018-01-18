@@ -51,22 +51,19 @@ Route::post('/userdetail/upload','home\UserDetailController@upload');
 
 // 首页路由
 Route::get('/','Home\IndexController@index');
-
 // 列表页路由
 Route::get('/list','Home\ListController@list');
-
 // 商品详情页
 Route::get('/show','Home\ShowController@show');
-
 
 // 后台
 
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
-
 // 商品路由
 Route::resource('/good','Admin\GoodController');
-
+//商品上下架
+Route::get('/good/jia/{id}','Admin\GoodController@jia');
 // 品牌路由oute
 Route::resource('/brand','Admin\BrandController');
 
