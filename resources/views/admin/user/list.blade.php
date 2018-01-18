@@ -65,7 +65,9 @@
                                         <td>{{ $v->email }}</td>
                                         <td>{{ $v->avatar }}</td>
                                         <td>{{ $v->tel }}</td>
-                                        <td>编辑   删除</td>
+                                        <td><a href="{{ url('admin/user/' .$v->id.' /edit') }}">编辑 </a>
+                                                <a href=""> 删除</a> 
+                                        </td>
                                     </tr>
                                  @endforeach
                                 </tbody>
