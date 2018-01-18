@@ -18,7 +18,7 @@ class BrandController extends Controller
     {
         //获取搜索条件
         $keyword = $request->input('keyword','');
-        $num = $request->input('num','2');
+        $num = $request->input('num','8');
         $title = "品牌列表";
         $data = Brands::where('name','like','%'. $keyword .'%')->paginate($num);
         return view('admin.brand.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);

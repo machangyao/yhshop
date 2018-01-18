@@ -16,17 +16,18 @@ class IndexController extends Controller
     public function index()
     {
     	//获取所有一级父类
-    	$cate = Categorys::where('pid',0)->get();
+    	// $cates = Categorys::where('pid',0)->get();
     	// dd($cate);
-    	$subcate = $this->findSubTree($cate,0,3);
-    	// dd($subcate);
+    	$cate = Categorys::all();
+    	
+    	$cates = $this->findSubTree($cate,0,0);
+    	// dd($cates[0]);
 
-    	return view('home.index',['cate'=>$cate,'subcate'=>$subcate]);
+    	return view('home.index',compact('cates'));
     }
 
-
     //递归获取子分类
-    protected function findSubTree($cates,$id=0,$lev=1){
+    function findSubTree($cates,$id=0,$lev=1){
         $subtree = [];//子孙数组
         foreach ($cates as $v) {
             if($v->pid==$id){

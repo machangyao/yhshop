@@ -99,6 +99,7 @@ class GoodController extends Controller
                 'price' => 'required|numeric',
                 'market_price' => 'required|numeric',
                 'number' => 'required|numeric',
+                'content' => 'required',
             ], [
                 'name.required' => '商品名称不能为空',
                 'name.min' => '商品名称最少两位',
@@ -107,7 +108,8 @@ class GoodController extends Controller
                 'market_price.required' => '市场价格不能为空',
                 'market_price.numeric' => '市场价格必须是数字',
                 'number.required' => '库存不能为空',
-                'number.numeric' => '库存必须是数字'
+                'number.numeric' => '库存必须是数字',
+                'content.required' => '商品详情不能为空'
             ]);
         // 获取提交的数据
         $input = $request->except('_token');
@@ -120,7 +122,6 @@ class GoodController extends Controller
         $data->bid = $input['bid'];
         $data->sn = $input['sn'];
         $data->number = $input['number'];
-        $data->pic = $input['pic'];
         $data->keyword = $input['keyword'];
         $data->description = $input['description'];
         $data->desc = $input['content'];

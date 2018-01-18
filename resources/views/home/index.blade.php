@@ -36,10 +36,10 @@
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
 								<div class="category-content" id="guide_2">
-									
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
-											@foreach($cate as $v)
+											@foreach($cates as $v)
+											@if($v->pid == 0)
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="/yh/home/images/cake.png"></i><a class="ml-22" title="点心">{{ $v->name }}</a></h3>
@@ -49,19 +49,17 @@
 														<div class="area-bg">
 															<div class="menu-srot">
 																<div class="sort-side">
-																	@foreach($subcate as $v)
+																	@foreach($cates as $vv)
+																	@if($v->id == $vv->pid)
 																	<dl class="dl-sort">
-																		<dt><span title="蛋糕">{{ $v->name }}</span></dt>
-																		<dd><a title="蒸蛋糕" href="#"><span>蒸蛋糕</span></a></dd>
-																		<dd><a title="脱水蛋糕" href="#"><span>脱水蛋糕</span></a></dd>
-																		<dd><a title="瑞士卷" href="#"><span>瑞士卷</span></a></dd>
-																		<dd><a title="软面包" href="#"><span>软面包</span></a></dd>
-																		<dd><a title="马卡龙" href="#"><span>马卡龙</span></a></dd>
-																		<dd><a title="千层饼" href="#"><span>千层饼</span></a></dd>
-																		<dd><a title="甜甜圈" href="#"><span>甜甜圈</span></a></dd>
-																		<dd><a title="蒸三明治" href="#"><span>蒸三明治</span></a></dd>
-																		<dd><a title="铜锣烧" href="#"><span>铜锣烧</span></a></dd>
+																		<dt><span title="{{ $vv->name }}">{{ $vv->name }}</span></dt>
+																		@foreach($cates as $vvv)
+																		@if($vv->id == $vvv->pid)
+																		<dd><a title="{{ $vvv->name }}" href="{{ url('/list') }}"><span>{{ $vvv->name }}</span></a></dd>
+																		@endif
+																		@endforeach
 																	</dl>
+																	@endif
 																	@endforeach
 																</div>
 															</div>
@@ -70,6 +68,7 @@
 												</div>
 											<b class="arrow"></b>	
 											</li>
+											@endif
 											@endforeach
 										</ul>
 									</div>

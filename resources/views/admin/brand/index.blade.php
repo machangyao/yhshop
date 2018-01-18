@@ -56,7 +56,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($data)
+                                @if(count($data))
                                     @foreach($data as $v)
                                     <tr>
                                         <td>{{ $v->id }}</td>

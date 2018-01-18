@@ -62,13 +62,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($data)
+                                @if(count($data))
                                     @foreach($data as $v)
                                     <tr>
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->name }}</td>
                                         <td>{{ $v->sn }}</td>
-                                        <td><img style="width:20px;height:20px;" src="./uploads/s_{{ $v->pic }}"></td>
+                                        <td>
+                                            <img style="width:50px;height:50px;" src="./uploads/s_{{ $v->pic }}">
+                                        </td>
                                         <td>{{ $v->price }}</td>
                                         <td>{{ $v->categorys->name }}</td>
                                         <td>{{ $v->brands->name }}</td>
