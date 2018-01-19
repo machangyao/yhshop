@@ -5,15 +5,16 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Home\Slides;
 class IndexController extends Controller
 {
-    /*
-	* 首页
-	* index
-    */
-    public function index()
-    {
-    	return view('home.index');
+    //
+    public function index(){
+    	$site = Site_config::get();
+    	$slides = Slides::get();
+    	return view('home.index',['site'=>$site],['slides'=>$slides]);
     }
 
 }

@@ -57,10 +57,9 @@ return [
 
     'from' => [
 
-
-
         'address' => env('MAIL_FROM_ADDRESS', 'mcyisemail@sina.com'),
         'name' => env('MAIL_FROM_NAME', 'YH'),
+
 
     ],
 

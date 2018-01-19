@@ -10,5 +10,7 @@ class Addr extends Model
     public $table = 'addrs';
     public $primaryket = 'id';
 	public $timestamps = false;
+    public $guarded = [];
+	
 
 }

@@ -54,6 +54,10 @@ class UserController extends Controller
      * @param 用户注册信息
      * @return 返回一个前台的提交注册
      */
+        if(strlen($request->input('user_tel')) != 11){
+            return back()->with('size','手机号必须11位');
+        }
+        
         $this->validate($request, [
             'user_password' => 'required|',
             'user_email' => 'required|email',
@@ -164,6 +168,13 @@ class UserController extends Controller
 
     public function dologin(Request $request){
 
+          /*
+         * 返回提交登陆
+         * @author 马长遥
+         * @datetime 20180111 20:26
+         * @param 用户登陆
+         * @return 返回一个前台的提交登陆
+         */
         $data = $request->except('_token','captcha');
         $this->validate($request, [
                 'user_name' => 'required|',

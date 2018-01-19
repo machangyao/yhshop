@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Goods extends Model
 {
+
 	
 	public $table = "goods";
 
@@ -22,4 +23,14 @@ class Goods extends Model
 	{
 		return $this->belongsTo('App\Http\Models\Admin\Brands','bid','id');
 	}
+
+	// public function orders(){
+ //    	return $this->belongsTo('App\Http\Models\Home\orders','gid','id');
+	// }
+    //
+    public $timestamps = false;
+
+    public $guarded = [];
+
+
 }

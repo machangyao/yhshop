@@ -11,9 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //登录页面路由
 Route::get('admin/login','Admin\LoginController@login');
@@ -41,14 +38,44 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 });
 
 
+
+//后台
+Route::get('/admin','Admin\IndexController@index');
+
+
+
+//轮播图路由
+Route::resource('/admin/slide', 'Admin\SlideController');
+
+//网站配置
+Route::get('/admin/site', 'Admin\SiteController@index');
+//编辑网站配置信息
+Route::get('/admin/site/edit' , 'Admin\SiteController@edit');
+Route::post('/admin/site', 'Admin\SiteController@syore');
+
+//有请链接
+Route::resource('/admin/link', 'Admin\LinkController');
+
+//广告
+Route::resource('admin/ads', 'Admin\AdsController');
+
+//文章
+Route::resource('admin/article', 'Admin\ArticleController');
+
+
+
+
 //前台
-//
+//个人订单
+Route::resource('/user/order','home\UserOrderController');
 //个人安全信息
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由
 Route::resource('/user/password','home\UserPasswordController')->middleware('homeIsLogin');
 //个人地址管理
 Route::resource('/user/addr','home\UserAddrController');
+//城市联动ajax
+Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
