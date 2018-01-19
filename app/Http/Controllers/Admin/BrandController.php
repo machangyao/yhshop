@@ -7,7 +7,10 @@ use App\Http\Controllers\Controller;
 use DB;
 use App\Http\Models\Admin\Brands;
 
+
 class BrandController extends Controller
+
+
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +20,7 @@ class BrandController extends Controller
     public function index(Request $request)
     {
 
+
         //获取搜索条件
         $keyword = $request->input('keyword','');
         $num = $request->input('num','8');
@@ -24,6 +28,7 @@ class BrandController extends Controller
         $title = "品牌列表";
         $data = Brands::where('name','like','%'. $keyword .'%')->paginate($num);
         return view('admin.brand.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
+
     }
 
     /**
@@ -33,9 +38,8 @@ class BrandController extends Controller
      */
     public function create()
     {
+
         //添加
-        return view('add');
-        //
         $title = "添加品牌";
         return view('admin.brand.create',['title'=>$title]);
     }
@@ -49,10 +53,6 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         //
-        $data = $request->except('_token');
-        $res = \DB::table('users')->insert([[ 'name'=>$data['name'],'password'=>$data['password'] ]]);
-        if($res){
-            return redirect('/user');
         $input = $request->except('_token');
         $data = new Brands;
         $data -> name = $input['name'];

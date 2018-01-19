@@ -66,7 +66,7 @@
                                    
                                     <td ><font style="vertical-align: inherit;">{{ $v->link_create_at }}</font></td>
 
-                                    <td><a href="">编辑</a> | <a href="">删除</a></td>
+                                    <td><a href="{{ url('admin/link/'.$v->link_id.'/edit') }}">编辑</a> | <a href="javascript:;" onclick="delLink({{ $v->link_id }})">删除</a></td>
 
                                 </tr>
 
@@ -90,5 +90,30 @@
         </section>
         <!-- /.content -->
     </div> 
+
+<script>
+    function delLink(id){
+        layer.confirm('您确定要删除吗？',{
+            btn:['确定','取消']
+        }, function(){
+            //向服务器发送ajax请求，删除当前id对应的用户数据
+            //$.post('请求的路由','携带的参数','处理成功后的返回结果')
+        $.post('{{ url('admin/link/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
+            if(data.status == 0){
+                layer.msg(data.message,{icon:6});
+                setTimeout(function(){
+                    window.location.href = location.href;
+                },1000);
+            }else{
+                layer.msg(data.message,{icon:5});
+                 setTimeout(function(){
+                     window.location.href = location.href;
+                        },1000);
+            }
+        })
+    },function(){});
+}
+
+    </script>
 
  @stop
