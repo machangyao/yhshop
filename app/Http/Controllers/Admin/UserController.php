@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\HTTP\Models\Admin\User;
+use App\Http\Models\Admin\User;
 use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
@@ -22,11 +22,11 @@ class UserController extends Controller
 
         //2.获取分页数据
 
-        $data = User::orderBy('id','asc') -> paginate(3);
+        $data = User::orderBy('id','asc') -> paginate(6);
         // return view('admin.user.list',compact('data'));
         //3.单条件搜索
         $input = $request -> input('keywords');
-        $data = User::where('nickname' , 'like' , '%' .$input. '%') -> paginate(2);
+        $data = User::where('nickname' , 'like' , '%' .$input. '%') -> paginate(6);
         return view('admin.user.list',compact('data','input'));
     }
 
@@ -50,7 +50,9 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //1.接收表单提交过来的参数
-
+       //  $input = $request ->all();
+       // dd($input);
+        $input = $request->except('_token','re-password');
         //2.检测表单验证规则
 
            $this->validate($request, [
@@ -75,8 +77,35 @@ class UserController extends Controller
                   'email.required' =>' 邮箱不能为空',
                   'avatar.image' =>'请上传一张正确的图片'
              ]);
-       $input = $request->except('_token','re-password');
 
+           //处理上传
+    if($request->hasFile('avatar'))
+    {
+        $file = $request->file('avatar');
+        if($file->isValid())
+        {
+            //处理
+            $ext = $file->getClientOriginalExtension();
+            $filename=time().mt_rand(10000,99999).'.'.$ext;
+            // dd($filename);
+            $res= $file->move('./uploads',$filename);
+            if($res)
+            {
+                $input['avatar'] = $filename;
+            }else
+            {
+                $input['avatar'] = 'default.jpg';
+            }
+        }else
+        {
+            $input['avatar']='default.jpg';
+        }
+    }else
+    {
+        $input['avatar'] = 'default.jpg';
+    }
+       
+    
         //3.将提交的数据添加到user表中
         //向数据表中添加数据
         $input['password'] = Crypt::encrypt($input['password']);
@@ -110,7 +139,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        //通过传过来的id获取到要修改的用户
+        $user = User::find($id);
+        return view('admin.user.edit',compact('user'));
     }
 
     /**
@@ -122,7 +153,38 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request -> except('_token','_method','updated_at');
+         //处理上传
+    if($request->hasFile('avatar'))
+    {
+        $file = $request->file('avatar');
+        if($file->isValid())
+        {
+            //处理
+            $ext = $file->getClientOriginalExtension();
+            $filename=time().mt_rand(10000,99999).'.'.$ext;
+            $res= $file->move('./uploads',$filename);
+            if($res)
+            {
+                  //删除原图片
+                $oldPic = User::where('id',$id)->first()->avatar;
+                 if($oldPic != 'default.jpg')
+                {
+                    //dd($oldPic);
+                   //  unlink('./uploads/'.$oldPic);
+                }
+               
+                $input['avatar'] = $filename;
+            }
+        }
+      }
+        //使用模型修改表记录的方法
+        $res = User:: where('id',$id) -> update($input);
+        if($res){
+            return redirect('admin/user');
+        }else{
+            return back() -> with('msg', '修改失败');
+        }
     }
 
     /**
@@ -133,6 +195,19 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = User::find($id) -> delete();
+        if($res){
+            $data = [
+                'status' => 0,
+                'message' => '删除成功'
+            ];
+        }else{
+
+            $data = [
+                'status' => 1,
+                'message' => '删除失败'
+            ];
+        }
+            return $data;
     }
 }
