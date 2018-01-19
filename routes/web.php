@@ -55,6 +55,8 @@ Route::get('/','Home\IndexController@index');
 Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
 Route::get('/show/{id}','Home\ShowController@show');
+//购物车页面
+Route::get('/cart','Home\CartController@index');
 // 后台
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
