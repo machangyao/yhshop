@@ -26,6 +26,7 @@
     <![endif]-->
     <script type="text/javascript" src="/yh/layer/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/yh/layer/layer.js"></script>
+    <script type="text/javascript" src="{{ asset('layer/layer.js') }}"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">

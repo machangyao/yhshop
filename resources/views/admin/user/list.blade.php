@@ -27,7 +27,7 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-hover">
-                            <form action="{{ url('/admin/user') }}" method="get">
+                            <form action="{{ url('/admin/user') }}" method="get" >
                             	<div class="row">
                             		<div class="col-md-2">
                             		      
@@ -63,10 +63,10 @@
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->nickname }}</td>
                                         <td>{{ $v->email }}</td>
-                                        <td>{{ $v->avatar }}</td>
+                                        <td><img width="60" src="/uploads/{{ $v->avatar }}"></td>
                                         <td>{{ $v->tel }}</td>
                                         <td><a href="{{ url('admin/user/' .$v->id.' /edit') }}">编辑 </a>
-                                                <a href=""> 删除</a> 
+                                                <a href="javascript:;" onclick="delUser({{ $v->id }})"> 删除</a> 
                                         </td>
                                     </tr>
                                  @endforeach
@@ -80,6 +80,9 @@
                     </div>
                     <!-- /.box -->
 
+
+
+    </script>
                     
                 </div>
                 <!-- /.col -->
@@ -89,64 +92,33 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+    <script>
+    function delUser(id){
+        layer.confirm('您确定要删除吗？',{
+            btn:['确定','取消']
+        }, function(){
+            //向服务器发送ajax请求，删除当前id对应的用户数据
+            //$.post('请求的路由','携带的参数','处理成功后的返回结果')
+        $.post('{{ url('admin/user/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
+            if(data.status == 0){
+                layer.msg(data.message,{icon:6});
+                setTimeout(function(){
+                    window.location.href = location.href;
+                },1000);
+            }else{
+                layer.msg(data.message,{icon:5});
+                 setTimeout(function(){
+                     window.location.href = location.href;
+                        },1000);
+            }
+        })
+    },function(){});
+}
+
+
+    </script>
 @stop
 
-@section('js')
-	<script type="text/javascript">
-	//添加事件
-	$(".name").on('dblclick', cname);
 
-	//封装
-	function cname(){
-		var td = $(this);
-		//创建input标签
-		var inp = $('<input type="text">');
+	
 
-		//获取原来的值
-		var oldValue = $(this).html();
-
-		//将原来的值放入inp
-		inp.val(oldValue);
-
-		//将inp放入td
-		$(this).html(inp);
-
-		//自动添加焦点
-		inp.select();
-
-		//删除事件
-		td.unbind('dblclick');
-
-		//获取id
-		var id = $(this).prev().html();
-
-		//添加失去焦点事件
-		inp.on('blur',function(){
-			//获取新名称
-			var newname = $(this).val();
-
-			$.ajax({
-			url:'{{ url("/admin/user/ajax/changename") }}',
-			type: 'post',
-			data: {id:id, name:newname},
-			success: function(data)
-			{
-				if(data.status == 1)
-				{
-					td.html(newname);
-				}else
-				{
-					td.html(oldValue);
-				}
-			},
-			dataType: 'json'
-			});
-
-			//添加事件
-			td.on('dblclick',cname);
-		});
-		
-	}
-	</script>
-
-@stop
