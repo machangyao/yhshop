@@ -146,21 +146,29 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
-									@foreach($data as $v)
-									<li>
-										<div class="i-pic limit">
-											<img src="./uploads/s_{{ $v->pic }}" />											
-											<p class="title fl">{{ $v->name }}</p>
-											<p class="price fl">
-												<b>¥</b>
-												<strong>{{ $v->price }}</strong>
-											</p>
-											<p class="number fl">
-												销量<span>1110</span>
-											</p>
-										</div>
-									</li>
-									@endforeach
+									@if(count($data))
+										@foreach($data as $v)
+										<li>
+											<div class="i-pic limit">
+												<a href="{{ url('/show/'.$v->id) }}"><img src="/uploads/s_{{ $v->pic }}" /></a>											
+												<p class="title fl"><a href="{{ url('/show/'.$v->id) }}">{{ $v->name }}</a></p>
+												<p class="price fl">
+													<b>¥</b>
+													<strong>{{ $v->price }}</strong>
+												</p>
+												<p class="number fl">
+													销量<span>0</span>
+												</p>
+											</div>
+										</li>
+										@endforeach
+									@else
+										<li style="width:100%; height: 100px; line-height: 100px;">
+											<div style="text-align:center;">
+												该分类下暂无商品
+											</div>
+										</li>
+									@endif
 								</ul>
 							</div>
 							<div class="search-side">
@@ -178,7 +186,7 @@
 											<strong>29.90</strong>
 										</p>
 										<p class="number fl">
-											销量<span>1110</span>
+											销量<span>0</span>
 										</p>
 									</div>
 								</li>
@@ -399,3 +407,4 @@
 	</body>
 
 </html>
+

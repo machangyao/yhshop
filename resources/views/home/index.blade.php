@@ -55,7 +55,7 @@
 																		<dt><span title="{{ $vv->name }}">{{ $vv->name }}</span></dt>
 																		@foreach($cates as $vvv)
 																		@if($vv->id == $vvv->pid)
-																		<dd><a title="{{ $vvv->name }}" href="{{ url('/list') }}"><span>{{ $vvv->name }}</span></a></dd>
+																		<dd><a title="{{ $vvv->name }}" href="{{ url('/list/'.$vvv->id) }}"><span>{{ $vvv->name }}</span></a></dd>
 																		@endif
 																		@endforeach
 																	</dl>

@@ -58,7 +58,7 @@ class GoodController extends Controller
         //
         $title = "商品列表";
         $keyword = $request->input('keyword','');
-        $num = $request->input('num',2);
+        $num = $request->input('num',6);
 
         //取商品分类信息
         $catess = new categorys;
