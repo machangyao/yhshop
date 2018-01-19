@@ -41,7 +41,7 @@ Route::resource('admin/article', 'Admin\ArticleController');
 
 
 //前台
-//
+
 //个人安全信息
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由

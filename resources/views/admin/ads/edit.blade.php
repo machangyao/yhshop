@@ -6,11 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                添加广告
+                编辑广告
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i>首页</a></li>
-                <li class="active">添加商品</li>
+                <li class="active">编辑广告</li>
             </ol>
         </section>
 
@@ -37,53 +37,70 @@
                             </div>
                         @endif
 
-                            <form action="{{ url('admin/ads') }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="form_upload"  enctype="multipart/form-data">   
+                            <form action="{{ url('admin/ads/'.$ads->ads_id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="form_upload"  enctype="multipart/form-data">   
                             {{ csrf_field() }}
-                                
+                            {{ method_field('PUT') }}
                             
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告链接</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="ads_url" class="form-control" id="inputEmail3" placeholder="请输入链接">
+                                        <input type="text" name="ads_url" class="form-control" id="inputEmail3" placeholder="请输入链接" value="{{ $ads->ads_url }}">
                                     </div>
                                 </div>
                             </div>
-                           <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
-
-                                    <div class="col-sm-4">
-                                        <input type="file" name="ads_img" id="inputEmail3" placeholder="请上传商品图片">
-                                    </div>
-                                </div>
-                            </div>
-                           
+                          
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告文字</label>
 
                                     <div class="col-sm-4">
                                        
-                                       <textarea class="form-control" rows="3" name="ads_text" placeholder="简单描述"></textarea>
+                                       <textarea class="form-control" rows="3" name="ads_text" placeholder="简单描述">{{ $ads->ads_text }}</textarea>
                                     </div>
                                 </div>
                             </div>
 
+                             <div class="box-body">
+                                <div class="form-group">
+                                    <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
+
+                                    <div class="col-sm-4">
+                                        <input type="file" name="ads_img" value="{{ $ads->ads_img }}" id="inputEmail3" placeholder="请上传商品图片">
+                                    </div>
+                                </div>
+                            </div>
+                           
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告存在时间</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="ads_time" class="form-control" id="inputEmail3" placeholder="请输入时间">
+                                        <input type="text" name="ads_time" class="form-control" id="inputEmail3" value="{{ $ads->ads_time }}" placeholder="请输入时间">
                                     </div>
                                 </div>
                             </div>
                             
+                           
+                           
+
+                            <!-- /.box-body -->
+                            <div class="row">
+                                <div class="col-sm-2"></div>
+                                <div class="col-sm-6">
+                                    <div class="box-footer">
+                                        <button type="submit" class="btn btn-default">提交</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4"></div>
+                            </div>
+                            <!-- /.box-footer -->
+
+
                             <script type="text/javascript">
                                 $("#file_upload").change(function () {
-                                        uploadImage();
+                                    uploadImage();
                                     });
                                 function uploadImage() {
                                     // alert('')判断是否有选择上传文件
@@ -100,19 +117,6 @@
                                             }
                                      }
                             </script>
-                               
-
-                            <!-- /.box-body -->
-                            <div class="row">
-                                <div class="col-sm-2"></div>
-                                <div class="col-sm-6">
-                                    <div class="box-footer">
-                                        <button type="submit" class="btn btn-default">添加</button>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-                            <!-- /.box-footer -->
 
 
 

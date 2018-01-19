@@ -47,7 +47,9 @@
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->slide_id }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_url }}</font></td>
-                                    <td><font style="vertical-align: inherit;">{{ $v->slide_mig }}</font></td>
+                                    <td width="10%">
+                                    <img class="img" height="50" width="50" src="{{$v->slide_mig}}">
+                                    </td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_text }}</font></td>
                                     <td><font style="vertical-align: inherit;">{{ $v->create_at }}</font></td>
                                     <td><font style="vertical-align: inherit;"><a href=" {{ url('admin/slide/'.$v->slide_id.'/edit') }} ">编辑</a> | <a href="javascript:;" onclick="delSlide({{ $v->slide_id }})">删除</a></font></td>
@@ -86,6 +88,7 @@
     </div> 
     
     <script>
+
     function delSlide(id){
         layer.confirm('您确定要删除吗？',{
             btn:['确定','取消']
@@ -107,6 +110,7 @@
         })
     },function(){});
 }
+    
 
     </script>
 @stop

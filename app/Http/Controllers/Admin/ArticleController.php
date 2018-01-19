@@ -24,10 +24,9 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    //返回添加页面
     public function create()
     {
-        //
-
         return view('admin/article/add');
     }
 
@@ -37,9 +36,13 @@ class ArticleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //执行添加
     public function store(Request $request)
     {
-        //
+        //获取数据
+        $input = $request->except('_token');
+
+        
     }
 
     /**

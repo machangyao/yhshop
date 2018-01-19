@@ -31,12 +31,31 @@ class SiteController extends Controller
     	//获取信息
     	$input = $request->except('_token');
 
+        // 请求中是否携带上传图片
+       if($request->file('site_logo')){
+           //获取上传图片文件
+            $file = $request->file('site_logo');
+            // 判断上传文件的有效性
+            if($file->isValid()) {
+                $entension = $file->getClientOriginalExtension();//上传文件的后缀名
+                // 生成新的文件名
+                $newName = date('YmdHis') . mt_rand(1000, 9999) . '.' . $entension;
+                // 将文件移动到指定位置
+                $path = $file->move(public_path().'/uploads',$newName);
+                // 返回上传文件图片  显示到浏览器上面
+                $url ='/uploads/'.$newName;
+                // 把所保存的图片位置放入到字段中去
+                $input['site_logo'] = $url;
+            }
+        }
+
+
     	  //验证数据
         $rule = [
             'site_keyword'=>'required',
             'site_describe'=>'required',
             'site_copyright'=>'required',
-            'site_logo'=>'required',
+            
         ];
 
         //提示信息
@@ -44,7 +63,7 @@ class SiteController extends Controller
             'site_keyword.required'=>'网站关键字不能为空',
             'site_describe.required'=>'网站描述不能为空',
             'site_copyright.required'=>'网站版权声明不能为空',
-            'site_logo.required'=>'网站logo图不能为空',
+           
         ];
 
         $Validator = Validator::make($input, $rule, $mess);
@@ -56,7 +75,7 @@ class SiteController extends Controller
         }
 
         //修改记录
-        $site = Site_config::find($id);
+        $site = Site_config::find(1);
         $res = $site->update($input);
 
         
