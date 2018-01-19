@@ -14,15 +14,16 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //首页
-         $data = \DB::table('users')->get();
-        return view('index', ['data'=>$data]);
-        //
+
+        //获取搜索条件
+        $keyword = $request->input('keyword','');
+        $num = $request->input('num','8');
+
         $title = "品牌列表";
-        $data = Brands::all();
-        return view('admin.brand.index',['title'=>$title,'data'=>$data]);
+        $data = Brands::where('name','like','%'. $keyword .'%')->paginate($num);
+        return view('admin.brand.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
     }
 
     /**

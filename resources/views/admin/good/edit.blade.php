@@ -51,7 +51,7 @@
                                                 $arr = explode(',',$v->path);
                                                 $n = count($arr) - 1;
                                             ?>
-                                            <option @if ( $v->id == $cid ) selected @endif value="{{ $v->id }}">{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</option>
+                                            <option @if(in_array($v->id,$pid)) disabled @endif @if ( $v->id == $cid ) selected @endif value="{{ $v->id }}">{{ str_repeat('&nbsp;',($n*11)-22).'|--' }}{{ $v->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

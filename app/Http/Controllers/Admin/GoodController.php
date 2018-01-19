@@ -58,7 +58,7 @@ class GoodController extends Controller
         //
         $title = "商品列表";
         $keyword = $request->input('keyword','');
-        $num = $request->input('num',2);
+        $num = $request->input('num',6);
 
         //取商品分类信息
         $catess = new categorys;
@@ -78,7 +78,12 @@ class GoodController extends Controller
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
 
-        return view('admin.good.create',['title'=>$title,'cates'=>$cates,'brands'=>$brands]);
+        //从分类数组中取出pid列
+        $pid = array_column($cates,'pid');
+        //去除重复
+        $pid = array_unique($pid);
+        
+        return view('admin.good.create',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'pid'=>$pid]);
     }
 
     /**
@@ -94,6 +99,7 @@ class GoodController extends Controller
                 'price' => 'required|numeric',
                 'market_price' => 'required|numeric',
                 'number' => 'required|numeric',
+                'content' => 'required',
             ], [
                 'name.required' => '商品名称不能为空',
                 'name.min' => '商品名称最少两位',
@@ -102,7 +108,8 @@ class GoodController extends Controller
                 'market_price.required' => '市场价格不能为空',
                 'market_price.numeric' => '市场价格必须是数字',
                 'number.required' => '库存不能为空',
-                'number.numeric' => '库存必须是数字'
+                'number.numeric' => '库存必须是数字',
+                'content.required' => '商品详情不能为空'
             ]);
         // 获取提交的数据
         $input = $request->except('_token');
@@ -115,7 +122,6 @@ class GoodController extends Controller
         $data->bid = $input['bid'];
         $data->sn = $input['sn'];
         $data->number = $input['number'];
-        $data->pic = $input['pic'];
         $data->keyword = $input['keyword'];
         $data->description = $input['description'];
         $data->desc = $input['content'];
@@ -190,7 +196,13 @@ class GoodController extends Controller
         $data = Goods::find($id);
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
-        return view('admin.good.edit',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'data'=>$data,'cid'=>$cid,'bid'=>$bid]);
+
+        //从分类数组中取出一列pid
+        $pid = array_column($cates,'pid');
+        //去除重复
+        $pid = array_unique($pid);
+
+        return view('admin.good.edit',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'data'=>$data,'cid'=>$cid,'bid'=>$bid,'pid'=>$pid]);
     }
 
     /**

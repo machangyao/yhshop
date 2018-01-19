@@ -62,13 +62,15 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @if($data)
+                                @if(count($data))
                                     @foreach($data as $v)
                                     <tr>
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->name }}</td>
                                         <td>{{ $v->sn }}</td>
-                                        <td><img style="width:20px;height:20px;" src="./uploads/s_{{ $v->pic }}"></td>
+                                        <td>
+                                            <img style="width:50px;height:50px;" src="./uploads/s_{{ $v->pic }}">
+                                        </td>
                                         <td>{{ $v->price }}</td>
                                         <td>{{ $v->categorys->name }}</td>
                                         <td>{{ $v->brands->name }}</td>
@@ -81,9 +83,9 @@
                                         </td>
                                         <td>
                                             @if($v->status == 1)
-                                                上架
+                                                <img src="./images/yes.gif">
                                             @else
-                                                下架
+                                                <img src="./images/no.gif">
                                             @endif
                                         </td>
                                         <td>{{ $v->created_at }}</td>
@@ -93,7 +95,7 @@
                                         @else
                                         <a href="javascript:;" onclick="jia({{$v->id}})">上架</a>
                                         @endif
-                                         <a href="{{ url('/good').'/'.$v->id }}">详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                         <a href="{{ url('/good').'/'.$v->id }}">查看详情</a> <a href="{{ url('good/'.$v->id.'/edit') }}?cid={{ $v->cid }}&bid={{ $v->bid }}">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
                                     </tr>
                                     @endforeach
                                 @else

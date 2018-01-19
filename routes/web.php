@@ -103,16 +103,16 @@ Route::resource('/userdetail','home\UserDetailController')->middleware('homeIsLo
 //个人头像上传ajax
 Route::post('/userdetail/upload','home\UserDetailController@upload');
 
-
+// 前台
 // 首页路由
 Route::get('/','Home\IndexController@index');
-// 列表页路由
-Route::get('/list','Home\ListController@list');
+// 商品列表页路由
+Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
-Route::get('/show','Home\ShowController@show');
-
+Route::get('/show/{id}','Home\ShowController@show');
+//购物车页面
+Route::get('/cart','Home\CartController@index');
 // 后台
-
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
 // 商品路由
