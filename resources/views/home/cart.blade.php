@@ -160,14 +160,14 @@
 									?>
 									<li class="td td-sum">
 										<div class="td-inner">
-											<em tabindex="0" class="J_ItemSum number">{{ $sum }}</em>
+											<em tabindex="0" id="money{{ $v['id'] }}" class="J_ItemSum number">{{ $sum }}</em>
 										</div>
 									</li>
 									<li class="td td-op">
 										<div class="td-inner">
 											<a title="移入收藏夹" class="btn-fav" href="#">
                   移入收藏夹</a>
-											<a href="javascript:;" data-point-url="#" class="delete">
+											<a href="javascript:;" onclick="delcart(this,{{ $v['id'] }})" data-point-url="#" class="delete">
                   删除</a>
 										</div>
 									</li>
@@ -189,13 +189,13 @@
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="#" hidefocus="true" class="deleteAll">删除</a>
+						<a href="javascript:;" class="deleteAll">删除</a>
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
 					</div>
 					<div class="float-bar-right">
 						<div class="amount-sum">
 							<span class="txt">已选商品</span>
-							<em id="J_SelectedItemsCount">{{ count(session('cart')) }}</em><span class="txt">件</span>
+							<em id="J_SelectedItemsCount"><span id="count">{{ count(session('cart')) }}</span></em><span class="txt">件</span>
 							<div class="arrow-box">
 								<span class="selected-items-arrow"></span>
 								<span class="arrow"></span>
@@ -203,10 +203,10 @@
 						</div>
 						<div class="price-sum">
 							<span class="txt">合计:</span>
-							<strong class="price">¥<em id="J_Total">{{ $total }}</em></strong>
+							<strong class="price">¥<em id="J_Total"><span id="total">{{ $total }}</span></em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="pay.html" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+							<a href="{{ url('') }}" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
@@ -313,29 +313,97 @@
 		</div>
 	
 		<script>
+			//增加数量
 			$('input[name=addnum]').on('click',function(){
-				// 获取商品数量
-				var num = $(this).prev().val();
-				$(this).prev().val(++num);
-				
-				// 获取id
-				var id = $(this).attr('ids');
+					// 获取id
+					var id = $(this).attr('ids');
 
-				$.ajax({
-					url:"{{ url('/addnum') }}",
-					type:'post',
-					data:{'id':id,'_token':'{{ csrf_token() }}'},
-					success:function(data){
-						if(data.status == 1)
-						{
+					obj = $(this);
 
-							// //获取单价
-							// var price = $(this).attr('price');
-							// alert(price);
+					$.ajax({
+						url:"{{ url('/addnum') }}",
+						type:'post',
+						data:{'id':id,'_token':'{{ csrf_token() }}'},
+						success:function(data){
+							if(data)
+							{
+								// 获取商品数量
+								var num = obj.prev().val();
+								num = Number(num);
+								obj.prev().val(++num);
+
+								//获取单价
+								var price = Number(obj.attr('price'));
+								// 获取小计
+								var money = Number( $("#money"+id).html() );
+								money = money + price;
+								$("#money"+id).html(money);
+
+								//获取总计
+								var total = Number($("#total").html());
+								total = total + price;
+								$("#total").html(total);
+							}
 						}
-					}
+					});
 				});
-			});
+
+				//减少数量
+				$('input[name=minnum]').on('click',function(){
+					// 获取id
+					var id = $(this).attr('ids');
+
+					obj = $(this);
+
+					$.ajax({
+						url:"{{ url('/minnum') }}",
+						type:'post',
+						data:{'id':id,'_token':'{{ csrf_token() }}'},
+						success:function(data){
+							if(data)
+							{
+								// 获取商品数量
+								var num = obj.next().val();
+								num = Number(num);
+								if(num<=1)
+								{
+									return "";
+								}
+								obj.next().val(--num);
+
+								//获取单价
+								var price = Number(obj.attr('price'));
+								// 获取小计
+								var money = Number( $("#money"+id).html() );
+								money = money - price;
+								$("#money"+id).html(money);
+
+								//获取总计
+								var total = Number($("#total").html());
+								total = total - price;
+								$("#total").html(total);
+								
+							}
+						}
+					});
+				});
+
+				//删除购物车
+				function delcart(obj,id)
+				{
+					$.ajax({
+						url:"{{ url('/delcart') }}",
+						type:'POST',
+						data:{'id':id,'_token':'{{ csrf_token() }}'},
+						success:function(data){
+							if(data)
+							{
+								$(obj).parent().parent().parent().remove();
+								window.location.href = location.href;
+							}
+						}
+					});
+				}
 		</script>
 
 	</body>

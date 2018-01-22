@@ -89,14 +89,58 @@ class CartController extends Controller
     		$request->session()->put('cart',$data);
     	}
 
-    	return response()->json(['stauts'=>1]);
+    	// return response()->json(['stauts'=>1]);
+    	echo 1;
 
     }
 
     //数量减少
-    public function minnum()
+    public function minnum(Request $request)
     {
+    	//获取id
+    	$id = $request->input('id');
 
+    	$data = session('cart') ? session('cart') : [];
+
+    	if($data)
+    	{
+    		foreach($data as $k=>$v)
+    		{
+    			if($v['id'] == $id)
+    			{
+    				$data[$k]['num'] = --$data[$k]['num'];
+    			}
+    		}
+    		// 把修改后的商品数量存入到session
+    		$request->session()->put('cart',$data);
+    	}
+
+    	// return response()->json(['stauts'=>1]);
+    	echo 1;
+    }
+
+
+    //删除购物车商品
+    public function delcart(Request $request)
+    {
+    	$id = $request->input('id');
+		$data = session('cart') ? session('cart') : [];
+
+    	if($data)
+    	{
+    		foreach($data as $k=>$v)
+    		{
+    			if($v['id'] == $id)
+    			{
+    				unset($data[$k]);
+    			}
+    		}
+    		// 把修改后的商品数量存入到session
+    		$request->session()->put('cart',$data);
+    	}
+
+    	// return response()->json(['stauts'=>1]);
+    	echo 1;
     }
 
 }
