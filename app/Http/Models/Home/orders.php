@@ -9,6 +9,7 @@ class orders extends Model
     //订单表 马长遥
     public $table = 'orders';
     public $primaryKey = 'id';
+    public $timestamps = false;
 
     // public function User(){
     // 	return $this->belongsTo('App\Http\Models\Home\User','user_id','id');

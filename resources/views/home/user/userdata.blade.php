@@ -29,44 +29,6 @@
 								</div>
 
 								<!--个人资产-->
-								<div class="m-userproperty">
-									<div class="s-bar">
-										<i class="s-icon"></i>个人资产
-									</div>
-									<p class="m-bonus">
-										<a href="bonus.html">
-											<i><img src="/yh/home/images/bonus.png"/></i>
-											<span class="m-title">红包</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-coupon">
-										<a href="coupon.html">
-											<i><img src="/yh/home/images/coupon.png"/></i>
-											<span class="m-title">优惠券</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-bill">
-										<a href="bill.html">
-											<i><img src="/yh/home/images/wallet.png"/></i>
-											<span class="m-title">钱包</span>
-											<em class="m-num">2</em>
-										</a>
-									</p>
-									<p class="m-big">
-										<a href="#">
-											<i><img src="/yh/home/images/day-to.png"/></i>
-											<span class="m-title">签到有礼</span>
-										</a>
-									</p>
-									<p class="m-big">
-										<a href="#">
-											<i><img src="/yh/home/images/72h.png"/></i>
-											<span class="m-title">72小时发货</span>
-										</a>
-									</p>
-								</div>
 							</div>
 							<div class="box-container-bottom"></div>
 
@@ -204,9 +166,9 @@
 							</div>
 							<div class="s-care s-care-noweather">
 								<div class="s-date">
-									<em>21</em>
-									<span>星期一</span>
-									<span>2015.12</span>
+									<em>{{date('d')}}</em>
+									<span>星期{{date('w')}}</span>
+									<span>{{date('Y-m-d')}}</span>
 								</div>
 							</div>
 						</div>

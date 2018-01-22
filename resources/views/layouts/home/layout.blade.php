@@ -121,7 +121,7 @@
 							<div class="avatar_box ">
 								<p class="avatar_imgbox "><img src="/yh/home/images/no-img_mid_.jpg " /></p>
 								<ul class="user_info ">
-									<li>用户名：sl1903</li>
+									<li>用户名：{{session('user_info')['user_name']}}</li>
 									<li>级&nbsp;别：普通会员</li>
 								</ul>
 							</div>

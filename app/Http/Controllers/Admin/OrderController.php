@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\orders;
+use Illuminate\Support\Facades\Input;
+
 class OrderController extends Controller
 {
     /**
@@ -59,7 +61,9 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        //修改订单信息 马长遥
+        $data = orders::find($id);
+        return view('admin.order.edit',compact('data'));
     }
 
     /**
@@ -71,7 +75,15 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //执行修改订单信息 马长遥
+        $data = $request->except('_token','_method');
+        $res = orders::where('id',$id)->update($data);
+        if($res){
+            return redirect('admin/order');
+        }else{
+            return back();
+        }
+
     }
 
     /**
@@ -83,5 +95,17 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status(){
+        //执行确认发货 马长遥
+        $data = Input::get('id');
+        $status = ['order_status'=>2];
+        $res = orders::where('id',$data)->update($status);
+        if($res){
+            return back();
+        }else{
+            return back();
+        }
     }
 }

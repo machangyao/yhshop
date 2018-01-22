@@ -40,8 +40,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 
 
 //后台
+//后台修改订单状态
+Route::get('/admin/order/status','Admin\OrderController@status');
+//前台确认收货
+Route::get('/order/status','Home\UserOrderController@status');
 //订单管理
 Route::resource('/admin/order','Admin\OrderController');
+
 
 //首页
 Route::get('/admin','Admin\IndexController@index');
@@ -124,5 +129,5 @@ Route::resource('/category','Admin\CategoryController');
 Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
-// 品牌路由oute
+// 品牌路由route
 Route::resource('/brand','Admin\BrandController');

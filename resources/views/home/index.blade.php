@@ -139,16 +139,18 @@
 						<div class="mod-vip">
 							<div class="m-baseinfo">
 								<a href="../person/index.html">
-									<img src="/yh/home/images/getAvatar.do.jpg">
+									<img src="{{session('user_info')['avatar']}}">
 								</a>
 								<em>
-									Hi,<span class="s-name">小叮当</span>
+									Hi,<span class="s-name">{{session('user_info')['user_name']}}</span>
 									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>
 							<div class="member-logout">
+								@if (!session('user_info'))
 								<a class="am-btn-warning btn" href="login.html">登录</a>
 								<a class="am-btn-warning btn" href="register.html">注册</a>
+									@endif
 							</div>
 							<div class="member-login">
 								<a href="#"><strong>0</strong>待收货</a>

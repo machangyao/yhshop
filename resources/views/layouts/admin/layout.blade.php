@@ -392,7 +392,6 @@
                 </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href=""><i class="fa fa-circle-o"></i>修改订单</a></li>
                             <li><a href="{{url('/admin/order')}}"><i class="fa fa-circle-o"></i>浏览订单</a></li>
                         </ul>
                 </li>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\orders;
 use App\Http\Models\Home\User;
+use Illuminate\Support\Facades\Input;
+
 class UserOrderController extends Controller
 {
     /**
@@ -92,5 +94,17 @@ class UserOrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function status(){
+        //执行确认收货 马长遥
+        $id = Input::get('id');
+        $data = ['order_status'=>3];
+        $res = orders::where('id',$id)->update($data);
+        if($res){
+            return back();
+        }else{
+            return back();
+        }
     }
 }

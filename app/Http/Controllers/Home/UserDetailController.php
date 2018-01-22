@@ -88,8 +88,10 @@ class UserDetailController extends Controller
         unset($data['month']);
         unset($data['day']);
         $data['birthday'] = $birthday;
-        
-
+        if(!$data['avatar']){
+            $data['avatar'] = session('user_info')['avatar'];
+        }
+//        dd($data);
         $res = User::where('id',$id)->update($data);
         $user = User::where('id',$id)->first();
         if($res){
