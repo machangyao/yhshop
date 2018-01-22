@@ -12,7 +12,7 @@
 		<link href="{{ asset('/yh/home/css/cartstyle.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/yh/home/css/optstyle.css') }}" rel="stylesheet" type="text/css" />
 
-		<script type="text/javascript" src="{{ asset('/yh/home/js/jquery.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('/yh/home/js/jquery-1.7.2.min.js') }}"></script>
 
 	</head>
 
@@ -41,7 +41,13 @@
 						<div class="menu-hd MyShangcheng"><a href="{{url('/mycenter')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+						<div class="menu-hd">
+						@if(session('user_info'))
+						<a id="mc-menu-hd" href="{{ url('/cart') }}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> {{ count(session('cart')) }}</strong></a>
+						@else
+						<a id="mc-menu-hd" href="javascript:;" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> 0</strong></a>
+						@endif
+						</div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -95,32 +101,15 @@
 						</div>
 					</div>
 					<div class="clear"></div>
-
-					<tr class="item-list">
-						<div class="bundle  bundle-last ">
-							<div class="bundle-hd">
-								<div class="bd-promos">
-									<div class="bd-has-promo">已享优惠:<span class="bd-has-promo-content">省￥19.50</span>&nbsp;&nbsp;</div>
-									<div class="act-promo">
-										<a href="#" target="_blank">第二支半价，第三支免费<span class="gt">&gt;&gt;</span></a>
-									</div>
-									<span class="list-change theme-login">编辑</span>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-					</tr>
-					<div class="clear"></div>
-	
+					@if(session('cart'))
+					<?php $total = 0; ?>
 					<tr class="item-list">
 						<div class="bundle  bundle-last ">
 							<div class="clear"></div>
 							<div class="bundle-main">
-								@if(session('cart'))
-								<?php $total = 0; ?>
+								
 								@foreach(session('cart') as $v)
 								<ul class="item-content clearfix">
-									
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
 											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox">
@@ -134,13 +123,12 @@
 										</div>
 										<div class="item-info">
 											<div class="item-basic-info">
-												<a href="javascript:;" title="{{ $v['goodinfo']->name }}" class="item-title J_MakePoint" data-point="tbcart.8.11">{{ $v['goodinfo']->name }}</a>
+												<a target="_bank" href="{{ url('/show/'.$v['id']) }}" title="{{ $v['goodinfo']->name }}" class="item-title J_MakePoint" data-point="tbcart.8.11">{{ $v['goodinfo']->name }}</a>
 											</div>
 										</div>
 									</li>
 									<li class="td td-info">
-										<div class="item-props item-props-can">
-											<span class="sku-line"></span>
+										<div class="item-props ">
 										</div>
 									</li>
 									<li class="td td-price">
@@ -156,9 +144,9 @@
 										<div class="amount-wrapper ">
 											<div class="item-amount ">
 												<div class="sl">
-													<input class="min am-btn" name="" type="button" value="-" />
-													<input class="text_box" name="" type="text" value="{{ $v['num'] }}" style="width:30px;"/>
-													<input class="add am-btn" name="" type="button" value="+" />
+													<input class="min am-btn" name="minnum" type="button" value="-" ids="{{ $v['id'] }}" price="{{ $v['goodinfo']->price }}"/>
+													<input class="text_box" id="num" name="" type="text" value="{{ $v['num'] }}" style="width:30px;"/>
+													<input class="add am-btn" name="addnum" type="button" value="+" ids="{{ $v['id'] }}" price="{{ $v['goodinfo']->price }}"/>
 												</div>
 											</div>
 										</div>
@@ -185,12 +173,10 @@
 									</li>
 								</ul>
 								@endforeach
-								@else
-								购物车暂无商品,请先去购物。
-								@endif
 							</div>
 						</div>
 					</tr>
+					
 				</div>
 				<div class="clear"></div>
 
@@ -209,7 +195,7 @@
 					<div class="float-bar-right">
 						<div class="amount-sum">
 							<span class="txt">已选商品</span>
-							<em id="J_SelectedItemsCount">0</em><span class="txt">件</span>
+							<em id="J_SelectedItemsCount">{{ count(session('cart')) }}</em><span class="txt">件</span>
 							<div class="arrow-box">
 								<span class="selected-items-arrow"></span>
 								<span class="arrow"></span>
@@ -224,6 +210,14 @@
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
+
+					@else
+					<tr>
+						<td>
+							<div style=" border:#F5F5F5 1px solid; text-align: center; height: 200px; line-height: 200px;">购物车暂无商品,请<a href="{{ url('/') }}" style="color:#f40">先去购物。</a></div>
+						</td>
+					</tr>
+					@endif
 
 				</div>
 
@@ -283,9 +277,9 @@
 							<div class="theme-options">
 								<div class="cart-title number">数量</div>
 								<dd>
-									<input class="min am-btn am-btn-default" name="" type="button" value="-" />
+									<input class="min am-btn am-btn-default" name="" type="button" value="-"/>
 									<input class="text_box" name="" type="text" value="1" style="width:30px;" />
-									<input class="add am-btn am-btn-default" name="" type="button" value="+" />
+									<input class="add am-btn am-btn-default" name="" type="button" value="+"/>
 									<span  class="tb-hidden">库存<span class="stock">1000</span>件</span>
 								</dd>
 
@@ -317,6 +311,33 @@
 			<li class="active"><a href="shopcart.html"><i class="am-icon-shopping-basket"></i>购物车</a></li>	
 			<li><a href="../person/index.html"><i class="am-icon-user"></i>我的</a></li>					
 		</div>
+	
+		<script>
+			$('input[name=addnum]').on('click',function(){
+				// 获取商品数量
+				var num = $(this).prev().val();
+				$(this).prev().val(++num);
+				
+				// 获取id
+				var id = $(this).attr('ids');
+
+				$.ajax({
+					url:"{{ url('/addnum') }}",
+					type:'post',
+					data:{'id':id,'_token':'{{ csrf_token() }}'},
+					success:function(data){
+						if(data.status == 1)
+						{
+
+							// //获取单价
+							// var price = $(this).attr('price');
+							// alert(price);
+						}
+					}
+				});
+			});
+		</script>
+
 	</body>
 
 </html>

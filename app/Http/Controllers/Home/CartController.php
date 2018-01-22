@@ -19,13 +19,39 @@ class CartController extends Controller
     		return redirect('login')->with('info','您还没有登录,请先登录');
     	}
 
+    	//2、如果登录后,返回上次操作的页面
+    	// if(session::get('user_info'))
+    	// {
+    	// 	return back();
+    	// }
+
     	//2、拼装session数组
     	$data = session('cart') ? session('cart') : [];
-    	$data[] = [
-    		'id' => $_GET['id'],
-    		'num' => $_GET['num'],
-    		'goodinfo' => Goods::where('id',$_GET['id'])->first(),
-    	];
+
+    	//判断如果购买同样的商品,则数量在原来的基础上增加
+    	$flag = 0;
+    	if($data)
+    	{
+    		foreach($data as $k=>&$v)
+    		{
+    			if($v['id'] == $_GET['id'])
+    			{
+    				$v['num'] += $_GET['num'];
+    				$flag = 1;
+    			}
+    		}
+    	}
+
+    	//如果没有购买同样的商品
+    	if(!$flag)
+    	{
+			$data[] = [
+	    		'id' => $_GET['id'],
+	    		'num' => $_GET['num'],
+	    		'goodinfo' => Goods::where('id',$_GET['id'])->first(),
+	    	];
+    	}
+    	
 
     	//3、把商品信息存入到session,追加
     	$request->session()->put('cart',$data);
@@ -40,6 +66,37 @@ class CartController extends Controller
     {
     	// dd(session('cart'));
     	return view('home.cart');
+    }
+
+    //数量增加
+    public function addnum(Request $request)
+    {
+    	//获取id
+    	$id = $request->input('id');
+
+    	$data = session('cart') ? session('cart') : [];
+
+    	if($data)
+    	{
+    		foreach($data as $k=>$v)
+    		{
+    			if($v['id'] == $id)
+    			{
+    				$data[$k]['num'] = ++$data[$k]['num'];
+    			}
+    		}
+    		// 把修改后的商品数量存入到session
+    		$request->session()->put('cart',$data);
+    	}
+
+    	return response()->json(['stauts'=>1]);
+
+    }
+
+    //数量减少
+    public function minnum()
+    {
+
     }
 
 }

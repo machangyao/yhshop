@@ -116,6 +116,10 @@ Route::get('/show/{id}','Home\ShowController@show');
 Route::get('/addcart','Home\CartController@addcart');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
+//ajax购物车页面数量增加
+Route::post('/addnum','Home\CartController@addnum');
+//ajax购物车页面数量减少
+Route::post('/minnum','Home\CartController@minnum');
 
 
 // 后台
