@@ -120,8 +120,10 @@ Route::get('/cart','Home\CartController@index');
 Route::post('/addnum','Home\CartController@addnum');
 //ajax购物车页面数量减少
 Route::post('/minnum','Home\CartController@minnum');
-//删除购物车商品
+//删除单个购物车商品
 Route::post('/delcart','Home\CartController@delcart');
+//删除购物车选中的商品
+Route::post('/clearcart','Home\CartController@clearcart');
 //结算
 
 

@@ -143,4 +143,32 @@ class CartController extends Controller
     	echo 1;
     }
 
+    //删除购物车选中的商品
+    public function clearcart(Request $request)
+    {
+    	$idstr = $request->input('id');
+    	//将字符串转成数组
+    	$idarr = explode(',',$idstr);
+    	//return $idstr;
+
+		$data = session('cart') ? session('cart') : [];
+
+    	if($data)
+    	{
+    		foreach($data as $k=>$v)
+    		{
+    			if( in_array($v['id'],$idarr) )
+    			{
+    				unset($data[$k]);
+    			}
+    		}
+    		// 把修改后的商品数量存入到session
+    		$request->session()->put('cart',$data);
+    	}
+
+    	// return response()->json(['stauts'=>1]);
+    	echo 1;
+    	
+    }
+
 }

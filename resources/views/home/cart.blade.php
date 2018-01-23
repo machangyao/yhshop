@@ -112,7 +112,7 @@
 								<ul class="item-content clearfix">
 									<li class="td td-chk">
 										<div class="cart-checkbox ">
-											<input class="check" id="J_CheckBox_170769542747" name="items[]" value="170769542747" type="checkbox">
+											<input class="check" idc="{{ $v['id'] }}" name="items[]" value="" type="checkbox">
 											<label for="J_CheckBox_170769542747"></label>
 										</div>
 									</li>
@@ -183,13 +183,13 @@
 				<div class="float-bar-wrapper">
 					<div id="J_SelectAll2" class="select-all J_SelectAll">
 						<div class="cart-checkbox">
-							<input class="check-all check" id="J_SelectAllCbx2" name="select-all" value="true" type="checkbox">
+							<input style="margin-top:20px;" id="checkall" name="select-all" value="true" type="checkbox">
 							<label for="J_SelectAllCbx2"></label>
 						</div>
 						<span>全选</span>
 					</div>
 					<div class="operations">
-						<a href="javascript:;" class="deleteAll">删除</a>
+						<a href="javascript:;" class="clearcart">删除</a>
 						<a href="#" hidefocus="true" class="J_BatchFav">移入收藏夹</a>
 					</div>
 					<div class="float-bar-right">
@@ -388,7 +388,7 @@
 					});
 				});
 
-				//删除购物车
+				//删除单个购物车商品
 				function delcart(obj,id)
 				{
 					$.ajax({
@@ -404,6 +404,48 @@
 						}
 					});
 				}
+
+
+				//全选全不选
+				$("#checkall").on('click',function(){
+					if($(this).is(":checked"))
+					{
+						$('.check').prop('checked',true);
+					}else{
+						$('.check').prop('checked',false);
+					}
+				});
+
+				//删除购物车选中的商品
+				$(".clearcart").on('click',function(){
+					var id_array = [];
+					//如果那个复选框被选中，获取id
+					$('.check').each(function(){
+						if( $(this).is(":checked") )
+						{
+							//alert($(this).attr('idc'));
+							// 把ID转成数组
+							id_array.push($(this).attr('idc'));
+						}
+					});
+					// 将数组转为字符串
+					var idstr = id_array.join(',');
+
+					
+					$.ajax({
+						url:"{{ url('/clearcart') }}",
+						type:'post',
+						data:{'id':idstr,'_token':'{{ csrf_token() }}'},
+						success:function(data){
+							if(data)
+							{
+								window.location.href = location.href;
+							}
+						}
+					});
+
+
+				});
 		</script>
 
 	</body>
