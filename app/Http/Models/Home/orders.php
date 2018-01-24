@@ -14,12 +14,16 @@ class orders extends Model
     // public function User(){
     // 	return $this->belongsTo('App\Http\Models\Home\User','user_id','id');
     // }
-
+    //订单关联商品 多对多
     public function Goods(){
-    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','oid','gid');
+    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','order_sn','gid');
     }
 
     public function addr(){
     	return $this->hasOne('App\Http\Models\Home\Addr','id','addr_id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Http\Models\Home\User','user_id','id');
     }
 }

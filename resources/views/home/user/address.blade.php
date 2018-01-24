@@ -15,8 +15,13 @@
 				<hr/>
 				<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
 					@foreach ($addr as $k=>$v)
+						@if ($v->addr_status == 1 )
 					<li class="user-addresslist defaultAddr">
-						<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
+						@else
+							<li class="user-addresslist">
+								@endif
+
+							<span class="new-option-r" id="da" onclick="da({{$v->id}})"><i class="am-icon-check-circle"></i>默认地址</span>
 						<p class="new-tit new-p-re">
 							<span class="new-txt">{{$v->addr_name}}</span>
 							<span class="new-txt-rd2">{{$v->addr_tel}}</span>
@@ -185,6 +190,17 @@
 					});
 
 				});
+				function da(id) {
+                    $.ajax({
+                        url:"{{url('/addr/status')}}",
+						type:'post',
+						data:{'id':id,'_token':"{{csrf_token()}}"},
+						success:function (data) {
+							// alert(data);
+                        }
+                    });
+                }
+					
 			</script>
 
 			<div class="clear"></div>

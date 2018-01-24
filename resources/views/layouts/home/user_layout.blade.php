@@ -120,25 +120,25 @@
 						<a href="{{url('/mycenter')}}">个人中心</a>
 					</li>
 					<li class="person">
-						<a href="">个人资料</a>
+						<a href="javascript:;">个人信息</a>
 						<ul>
-							<li> <a href="{{url('/userdetail')}}">个人信息</a></li>
+							<li> <a href="{{url('/userdetail')}}">个人资料</a></li>
 							<li> <a href="{{url('/user/safety')}}">安全设置</a></li>
 							<li> <a href="{{url('/user/addr')}}">收货地址</a></li>
 						</ul>
 					</li>
 					<li class="person">
-						<a href="#">我的交易</a>
+						<a href="javascript:;">我的交易</a>
 						<ul>
 							<li><a href="{{url('/user/order')}}">订单管理</a></li>
-							<li> <a href="change.html">退款售后</a></li>
 						</ul>
 					</li>
 					<li class="person">
-						<a href="#">我的小窝</a>
+						<a href="javascript:;">我的小窝</a>
 						<ul>
-							<li> <a href="collection.html">收藏</a></li>
+							<li> <a href="{{url('/user/collect')}}">收藏</a></li>
 							<li> <a href="comment.html">评价</a></li>
+
 						</ul>
 					</li>
 

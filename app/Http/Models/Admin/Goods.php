@@ -24,6 +24,10 @@ class Goods extends Model
 		return $this->belongsTo('App\Http\Models\Admin\Brands','bid','id');
 	}
 
+	public function gct(){
+	    return $this->belongsTo('App\Http\Models\Home\order_goods','id','gid');
+    }
+
 	// public function orders(){
  //    	return $this->belongsTo('App\Http\Models\Home\orders','gid','id');
 	// }

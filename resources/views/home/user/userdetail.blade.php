@@ -136,12 +136,19 @@
 					var year = '{{session('user_info')['birthday']}}'.slice(0,4);
 					var month = '{{session('user_info')['birthday']}}'.slice(5,7);
 					var day = '{{session('user_info')['birthday']}}'.slice(8,10);
+					if(year){
+                        new DateSelector(selYear, selMonth, selDay, year, month, day);
+                        $('#update').on('click',function(){
+                            $('form').submit();
+                        });
+					}else{
+                        new DateSelector(selYear, selMonth, selDay, 2000, 1, 1);
+                        $('#update').on('click',function(){
+                            $('form').submit();
+                        });
+					}
 
-					new DateSelector(selYear, selMonth, selDay, year, month, day);
-					$('#update').on('click',function(){
-						$('form').submit();
-					});
-					</script>
+				</script>
                     <script type="text/javascript">
 					    $(function () {
 					        $("#file_upload").change(function () {

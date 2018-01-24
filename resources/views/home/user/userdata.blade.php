@@ -29,6 +29,8 @@
 								</div>
 
 								<!--个人资产-->
+
+
 							</div>
 							<div class="box-container-bottom"></div>
 
@@ -121,20 +123,21 @@
 									<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
 								</div>
 								<div class="s-content">
+									@foreach ($collects as $v)
 									<div class="s-item-wrap">
 										<div class="s-item">
 
 											<div class="s-pic">
-												<a href="#" class="s-pic-link">
-													<img src="/yh/home/images/0-item_pic.jpg_220x220.jpg" alt="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰" class="s-pic-img s-guess-item-img">
+												<a href="{{url('/show')}}/{{$v->id}}" class="s-pic-link">
+													<img src="/uploads/{{$v->pic}}" alt="" title="" class="s-pic-img s-guess-item-img">
 												</a>
 											</div>
 											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">42.50</em></span>
+												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{$v->price}}</em></span>
 												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">68.00</em></span>
 
 											</div>
-											<div class="s-title"><a href="#" title="包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰">包邮s925纯银项链女吊坠短款锁骨链颈链日韩猫咪银饰简约夏配饰</a></div>
+											<div class="s-title"><a href="#" title="">{{$v->name}}</a></div>
 											<div class="s-extra-box">
 												<span class="s-comment">好评: 98.03%</span>
 												<span class="s-sales">月销: 219</span>
@@ -142,7 +145,7 @@
 											</div>
 										</div>
 									</div>
-
+										@endforeach
 								
 
 									
@@ -169,6 +172,7 @@
 									<em>{{date('d')}}</em>
 									<span>星期{{date('w')}}</span>
 									<span>{{date('Y-m-d')}}</span>
+
 								</div>
 							</div>
 						</div>

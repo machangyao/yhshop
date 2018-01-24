@@ -18,7 +18,7 @@ class UserOrderController extends Controller
     public function index()
     {
         //马长遥 返回订单页面
-        $user = User::find(20);
+        $user = User::find(session('user_info')['id']);
         $orders = $user->orders;
         // $goods = [];
         // foreach($orders as $v){

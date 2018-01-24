@@ -78,9 +78,7 @@
 						</div>
 						<!--轮播 -->
 						<script type="text/javascript">
-							(function() {
-								$('.am-slider').flexslider();
-							});
+
 							$(document).ready(function() {
 								$("li").hover(function() {
 									$(".category-content .category-list li.first .menu-in").css("display", "none");
@@ -138,19 +136,28 @@
 							    
 						<div class="mod-vip">
 							<div class="m-baseinfo">
+								@if (session('user_info'))
 								<a href="../person/index.html">
 									<img src="{{session('user_info')['avatar']}}">
 								</a>
 								<em>
 									Hi,<span class="s-name">{{session('user_info')['user_name']}}</span>
+								@else
+									<a href="../person/index.html">
+										<img src="/yh/home/images/hwbn40x40.jpg">
+									</a>
+									<em>
+									Hi,<span class="s-name">游客</span>
+								@endif
 									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>
 							<div class="member-logout">
 								@if (!session('user_info'))
-								<a class="am-btn-warning btn" href="login.html">登录</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
+								<a class="am-btn-warning btn" href="{{url('/login').'?url='.\Illuminate\Support\Facades\Input::url()}}">登录</a>
+								<a class="am-btn-warning btn" href="{{url('/user/create')}}">注册</a>
 									@endif
+
 							</div>
 							<div class="member-login">
 								<a href="#"><strong>0</strong>待收货</a>
