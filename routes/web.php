@@ -124,10 +124,16 @@ Route::post('/minnum','Home\CartController@minnum');
 Route::post('/delcart','Home\CartController@delcart');
 //删除购物车选中的商品
 Route::post('/clearcart','Home\CartController@clearcart');
+//订单页面
+Route::get('/order','Home\OrderController@index');
+//ajax订单页面数量增加
+Route::post('/orderaddnum','Home\OrderController@orderaddnum');
+//ajax订单页面数量减少
+Route::post('/orderminnum','Home\OrderController@orderminnum');
 //结算
-
-
-
+Route::post('/pay','Home\PayController@index');
+//下单成功
+Route::get('/success/{id}','Home\SuccessController@index');
 // 后台
 // 分类路由
 Route::resource('/category','Admin\CategoryController');

@@ -118,7 +118,7 @@
 									</li>
 									<li class="td td-item">
 										<div class="item-pic">
-											<a href="javascript:;" class="J_MakePoint" data-point="tbcart.8.12">
+											<a href="{{ url('/show/'.$v['id']) }}" class="J_MakePoint" data-point="tbcart.8.12">
 												<img style="width:100%" src="./uploads/s_{{ $v['goodinfo']->pic }}" class="itempic J_ItemImg"></a>
 										</div>
 										<div class="item-info">
@@ -155,7 +155,6 @@
 										//小计
 										$sum = $v['goodinfo']->price * $v['num'];
 										//合计
-
 										$total = $total + $sum;
 									?>
 									<li class="td td-sum">
@@ -206,7 +205,7 @@
 							<strong class="price">¥<em id="J_Total"><span id="total">{{ $total }}</span></em></strong>
 						</div>
 						<div class="btn-area">
-							<a href="{{ url('') }}" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
+							<a href="{{ url('/order') }}" id="J_Go" class="submit-btn submit-btn-disabled" aria-label="请注意如果没有选择宝贝，将无法结算">
 								<span>结&nbsp;算</span></a>
 						</div>
 					</div>
