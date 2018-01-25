@@ -1,6 +1,7 @@
  @extends('layouts.admin.layout')
 
  @section('content')
+
  <style type="text/css">
     .form-group{ margin-bottom: 0;}
 </style>
@@ -26,13 +27,30 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">广告</h3>
                         </div>
-
-
-                        <div class="box-body">
-                            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-
-
-
+                               
+                                            
+                                            
+                        <div class="col-xs-3"></div>       
+                        <div class="col-xs-6"></div>                
+                                
+                             
+                        <div class="col-xs-3">    
+                            <div class="input-group input-group">
+                             <form action="{{url('admin/ads')}}" method="get">
+                             <table>
+                             <tr>
+                             <td>
+                                <input type="text" name="keywords1" value="{{$request->keywords1}}" class="form-control" placeholder="输入广告描述搜索条件">
+                                </td><td>
+                                <span class="input-group-btn">
+                                 <button class="btn btn-info btn-flat">搜索</button>
+                                </span>
+                                </td>
+                                </tr>
+                                </table>
+                             </form>   
+                            </div>   
+                        </div>
                             <div class="row"><div class="col-sm-12">
 
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" > 
@@ -81,22 +99,14 @@
                            </tbody>
 
                             </table>
+                             <div class="page_list">
+                                {!! $ads->appends($request->all())->render() !!}
                             </div>
-
-	                        </div>
-							</div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-					</div>	
-					</div>
-                <!--/.col (right) -->
-            </div>
             <!-- /.row -->
         </section>
-        <!-- /.content -->
+        </div>
     </div> 
- <script>
+<script>
     function delAds(id){
         layer.confirm('您确定要删除吗？',{
             btn:['确定','取消']
@@ -118,6 +128,5 @@
         })
     },function(){});
 }
-
-    </script>
+</script>
  @stop

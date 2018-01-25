@@ -1,4 +1,4 @@
- @extends('layouts.admin.layout')
+   @extends('layouts.admin.layout')
 
  @section('content')
 
@@ -24,7 +24,7 @@
                         <div class="box-header with-border">
 
                         @if (count($errors) > 0)
-                            <div >
+                            <div>
                                 <ul>
                                     @if(is_object($errors))
                                         @foreach ($errors->all() as $error)
@@ -55,10 +55,58 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
 
                                     <div class="col-sm-4">
-                                        <input type="file" name="ads_img" id="inputEmail3" placeholder="请上传商品图片">
+                                        <input id="file_upload" name="ads_img" type="file" multiple="true">
+                                        <br>
+                                        <img src="" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
                                     </div>
                                 </div>
                             </div>
+
+                    <script type="text/javascript">
+                            $("#file_upload").change(function () {
+                                uploadImage();
+                            });
+                        function uploadImage() {
+                            // alert('')判断是否有选择上传文件
+                            var imgPath = $("#file_upload").val();
+                            if (imgPath == "") {
+                                alert("请选择上传图片！");
+                                return;
+                            }
+                            //判断上传文件的后缀名
+                            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                            if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp' && strExtension == '') {
+                                alert("请选择图片文件");
+                                return;
+                            }
+
+                            //只将文件上传表单项的内容放入formData对象
+                                var formData = new FormData();
+                                formData.append('file_upload', $('#file_upload')[0].files[0]);
+                                formData.append('_token', '{{csrf_token()}}');
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/slide/upload",
+                                    data: formData,
+                                    async: true,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(data) {
+//                                        alert()
+                                        $('#file_upload_img').attr('src',data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("上传失败，请检查网络后重试");
+                                    }
+                                });
+                        }
+
+
+
+                    </script>                           
+
                            
                             <div class="box-body">
                                 <div class="form-group">
@@ -71,35 +119,8 @@
                                 </div>
                             </div>
 
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">广告存在时间</label>
-
-                                    <div class="col-sm-2">
-                                        <input type="text" name="ads_time" class="form-control" id="inputEmail3" placeholder="请输入时间">
-                                    </div>
-                                </div>
-                            </div>
                             
-                            <script type="text/javascript">
-                                $("#file_upload").change(function () {
-                                        uploadImage();
-                                    });
-                                function uploadImage() {
-                                    // alert('')判断是否有选择上传文件
-                                    var imgPath = $("#file_upload").val();
-                                    if (imgPath == "") {
-                                        alert("请选择上传图片！");
-                                        return;
-                                    }
-                                    //判断上传文件的后缀名
-                                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
-                                    if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp' && strExtension == '') {
-                                            alert("请选择图片文件");
-                                            return;
-                                            }
-                                     }
-                            </script>
+                            
                                
 
                             <!-- /.box-body -->

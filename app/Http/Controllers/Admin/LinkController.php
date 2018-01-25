@@ -13,13 +13,20 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
-        $link = Links::get();
-        return view('admin.link.index',['link'=>$link]);
-
+         $link = Links::orderBy('link_id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('keywords1');
+                if(!empty($username)) {
+                    $query->where('link_text','like','%'.$username.'%');
+                }
+            })
+            ->paginate($request->input('num', 5));
+        return view('admin/link/index',['link'=>$link, 'request'=> $request]);
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,14 +61,14 @@ class LinkController extends Controller
         //提示信息
         $mess = [
             'link_url.required'=>'连接不能为空',
-            'link_text.required'=>'图片不能为空',
+            'link_text.required'=>'描述不能为空',
             
         ];
 
         $Validator = Validator::make($input, $rule, $mess);
 
         if($Validator->fails()){
-            return redirect('admin/ads/create')
+            return redirect('admin/kink/create')
                 ->withErrors($Validator)
                 ->withInput(); 
         }

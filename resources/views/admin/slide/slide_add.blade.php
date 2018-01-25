@@ -63,9 +63,11 @@
                             <div class="box-body"> 
                                 <div class="form-group">
                                     <label for="exampleInputFile">轮播图图片</label>
-                                    <input type="file" name="slide_mig" id="exampleInputFile">
-
-                                    
+                                   
+                                    <input id="file_upload" name="slide_mig" type="file" multiple="true">
+                                           <br>
+                                           <img src="" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
+                                                     
                                 </div>
                                 
                             </div>
@@ -93,12 +95,38 @@
                                 alert("请选择图片文件");
                                 return;
                             }
-                        }
-                    </script>
 
-                    
-                        </form>
-                    </div>
+                            //只将文件上传表单项的内容放入formData对象
+                                var formData = new FormData();
+                                formData.append('file_upload', $('#file_upload')[0].files[0]);
+                                formData.append('_token', '{{csrf_token()}}');
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/slide/upload",
+                                    data: formData,
+                                    async: true,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(data) {
+//                                        alert()
+                                        $('#file_upload_img').attr('src',data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("上传失败，请检查网络后重试");
+                                    }
+                                });
+                        }
+
+
+
+                    </script>
+                        
+                 
+
+                </form>
+        </div>
 
 </div>
 
@@ -111,4 +139,6 @@
         <!-- /.content -->
     </div> 
 
+
+   
 @stop

@@ -18,22 +18,38 @@
         </section>
 
         <!-- Main content -->
+
         <section class="content">
             <div class="row">
-                <!-- right column -->
-                <div class="col-md-12">
+              <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title">友情连接</h3>
                         </div>
-
-
+                         <div class="col-xs-3"></div>       
+                        <div class="col-xs-6"></div>                
+                                
+                             
+                        <div class="col-xs-3">    
+                            <div class="input-group input-group">
+                             <form action="{{url('admin/link')}}" method="get">
+                             <table>
+                             <tr>
+                             <td>
+                                <input type="text" name="keywords1" value="{{$request->keywords1}}" class="form-control" placeholder="输入文字描述搜索条件">
+                                </td><td>
+                                <span class="input-group-btn">
+                                 <button class="btn btn-info btn-flat">搜索</button>
+                                </span>
+                                </td>
+                                </tr>
+                                </table>
+                             </form>   
+                            </div>   
+                        </div> 
                         <div class="box-body">
-                            <div id="example1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
-
-
-
-                            <div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info"> 
+                        </div>   
+                         <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info"> 
                                <thead>
                                 <tr role="row">
 
@@ -42,9 +58,6 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 202px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">友情连接地址</font></font></th>
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 178px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">友情连接文字描述</font></font></th>
-								
-								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 178px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">友情连接创建时间</font></font></th>
-
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 100px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">操作</font></font></th>
 
@@ -63,33 +76,22 @@
                                     
                                     <td><font style="vertical-align: inherit;">{{ $v->link_text }}</font></td>
 
-                                   
-                                    <td ><font style="vertical-align: inherit;">{{ $v->link_create_at }}</font></td>
-
                                     <td><a href="{{ url('admin/link/'.$v->link_id.'/edit') }}">编辑</a> | <a href="javascript:;" onclick="delLink({{ $v->link_id }})">删除</a></td>
 
                                 </tr>
-
+                    
 							@endforeach
 									
                            </tbody>
-
-                            </table>
-                            </div>
-
-	                        </div>
-							</div>
-                        </div>
-                        <!-- /.box-body -->
-                    </div>
-					</div>	
-					</div>
-                <!--/.col (right) -->
+                        </table>
+                      <div class="page_list">
+                            {!! $link->appends($request->all())->render() !!}
+                      </div>     
+                </div>
             </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div> 
+            </div>
+            </section>
+            </div>
 
 <script>
     function delLink(id){

@@ -43,7 +43,7 @@
 
 
 
-                        <form role="form" action="{{ url('admin/slide/'.$slide->slide_id) }}" method="post">
+                        <form role="form" action="{{ url('admin/slide/'.$slide->slide_id) }}" method="post" enctype="multipart/form-data">
 
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
@@ -58,11 +58,54 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">轮播图图片</label>
-                                    <input type="file" name="slide_mig" id="exampleInputFile">
-
+                                    <input id="file_upload" name="slide_mig" type="file" multiple="true">
+                                           <br>
+                                           <img src="{{ $slide->slide_mig }}" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
                                     
                                 </div>
-                                
+                    <script type="text/javascript">
+                            $("#file_upload").change(function () {
+                                uploadImage();
+                            });
+                        function uploadImage() {
+                            // alert('')判断是否有选择上传文件
+                            var imgPath = $("#file_upload").val();
+                            if (imgPath == "") {
+                                alert("请选择上传图片！");
+                                return;
+                            }
+                            //判断上传文件的后缀名
+                            var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                            if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp' && strExtension == '') {
+                                alert("请选择图片文件");
+                                return;
+                            }
+
+                            //只将文件上传表单项的内容放入formData对象
+                                var formData = new FormData();
+                                formData.append('file_upload', $('#file_upload')[0].files[0]);
+                                formData.append('_token', '{{csrf_token()}}');
+
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/slide/upload",
+                                    data: formData,
+                                    async: true,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(data) {
+                                        $('#file_upload_img').attr('src',data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("上传失败，请检查网络后重试");
+                                    }
+                                });
+                        }
+
+
+
+                    </script>                                
                             </div>
                             <!-- /.box-body -->
 

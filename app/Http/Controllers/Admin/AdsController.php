@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\Ads;
+
 class AdsController extends Controller
 {
     /**
@@ -12,12 +13,19 @@ class AdsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $ads = Ads::get();
-        return view('admin/ads/index',['ads'=>$ads]);
-
+         $ads = Ads::orderBy('ads_id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $username = $request->input('keywords1');
+                if(!empty($username)) {
+                    $query->where('ads_text','like','%'.$username.'%');
+                }
+            })
+            ->paginate($request->input('num', 5));
+        return view('admin/ads/index',['ads'=>$ads, 'request'=> $request]);
     }
 
     /**
@@ -69,6 +77,7 @@ class AdsController extends Controller
             'ads_url'=>'required',
             'ads_img'=>'required',
             'ads_text'=>'required',
+            'ads_img'=>'image',
         ];
 
         //提示信息
@@ -76,6 +85,7 @@ class AdsController extends Controller
             'ads_url.required'=>'连接不能为空',
             'ads_img.required'=>'图片不能为空',
             'ads_text.required'=>'文字描述不能为空',
+            'ads_img.image'=>'必须为图片',
         ];
 
         $Validator = Validator::make($input, $rule, $mess);
@@ -160,14 +170,14 @@ class AdsController extends Controller
         $rule = [
             'ads_url'=>'required',
             'ads_text'=>'required',
-           
+            'ads_img'=>'image',
         ];
 
         //提示信息
         $mess = [
             'ads_url.required'=>'连接不能为空',
             'ads_text.required'=>'文字描述不能为空',
-           
+            'ads_img.image'=>'必须为图片',
         ];
 
         $Validator = Validator::make($input, $rule, $mess);

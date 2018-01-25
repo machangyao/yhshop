@@ -25,8 +25,23 @@
                                                     </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        <form action="/good" method="post" class="form-horizontal" enctype="multipart/form-data" style="">   
-                            <input type="hidden" name="_token" value="puKbNZFAypjJZKBSfJhWHyDs2oacijXTGSzbM2oi">
+                        
+                        @if (count($errors) > 0)
+                            <div >
+                                <ul>
+                                    @if(is_object($errors))
+                                        @foreach ($errors->all() as $error)
+                                            <li style="color:red">{{ $error }}</li>
+                                        @endforeach
+                                    @else
+                                            <li style="color:red">{{ $errors }}</li>
+                                    @endif
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ url('admin/article') }}" method="post" class="form-horizontal" enctype="multipart/form-data" style="">   
+                            {{ csrf_field() }}
                             <div class="box-body">
                                 
                             </div>
@@ -34,8 +49,8 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章作者</label>
 
-                                    <div class="col-sm-4">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+                                    <div class="col-sm-2">
+                                        <input type="text" name="article_author" class="form-control" id="inputEmail3" placeholder="请输入作者名称">
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +59,8 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题</label>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" name="price" class="form-control" id="inputEmail3" placeholder="请输入商品价格">
+                                    <div class="col-sm-3">
+                                        <input type="text" name="article_title" class="form-control" id="inputEmail3" placeholder="请输文章标题">
                                     </div>
                                 </div>
                             </div>
@@ -53,8 +68,17 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容</label>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" name="market_price" class="form-control" id="inputEmail3" placeholder="请输入商品市场价格">
+                                    <div class="col-sm-9">
+                                        <!-- 加载编辑器的容器 -->
+                                        <script id="container" name="article_content" type="text/plain"></script>
+                                        <!-- 配置文件 -->
+                                        <script type="text/javascript" src="/yh/ueditor/ueditor.config.js"></script>
+                                        <!-- 编辑器源码文件 -->
+                                        <script type="text/javascript" src="/yh/ueditor/ueditor.all.js"></script>
+                                        <!-- 实例化编辑器 -->
+                                        <script type="text/javascript">
+                                            var ue = UE.getEditor('container');
+                                        </script>
                                     </div>
                                 </div>
                             </div>

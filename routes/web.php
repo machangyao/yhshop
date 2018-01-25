@@ -23,7 +23,7 @@ Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
 
 //登陆页面的处理逻辑
 Route::post('admin/dologin','Admin\LoginController@dologin');
-
+ 
 Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
 //后台首页
     Route::get('index','LoginController@index');
@@ -43,9 +43,13 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 Route::get('/admin','Admin\IndexController@index');
 
 
-
+//状态
+Route::get('/admin/slide/state','Admin\SlideController@state');
+//图片
+Route::post('/admin/slide/upload','Admin\SlideController@upload');
 //轮播图路由
 Route::resource('/admin/slide', 'Admin\SlideController');
+
 
 //网站配置
 Route::get('/admin/site', 'Admin\SiteController@index');

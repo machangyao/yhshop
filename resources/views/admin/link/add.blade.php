@@ -65,15 +65,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">友情连接创建时间</label>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" name="create_at" class="form-control" id="inputEmail3" placeholder="请输入时间">
-                                    </div>
-                                </div>
-                            </div>
                             
                            
                            

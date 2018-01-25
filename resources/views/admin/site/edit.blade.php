@@ -57,7 +57,7 @@
                             <div class="box-body">
                                 <div class="col-sm-5">
                                     <label>网站描述</label>
-                                    <textarea class="form-control" rows="3" name="site_describe" value="">{{ $site->site_describe }}</textarea>
+                                    <textarea class="form-control" rows="3" name="site_describe" >{{ $site->site_describe }}</textarea>
                                 </div>
                             </div>
 
@@ -71,22 +71,19 @@
                             <div class="box-body">    
                                 <div class="form-group">
                                     <label for="exampleInputFile">网站logo图</label><br>
-                                    <img src=" {{ $site->site_logo }} ">
-                                    
-                                    <input type="file" name="site_logo" value="{{ $site->site_logo }}" id="exampleInputFile">
-                                </div>
-                            
-                                    
-                            <div class="box-footer">
-                                <button type="submit" class="btn btn-primary">提交</button>
+                                  
+                                    <input type="file" multiple="true" name="site_logo" id="file_upload">
+                                    <img src="{{ $site->site_logo }}" id="file_upload_img">
                             </div>
 
+
                     <script type="text/javascript">
-                        $("#file_upload").change(function () {
+                            $("#file_upload").change(function () {
                                 uploadImage();
                             });
                         function uploadImage() {
-                            //判断是否有选择上传文件
+
+                            // alert('')判断是否有选择上传文件
                             var imgPath = $("#file_upload").val();
                             if (imgPath == "") {
                                 alert("请选择上传图片！");
@@ -98,8 +95,36 @@
                                 alert("请选择图片文件");
                                 return;
                             }
+
+                            //只将文件上传表单项的内容放入formData对象
+                                var formData = new FormData();
+                                formData.append('file_upload', $('#file_upload')[0].files[0]);
+                                formData.append('_token', '{{csrf_token()}}');
+                                console.log(formData);
+                                $.ajax({
+                                    type: "POST",
+                                    url: "/admin/slide/upload",
+                                    data: formData,
+                                    async: true,
+                                    cache: false,
+                                    contentType: false,
+                                    processData: false,
+                                    success: function(data) {
+                                        $('#file_upload_img').attr('src',data);
+                                    },
+                                    error: function(XMLHttpRequest, textStatus, errorThrown) {
+                                        alert("上传失败，请检查网络后重试");
+                                    }
+                                });
                         }
-                    </script>
+                    </script> 
+
+                                    
+                            <div class="box-footer">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            </div>
+
+                   
                         </form>
                         <!-- /.box-body -->
                     </div>
