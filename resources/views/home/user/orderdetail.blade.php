@@ -122,7 +122,7 @@
 								<li class="td td-item">
 									<div class="item-pic">
 										<a href="#" class="J_MakePoint">
-											<img src="{{$v->pic}}" class="itempic J_ItemImg">
+											<img src="/uploads/{{$v->pic}}" class="itempic J_ItemImg">
 										</a>
 									</div>
 									<div class="item-info" style='float:none;'>
