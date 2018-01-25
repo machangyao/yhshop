@@ -23,7 +23,7 @@
                     <!-- Horizontal Form -->
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">可以快速的添加一个用户</h3>
+                            <h3 class="box-title"></h3>
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -40,54 +40,22 @@
                                     </ul>
                                 </div>
                          @endif
-                        <form class="form-horizontal" action="{{ url('/admin/user') }}" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{ url('/admin/role/'.$role->id) }}" method="post" enctype="multipart/form-data">
                         	{{ csrf_field() }}
+                            {{ method_field('PUT') }}
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">用户名 :</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称 :</label>
 
                                     <div class="col-sm-10">
-                                        <input name="nickname" type="text" class="form-control" id="inputEmail3" placeholder="请输入用户名">
+                                        <input name="name" value="{{ $role -> name }}" type="text" class="form-control" id="inputEmail3">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">密码 :</label>
+                                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述 :</label>
 
                                     <div class="col-sm-10">
-                                        <input name="password" type="password" class="form-control" id="inputPassword3"
-                                               placeholder="请输入密码">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">确认密码 :</label>
-
-                                    <div class="col-sm-10">
-                                        <input name="re-password" type="password" class="form-control" id="inputPassword3"
-                                               placeholder="请输入确认密码">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">邮箱 :</label>
-
-                                    <div class="col-sm-10">
-                                        <input name="email" type="email" class="form-control" id="inputPassword3"
-                                               placeholder="请输入邮箱">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">手机号 :</label>
-
-                                    <div class="col-sm-10">
-                                        <input name="tel" type="text" class="form-control" id="inputPassword3"
-                                               placeholder="请输入手机号">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">头像 :</label>
-
-                                    <div class="col-sm-10">
-                                        <input name="avatar" type="file" id="inputPassword3"
-                                               placeholder="">
+                                        <input name="description" value="{{ $role -> description }}" type="textd" class="form-control" id="inputPassword3">
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +65,7 @@
                             <div class="form-group">
                             	<div class="col-md-2"></div>
                             	<div class="col-sm-10">
-                                        <button type="submit" class="btn btn-default">添加</button>
+                                        <button type="submit" class="btn btn-default">提交</button>
                                     </div>
                                 </div>
                                 

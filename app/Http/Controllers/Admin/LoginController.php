@@ -90,8 +90,8 @@ class LoginController extends Controller
 		}else{
                                     //将用户的登录状态保存到session
     
-                                    Session::put('user',$user->nickname);
-			return view('admin/index');
+                                    Session::put('user',$user);
+			return redirect('admin/index');
 		}
 	}else{
 		return back()->with('errors','账号不存在');
@@ -111,6 +111,12 @@ class LoginController extends Controller
     {
         session()->forget('user');
         return redirect('admin/login');
+    }
+
+    //没有权限的提示页面
+    public function auth()
+    {
+        return view('errors.auth');
     }
 
 }

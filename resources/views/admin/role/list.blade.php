@@ -37,8 +37,7 @@
                             			
                             		</div>
                             		<div class="col-md-4">
-                            			<input type="text"  name="keywords" value="{{ $input }}" class="form-control">
-                                                                <button class="btn btn-info btn-flat">查询</button>
+                            			
 				<div class="input-group input-group">
 	                      				
 	                    			
@@ -50,24 +49,20 @@
 			<thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>用户名</th>
-                                    <th>邮箱</th>
-                                    <th>头像</th>
-                                    <th>手机号</th>
+                                    <th>角色名称</th>
+                                    <th>角色描述</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($data as $k=>$v)
+                                @foreach($role as $k=>$v)
                                     <tr>
                                         <td>{{ $v->id }}</td>
-                                        <td>{{ $v->nickname }}</td>
-                                        <td>{{ $v->email }}</td>
-                                        <td><img width="60" src="/uploads/{{ $v->avatar }}"></td>
-                                        <td>{{ $v->tel }}</td>
-                                        <td><a href="{{ url('admin/user/' .$v->id.' /edit') }}">编辑 </a>
-                                                <a href="{{ url('admin/user/auth/' .$v->id) }}">授权 </a>
-                                                <a href="javascript:;" onclick="delUser({{ $v->id }})"> 删除</a> 
+                                        <td>{{ $v->name }}</td>
+                                        <td>{{ $v->description}}</td>
+                                        <td><a href="{{ url('admin/role/' .$v->id.' /edit') }}">编辑 </a>
+                                                <a href="{{ url('admin/role/auth/' .$v->id) }}">授权 </a>
+                                                <a href="javascript:;" onclick="delRole({{ $v->id }})"> 删除</a> 
                                         </td>
                                     </tr>
                                  @endforeach
@@ -75,7 +70,7 @@
                                       
 
                             </table>
-                                      {!! $data->appends(['keywords'=>$input])->render() !!}
+                                
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -94,13 +89,13 @@
     </div>
     <!-- /.content-wrapper -->
     <script>
-    function delUser(id){
+    function delRole(id){
         layer.confirm('您确定要删除吗？',{
             btn:['确定','取消']
         }, function(){
             //向服务器发送ajax请求，删除当前id对应的用户数据
             //$.post('请求的路由','携带的参数','处理成功后的返回结果')
-        $.post('{{ url('admin/user/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
+        $.post('{{ url('admin/role/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
             if(data.status == 0){
                 layer.msg(data.message,{icon:6});
                 setTimeout(function(){
