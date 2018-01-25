@@ -19,6 +19,9 @@ class ForgetController extends Controller
         \Mail::send('email.forget',['email'=>$email],function($msg) use($email){
             $msg->to($email)->subject('修改密码');
         });
+
+        return redirect('/login');
+
     }
 
     public function fgedit($email){

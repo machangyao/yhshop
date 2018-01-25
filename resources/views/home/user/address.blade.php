@@ -15,26 +15,34 @@
 				<hr/>
 				<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
 
+					@foreach ($addr as $k=>$v)
+					@if ($v->addr_status == 1)
 					<li class="user-addresslist defaultAddr">
-						<span class="new-option-r"><i class="am-icon-check-circle"></i>默认地址</span>
+					@else
+					<li class="user-addresslist">
+					@endif
+							<span class="new-option-r" id="daddr" onclick="daddr({{$v->id}})"><i class="am-icon-check-circle"></i>默认地址</span>
 						<p class="new-tit new-p-re">
-							<span class="new-txt">小叮当</span>
-							<span class="new-txt-rd2">159****1622</span>
+							<span class="new-txt">{{$v->addr_name}}</span>
+							<span class="new-txt-rd2">{{$v->addr_tel}}</span>
+
 						</p>
 						<div class="new-mu_l2a new-p-re">
 							<p class="new-mu_l2cw">
 								<span class="title">地址：</span>
-								<span class="province">湖北</span>省
-								<span class="city">武汉</span>市
-								<span class="dist">洪山</span>区
-								<span class="street">雄楚大道666号(中南财经政法大学)</span></p>
+
+								<span class="province">{{$v->addr}}</span>
+								<span class="province">{{$v->addrdetail}}</span>
+								
 						</div>
 						<div class="new-addr-btn">
-							<a href="#"><i class="am-icon-edit"></i>编辑</a>
+							<a href="{{url('/user/addr')}}/{{$v->id}}"><i class="am-icon-edit"></i>编辑</a>
 							<span class="new-addr-bar">|</span>
-							<a href="javascript:void(0);" onclick="delClick(this);"><i class="am-icon-trash"></i>删除</a>
+							<a href="javascript: void(0)" class='del' Common="{{$v->id}}"><i class="am-icon-trash"></i>删除</a>
 						</div>
+
 					</li>
+					@endforeach
 
 				</ul>
 				<div class="clear"></div>
@@ -50,36 +58,53 @@
 						</div>
 						<hr/>
 
+						@if (count($errors) > 0)
+						    <div class="alert alert-danger" >
+						        <ul>
+						            @foreach ($errors->all() as $error)
+						                <li>{{ $error }}</li>
+						            @endforeach
+						        </ul>
+						    </div>
+						@endif
 						<div class="am-u-md-12 am-u-lg-8" style="margin-top: 20px;">
-							<form class="am-form am-form-horizontal">
-
+							<form id='form' class="am-form am-form-horizontal" action="{{url('/user/addr/')}}" method='post'>
+							{{csrf_field()}}
 								<div class="am-form-group">
 									<label for="user-name" class="am-form-label">收货人</label>
 									<div class="am-form-content">
-										<input type="text" id="user-name" placeholder="收货人">
+										<input type="text" id="name" placeholder="收货人" name='addr_name'>
+
 									</div>
 								</div>
 
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">手机号码</label>
 									<div class="am-form-content">
-										<input id="user-phone" placeholder="手机号必填" type="email">
+
+										<input id="tel" placeholder="手机号必填" type="email" name='addr_tel'>
+
 									</div>
 								</div>
 								<div class="am-form-group">
 									<label for="user-address" class="am-form-label">所在地</label>
 									<div class="am-form-content address">
-										<select >
+
+										<select id='s' >
+
 											@foreach ($sheng as $v)
 											<option value="{{$v->id}}">{{$v->Name}}</option>
 											@endforeach
 										</select>
-										<select data-am-selected>
+
+										<select id='shi' >
 											<option value="{{$shi['id']}}">{{$shi['Name']}}</option>
 										</select>
-										<select data-am-selected>
-											<option value="a">瑞安区</option>
-											<option value="b" selected>洪山区</option>
+										<select id='qu' name='qu'>
+											@foreach ($qu as $v)
+											<option value="{{$v->id}}">{{$v->Name}}</option>
+											@endforeach
+
 										</select>
 									</div>
 								</div>
@@ -87,14 +112,18 @@
 								<div class="am-form-group">
 									<label for="user-intro" class="am-form-label">详细地址</label>
 									<div class="am-form-content">
-										<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+
+										<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name='addrdetail'></textarea>
+
 										<small>100字以内写出你的详细地址...</small>
 									</div>
 								</div>
 
 								<div class="am-form-group">
 									<div class="am-u-sm-9 am-u-sm-push-3">
-										<a class="am-btn am-btn-danger">保存</a>
+
+										<a class="am-btn am-btn-danger" id='submit'>保存</a>
+
 										<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
 									</div>
 								</div>
@@ -123,6 +152,70 @@
 				$(function(){
   					$("#province").ProvinceCity();
   				});
+
+
+				$('#s').on('change',function(){
+					var val = $(this).val();
+					$.ajax({
+						url:"{{url('/city/ajax')}}",
+						type:'post',
+						data:{'val':val,'_token':'{{ csrf_token()}}'},
+						success:function(data){
+							$("#shi").empty();
+							$("#qu").empty();
+							$.each(data['shi'],function(k,v){
+								var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+								$("#shi").append(op);
+							});
+							$.each(data['qu'],function(k,v){
+								var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+								$("#qu").append(op);
+							});
+						}
+					});
+				});
+					$('#shi').on('change',function(){
+					var val = $(this).val();
+					$.ajax({
+						url:"{{url('/city/ajax')}}",
+						type:'post',
+						data:{'val':val,'_token':'{{ csrf_token()}}'},
+						success:function(data){
+							$("#qu").empty();
+							$.each(data['shi'],function(k,v){
+								var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+								$("#qu").append(op);
+							});
+						}
+					});
+				});
+
+				$('#submit').on('click',function(){
+					$('#form').submit();
+				});
+
+				$('.del').on('click',function(){
+					var id = $(this).attr('Common');
+					$.ajax({
+						url:"{{url('/user/addr')}}/"+id,
+						type:'post',
+						data:{'_token':'{{csrf_token()}}','_method':'delete','id':id},
+						success:function(){
+							 location.reload();
+						}
+					});
+
+				});
+
+				function daddr(id) {
+                    $.ajax({
+                        url:'{{url("/user/daddr")}}',
+                        type:'post',
+                        data:{'id':id,'_token':'{{csrf_token()}}'},
+                        success: function (data) {
+                    }
+                    });
+                }
 
 
 			</script>

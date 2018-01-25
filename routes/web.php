@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -43,6 +44,16 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 
 
 //后台
+
+//后台修改订单状态
+Route::get('/admin/order/status','Admin\OrderController@status');
+//前台确认收货
+Route::get('/order/status','Home\UserOrderController@status');
+//订单管理
+Route::resource('/admin/order','Admin\OrderController');
+
+
+//首页
 Route::get('/admin','Admin\IndexController@index');
 
 
@@ -69,17 +80,32 @@ Route::resource('admin/article', 'Admin\ArticleController');
 
 
 //前台
-//
+
+
+//个人订单
+Route::resource('/user/order','home\UserOrderController')->middleware('homeIsLogin');
+
+//个人收藏
+Route::get('/user/collect/create','home\CollectController@create');
+Route::get('/user/collect/del','home\CollectController@del')->middleware('homeIsLogin');
+Route::get('/user/collect','home\CollectController@index')->middleware('homeIsLogin');
 //个人安全信息
+
+
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由
 Route::resource('/user/password','home\UserPasswordController')->middleware('homeIsLogin');
 //个人地址管理
-Route::resource('/user/addr','home\UserAddrController');
+
+Route::post('/user/daddr','home\UserAddrController@daddr')->middleware('homeIsLogin');
+Route::resource('/user/addr','home\UserAddrController')->middleware('homeIsLogin');
+//城市联动ajax
+Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
-Route::resource('/user','home\UserController');
+Route::resource('/user','home\UserController')->middleware('homeIsLogin');
+
 //注册账号ajax路由
 //
 Route::post('/user/ajax','home\UserController@ajax');
@@ -104,13 +130,15 @@ Route::resource('/userdetail','home\UserDetailController')->middleware('homeIsLo
 Route::post('/userdetail/upload','home\UserDetailController@upload');
 
 
+// 前台
 // 首页路由
 Route::get('/','Home\IndexController@index');
-// 列表页路由
-Route::get('/list','Home\ListController@list');
+// 商品列表页路由
+Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
-Route::get('/show','Home\ShowController@show');
-
+Route::get('/show/{id}','Home\ShowController@show');
+//购物车页面
+Route::get('/cart','Home\CartController@index');
 // 后台
 
 // 分类路由
@@ -119,8 +147,7 @@ Route::resource('/category','Admin\CategoryController');
 Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
-// 品牌路由oute
-Route::resource('/brand','Admin\BrandController');
+
 
 //评论管理路由
 Route::get('admin/comment','Admin\CommentController@comment');
@@ -137,3 +164,7 @@ Route::get('admin/recommend','Admin\ReController@recommend');
 //支付管理路由
 Route::get('admin/pay','Admin\PayController@pay');
 Route::get('admin/pay/{id}','Admin\PayController@pays');
+
+// 品牌路由route
+Route::resource('/brand','Admin\BrandController');
+

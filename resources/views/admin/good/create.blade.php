@@ -42,7 +42,9 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">分类</label>
-                                    <div class="col-sm-2">
+
+                                    <div class="col-sm-3">
+
                                         <select name="id" class="form-control">
                                             <option value="0">==请选择==</option>
                                             @foreach($cates as $v)
@@ -50,7 +52,9 @@
                                                 $arr = explode(',',$v->path);
                                                 $n = count($arr) - 1;
                                             ?>
-                                            <option value="{{ $v->id }}">
+
+                                            <option value="{{ $v->id }}" @if(in_array($v->id,$pid)) disabled @endif>
+
                                             @if($v->pid == 0)
                                                 {{ str_repeat('&nbsp;',($n*11)-22) }}
                                             @else
@@ -68,7 +72,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">名称</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+
+                                        <input type="text" name="name" class="form-control" id="inputEmail3" value="{{ old('name') }}" placeholder="请输入商品名称">
+
                                     </div>
                                 </div>
                             </div>
@@ -77,7 +83,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">货号</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="sn" class="form-control" id="inputEmail3" placeholder="请输入商品货号">
+
+                                        <input type="text" name="sn" class="form-control" id="inputEmail3" value="<?php echo 'YH'.str_random(4) ?>" placeholder="请输入商品货号">
+
                                     </div>
                                 </div>
                             </div>
@@ -86,7 +94,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">价格</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="price" class="form-control" id="inputEmail3" placeholder="请输入商品价格">
+
+                                        <input type="text" name="price" class="form-control" id="inputEmail3" value="{{ old('price') }}" placeholder="请输入商品价格">
+
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +105,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">市场价格</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="market_price" class="form-control" id="inputEmail3" placeholder="请输入商品市场价格">
+
+                                        <input type="text" name="market_price" class="form-control" id="inputEmail3" value="{{ old('market_price') }}" placeholder="请输入商品市场价格">
+
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +130,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">库存</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="number" class="form-control" id="inputEmail3" placeholder="请输入商品库存">
+
+                                        <input type="text" name="number" class="form-control" id="inputEmail3" value="{{ old('number') }}" placeholder="请输入商品库存">
+
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +150,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">关键字</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="keyword" class="form-control" id="inputEmail3" placeholder="请输入商品关键字">
+
+                                        <input type="text" name="keyword" class="form-control" id="inputEmail3" value="{{ old('keyword') }}" placeholder="请输入商品关键字">
+
                                     </div>
                                 </div>
                             </div>
@@ -145,7 +161,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">描述</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="description" class="form-control" id="inputEmail3" placeholder="请输入商品描述">
+
+                                        <input type="text" name="description" class="form-control" id="inputEmail3" value="{{ old('description') }}" placeholder="请输入商品描述">
+
                                     </div>
                                 </div>
                             </div>

@@ -42,7 +42,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">商品分类</label>
                                     <div class="col-sm-4">
                                         <div class="form-control" style="border:none">
-                                            {{ $data->cid }}
+
+                                            {{ $data->categorys->name }}
+
                                         </div>
                                     </div>
                                 </div>
@@ -52,7 +54,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">所属品牌</label>
                                     <div class="col-sm-4">
                                         <div class="form-control" style="border:none">
-                                            {{ $data->bid }}
+
+                                            {{ $data->brands->name }}
+
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +95,9 @@
                                 <div class="form-group" style="height:150px;">
                                     <label for="inputEmail3" class="col-sm-2 control-label">商品图片</label>
                                     <div class="col-sm-4">
-                                        <div class="form-control" style="border:none">
+
+                                        <div class="form-control" style="border:none;height:auto;">
+
                                             <img style="width:200px" src="/uploads/{{ $data->pic }}">
                                         </div>
                                     </div>

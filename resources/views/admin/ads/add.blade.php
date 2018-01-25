@@ -22,20 +22,34 @@
                     <!-- Horizontal Form -->
                     <div class="box box-info" style="">
                         <div class="box-header with-border">
-                                                    </div>
-                        <!-- /.box-header -->
-                        <!-- form start -->
-                        <form action="/good" method="post" class="form-horizontal" enctype="multipart/form-data" style="">   
-                            <input type="hidden" name="_token" value="puKbNZFAypjJZKBSfJhWHyDs2oacijXTGSzbM2oi">
-                            <div class="box-body">
-                                
+
+                        @if (count($errors) > 0)
+                            <div >
+                                <ul>
+                                    @if(is_object($errors))
+                                        @foreach ($errors->all() as $error)
+                                            <li style="color:red">{{ $error }}</li>
+                                        @endforeach
+                                    @else
+                                            <li style="color:red">{{ $errors }}</li>
+                                    @endif
+                                </ul>
                             </div>
+                        @endif
+
+                            <form action="{{ url('admin/ads') }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="form_upload"  enctype="multipart/form-data">   
+                            {{ csrf_field() }}
+                                
+                            
+
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告链接</label>
 
                                     <div class="col-sm-4">
-                                        <input type="text" name="name" class="form-control" id="inputEmail3" placeholder="请输入商品名称">
+
+                                        <input type="text" name="ads_url" class="form-control" id="inputEmail3" placeholder="请输入链接">
+
                                     </div>
                                 </div>
                             </div>
@@ -44,31 +58,55 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
 
                                     <div class="col-sm-4">
-                                        <input type="file" name="pic" id="inputEmail3" placeholder="请上传商品图片">
+
+                                        <input type="file" name="ads_img" id="inputEmail3" placeholder="请上传商品图片">
                                     </div>
                                 </div>
                             </div>
+                           
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">广告文字描述</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">广告文字</label>
 
-                                    <div class="col-sm-2">
-                                        <input type="text" name="price" class="form-control" id="inputEmail3" placeholder="请输入商品价格">
+                                    <div class="col-sm-4">
+                                       
+                                       <textarea class="form-control" rows="3" name="ads_text" placeholder="简单描述"></textarea>
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告存在时间</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="market_price" class="form-control" id="inputEmail3" placeholder="请输入商品市场价格">
+
+                                        <input type="text" name="ads_time" class="form-control" id="inputEmail3" placeholder="请输入时间">
+
                                     </div>
                                 </div>
                             </div>
-                            
-                           
-                           
+
+                            <script type="text/javascript">
+                                $("#file_upload").change(function () {
+                                        uploadImage();
+                                    });
+                                function uploadImage() {
+                                    // alert('')判断是否有选择上传文件
+                                    var imgPath = $("#file_upload").val();
+                                    if (imgPath == "") {
+                                        alert("请选择上传图片！");
+                                        return;
+                                    }
+                                    //判断上传文件的后缀名
+                                    var strExtension = imgPath.substr(imgPath.lastIndexOf('.') + 1);
+                                    if (strExtension != 'jpg' && strExtension != 'gif' && strExtension != 'png' && strExtension != 'bmp' && strExtension == '') {
+                                            alert("请选择图片文件");
+                                            return;
+                                            }
+                                     }
+                            </script>
 
                             <!-- /.box-body -->
                             <div class="row">
@@ -81,8 +119,13 @@
                                 <div class="col-sm-4"></div>
                             </div>
                             <!-- /.box-footer -->
-                        </form>
+                             </form>
                     </div>
+                        <!-- /.box-header -->
+                        <!-- form start -->
+                        
+                    </div>
+
                     <!-- /.box -->
                 </div>
                 <!--/.col (right) -->

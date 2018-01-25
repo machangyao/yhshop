@@ -15,6 +15,7 @@
 		<link href="{{ asset('/yh/home/css/hmstyle.css') }}" rel="stylesheet" type="text/css" />
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/jquery.min.js') }}"></script>
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/amazeui.min.js') }}"></script>
+
 	</head>
 
 	<body>
@@ -25,10 +26,12 @@
 					<div class="topMessage">
 						<div class="menu-hd">
 							@if (session('user_info')) 
-							<a href="#" target="_top" class="h">亲，{{session('user_info')['user_name']}} </a>
+
+							<a href="{{url('/mycenter')}}" target="_top" class="h">亲，{{session('user_info')['user_name']}} </a>
 							<a href="{{url('/user/lgout')}}" target="_top">退出</a>
 							@else
-							<a href="{{url('/login')}}" target="_top" class="h">亲，请登录 </a>
+							<a href="{{url('/login')}}?url={{\Illuminate\Support\Facades\Input::url()}}" target="_top" class="h">亲，请登录 </a>
+
 							<a href="{{url('/user/create')}}" target="_top">注册</a>
 							@endif
 						</div>
@@ -59,8 +62,10 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
-						<form>
-							<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
+
+						<form action="{{ url('/list') }}" method="get">
+							<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off">
+
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>
@@ -117,15 +122,23 @@
 						</a>
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
+
+								@if(session('user_info'))
+								<p class="avatar_imgbox "><img src="{{session('user_info')['avatar']}}" /></p>
+								@else
 								<p class="avatar_imgbox "><img src="/yh/home/images/no-img_mid_.jpg " /></p>
+								@endif
 								<ul class="user_info ">
-									<li>用户名：sl1903</li>
+									<li>用户名：{{session('user_info')['user_name']}}</li>
+
 									<li>级&nbsp;别：普通会员</li>
 								</ul>
 							</div>
 							<div class="login_btnbox ">
-								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+
+								<a href="{{url('/user/order')}}" class="login_order ">我的订单</a>
+								<a href="{{url('/user/collect')}}" class="login_favorite ">我的收藏</a>
+
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
@@ -161,11 +174,14 @@
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="#">
+
+						<a href="{{url('/user/collect')}}">
+
 							<span class="wdsc "><img src="/yh/home/images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
 							我的收藏
+
 							<i class="icon_arrow_right_black "></i>
 						</div>
 					</div>

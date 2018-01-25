@@ -11,4 +11,9 @@ class User extends Model
     //定义关联表的主键
     	public $primarykey = 'id';
     	public $timestamp = false;
+
+
+    //不允许批量修改的字段
+    	public $guarded = [];
 }
+

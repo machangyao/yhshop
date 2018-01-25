@@ -24,7 +24,9 @@
                 <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header with-border">
-                            <h3 class="box-title">轮播图</h3>
+
+                            <h3 class="box-title">广告</h3>
+
                         </div>
 
 
@@ -33,7 +35,11 @@
 
 
 
-                            <div class="row"><div class="col-sm-12"><table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info"> 
+
+                            <div class="row"><div class="col-sm-12">
+
+                            <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" > 
+
                                <thead>
                                 <tr role="row">
 
@@ -58,11 +64,21 @@
 								@foreach($ads as $v)
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->ads_id }}</font></td>
-                                    <td ><font style="vertical-align: inherit;">{{ $v->ads_url }}</font></td>
-                                    <td><font style="vertical-align: inherit;"><img src="/{{ $v->ads_img }}" alt=""></font></td>
+
+                                    <td >
+                                        
+                                        <font style="vertical-align: inherit;">{{ $v->ads_url }}</font>
+                                    </td>
+
+                                    
+                                    <td>
+                                        <img height="50" width="50" src="{{ $v->ads_img }}">
+                                    </td>
+                                    
                                     <td ><font style="vertical-align: inherit;">{{ $v->ads_text }}</font></td>
 
-                                    <td><a href="">编辑</a> | <a href="">删除</a></td>
+                                    <td><a href="{{ url('admin/ads/'.$v->ads_id.'/edit') }}">编辑</a> | <a href="javascript:;" onclick="delAds({{ $v->ads_id }})">删除</a></td>
+
 
                                 </tr>
 
@@ -86,5 +102,30 @@
         </section>
         <!-- /.content -->
     </div> 
+
+ <script>
+    function delAds(id){
+        layer.confirm('您确定要删除吗？',{
+            btn:['确定','取消']
+        }, function(){
+            //向服务器发送ajax请求，删除当前id对应的用户数据
+            //$.post('请求的路由','携带的参数','处理成功后的返回结果')
+        $.post('{{ url('admin/ads/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
+            if(data.status == 0){
+                layer.msg(data.message,{icon:6});
+                setTimeout(function(){
+                    window.location.href = location.href;
+                },1000);
+            }else{
+                layer.msg(data.message,{icon:5});
+                 setTimeout(function(){
+                     window.location.href = location.href;
+                        },1000);
+            }
+        })
+    },function(){});
+}
+
+    </script>
 
  @stop

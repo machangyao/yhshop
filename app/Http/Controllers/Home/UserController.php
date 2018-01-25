@@ -8,6 +8,8 @@ use App\Http\Models\Home\User;
 use Illuminate\Support\Facades\Crypt;
 use Gregwar\Captcha\CaptchaBuilder; 
 use Gregwar\Captcha\PhraseBuilder;
+use Illuminate\Support\Facades\Input;
+
 use Session;
 use Illuminate\Support\Facades\Cookie;
 class UserController extends Controller
@@ -54,6 +56,11 @@ class UserController extends Controller
      * @param 用户注册信息
      * @return 返回一个前台的提交注册
      */
+
+        if(strlen($request->input('user_tel')) != 11){
+            return back()->with('size','手机号必须11位');
+        }
+
         $this->validate($request, [
             'user_password' => 'required|',
             'user_email' => 'required|email',
@@ -159,10 +166,23 @@ class UserController extends Controller
         if(session('user_info')){
             return redirect('/');
         }
+
+        if(!session('back')){
+            Session::put('back',Input::get('url'));
+        }
+
         return view('Home.login');
     }
 
     public function dologin(Request $request){
+
+          /*
+         * 返回提交登陆
+         * @author 马长遥
+         * @datetime 20180111 20:26
+         * @param 用户登陆
+         * @return 返回一个前台的提交登陆
+         */
 
         $data = $request->except('_token','captcha');
         $this->validate($request, [
@@ -188,7 +208,9 @@ class UserController extends Controller
                     cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res);
-                return redirect('/mycenter');
+
+//                return redirect('/mycenter');
+
                 if(session('back')){
                     return redirect(session('back'));
                 }else{
