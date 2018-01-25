@@ -17,14 +17,7 @@ class OrderController extends Controller
     public function index()
     {
         //返回浏览订单页面 马长遥
-        $orders = orders::paginate(5);
-        $number = Input::get('keyword');
-        if($number){
-            $orders = orders::where('order_number',$number)->paginate(5);
-            return view('admin.order.list',compact('orders'));
-
-
-        }
+        $orders = orders::get();
         return view('admin.order.list',compact('orders'));
     }
 
@@ -114,13 +107,5 @@ class OrderController extends Controller
         }else{
             return back();
         }
-    }
-
-    public function ajax(Request $request){
-        $id = $request->input('id');
-        $order = orders::find($id);
-        $data['goods'] = $order->Goods;
-        $data['addr'] = $order->addr;
-        return $data;
     }
 }

@@ -20,13 +20,7 @@
 		<script type="text/javascript" src="{{ asset('/yh/home/js/jquery.imagezoom.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/yh/home/js/jquery.flexslider.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('/yh/home/js/list.js') }}"></script>
-		<style>
-			#collect{
-				position: absolute;
-				margin-top: 5px;
-				margin-left: 15px;
-			}
-		</style>
+
 	</head>
 
 	<body>
@@ -50,15 +44,8 @@
 					<div class="menu-hd MyShangcheng"><a href="#" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 				</div>
 				<div class="topMessage mini-cart">
-
-						<div class="menu-hd">
-						@if(session('user_info'))
-						<a id="mc-menu-hd" href="{{ url('/cart') }}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> {{ count(session('cart')) }}</strong></a>
-						@else
-						<a id="mc-menu-hd" href="javascript:;" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> 0</strong></a>
-						@endif
-						</div>
-					</div>
+					<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
+				</div>
 				<div class="topMessage favorite">
 					<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 			</ul>
@@ -321,9 +308,10 @@
 						</div>
 
 						<div class="pay">
-							{{--<a><span class="am-icon-heart am-icon-fw">收藏</span></a>--}}
-							{{--<br>--}}
-							{{--<br>--}}
+							<div class="pay-opt">
+							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
+
+							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
 									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
@@ -332,15 +320,9 @@
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
 									<a id="LikBasket" title="加入购物车" href="{{ url('cart') }}"><i></i>加入购物车</a>
-
 								</div>
-
 							</li>
-
-							 <li>
-									<a id="collect" title="加入收藏夹" href="{{url('/collect').'?id='.$data->id}}" >收藏</a>
-
-
+							<li>							<div style="padding-left: 10px;padding-top: 5px;"><a href="{{url('/user/collect/create')}}?gid={{$data->id}}"> 收藏</a></div>
 							</li>
 						</div>
 
@@ -950,116 +932,7 @@
 													</p>
 												</div>
 											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
-											<li>
-												<div class="i-pic limit">
-													<img src="/yh/home/images/imgsearch1.jpg" />
-													<p>【良品铺子_开口松子】零食坚果特产炒货
-														<span>东北红松子奶油味</span></p>
-													<p class="price fl">
-														<b>¥</b>
-														<strong>298.00</strong>
-													</p>
-												</div>
-											</li>
+
 										</ul>
 									</div>
 									<div class="clear"></div>
@@ -1270,14 +1143,6 @@
 				</div>
 			</div>
 
-
-			<input type="hidden" name="id" value="{{ $data->id }}">
-	<script>
-		$("#addcart").on('click',function(){
-			var id = $('input[name=id]').val();
-			var num = $('#text_box').val();
-			window.location.href = '{{ url('addcart/?id=') }}'+id+'&num='+num;
-		});
-	</script>
 	</body>
+
 </html>

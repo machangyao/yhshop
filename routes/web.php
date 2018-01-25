@@ -40,8 +40,6 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 
 
 //后台
-//后台订单详细信息
-Route::post('/admin/order/ajax','Admin\OrderController@ajax');
 //后台修改订单状态
 Route::get('/admin/order/status','Admin\OrderController@status');
 //前台确认收货
@@ -52,10 +50,6 @@ Route::resource('/admin/order','Admin\OrderController');
 
 //首页
 Route::get('/admin','Admin\IndexController@index');
-
-
-Route::get('/admin','Admin\IndexController@index');
-
 
 
 //轮播图路由
@@ -80,28 +74,28 @@ Route::resource('admin/article', 'Admin\ArticleController');
 
 
 //前台
-//收藏路由
-Route::get('/collect','home\CollectController@create')->middleware('homeIsLogin');
+
 //个人订单
-Route::resource('/user/order','home\UserOrderController')->middleware('homeIsLogin');
-//删除收藏
-Route::post('/user/collect/del','home\CollectController@del');
-//个人收藏页面
-Route::get('/user/collect','home\CollectController@index')->middleware('homeIsLogin');
+Route::resource('/user/order','home\UserOrderController');
+
+//个人收藏
+Route::get('/user/collect/create','home\CollectController@create');
+Route::get('/user/collect/del','home\CollectController@del');
+Route::get('/user/collect','home\CollectController@index');
 //个人安全信息
+
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由
 Route::resource('/user/password','home\UserPasswordController')->middleware('homeIsLogin');
 //个人地址管理
-Route::resource('/user/addr','home\UserAddrController')->middleware('homeIsLogin');
-//修改默认地址
-Route::post('/addr/status','home\UserAddrController@status');
+Route::post('/user/daddr','home\UserAddrController@daddr');
+Route::resource('/user/addr','home\UserAddrController');
 //城市联动ajax
 Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
-Route::resource('/user','home\UserController')->middleware('homeIsLogin');
+Route::resource('/user','home\UserController');
 //注册账号ajax路由
 //
 Route::post('/user/ajax','home\UserController@ajax');
@@ -134,16 +128,6 @@ Route::get('/list/{id}','Home\ListController@index');
 Route::get('/show/{id}','Home\ShowController@show');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
-//加入购物车
-Route::get('/addcart','Home\CartController@addcart');
-//购物车页面
-Route::get('/cart','Home\CartController@index');
-//ajax购物车页面数量增加
-Route::post('/addnum','Home\CartController@addnum');
-//ajax购物车页面数量减少
-Route::post('/minnum','Home\CartController@minnum');
-
-
 // 后台
 // 分类路由
 Route::resource('/category','Admin\CategoryController');

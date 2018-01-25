@@ -18,19 +18,10 @@
 										<div class="s-prestige am-btn am-round">
 											</span>会员福利</div>
 									</div>
-									<div class="m-right">
-										<div class="m-new">
-											<a href="news.html"><i class="am-icon-bell-o"></i>消息</a>
-										</div>
-										<div class="m-address">
-											<a href="address.html" class="i-trigger">我的收货地址</a>
-										</div>
-									</div>
+
 								</div>
 
 								<!--个人资产-->
-
-
 							</div>
 							<div class="box-container-bottom"></div>
 
@@ -123,21 +114,22 @@
 									<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
 								</div>
 								<div class="s-content">
-									@foreach ($collects as $v)
+									@foreach ($data as $v)
+
 									<div class="s-item-wrap">
 										<div class="s-item">
 
 											<div class="s-pic">
-												<a href="{{url('/show')}}/{{$v->id}}" class="s-pic-link">
-													<img src="/uploads/{{$v->pic}}" alt="" title="" class="s-pic-img s-guess-item-img">
+												<a href="{{url('/show')}}/{{$v->goods->id}}" class="s-pic-link">
+													<img src="/uploads/{{$v->goods->pic}}" alt="" title="" class="s-pic-img s-guess-item-img">
 												</a>
 											</div>
 											<div class="s-price-box">
-												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{$v->price}}</em></span>
-												<span class="s-history-price"><em class="s-price-sign">¥</em><em class="s-value">68.00</em></span>
+												<span class="s-price"><em class="s-price-sign">¥</em><em class="s-value">{{$v->goods->price}}</em></span>
+												<span class="s-history-price"><em class="s-price-sign">/em><em class="s-value"></em></span>
 
 											</div>
-											<div class="s-title"><a href="#" title="">{{$v->name}}</a></div>
+											<div class="s-title"><a href="{{url('/show')}}/{{$v->goods->id}}" title="">{{$v->goods->name}}</a></div>
 											<div class="s-extra-box">
 												<span class="s-comment">好评: 98.03%</span>
 												<span class="s-sales">月销: 219</span>
@@ -145,7 +137,7 @@
 											</div>
 										</div>
 									</div>
-										@endforeach
+								@endforeach
 								
 
 									
@@ -172,7 +164,6 @@
 									<em>{{date('d')}}</em>
 									<span>星期{{date('w')}}</span>
 									<span>{{date('Y-m-d')}}</span>
-
 								</div>
 							</div>
 						</div>

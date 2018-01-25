@@ -12,6 +12,7 @@ class Goods extends Model
 
 	public $primaryKey = 'id';
 
+
 	// 商品表与分类表的动态属性,查找所属分类id的分类名
 	public function categorys()
 	{
@@ -25,7 +26,7 @@ class Goods extends Model
 	}
 
 	public function gct(){
-	    return $this->belongsTo('App\Http\Models\Home\order_goods','id','gid');
+	    return $this->hasOne('App\Http\Models\Home\Order_goods','gid','id');
     }
 
 	// public function orders(){

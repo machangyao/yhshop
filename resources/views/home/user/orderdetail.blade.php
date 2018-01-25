@@ -122,7 +122,7 @@
 								<li class="td td-item">
 									<div class="item-pic">
 										<a href="#" class="J_MakePoint">
-											<img src="/uploads/{{$v->pic}}" class="itempic J_ItemImg">
+											<img src="{{$v->pic}}" class="itempic J_ItemImg">
 										</a>
 									</div>
 									<div class="item-info" style='float:none;'>
@@ -142,7 +142,7 @@
 								</li>
 								<li class="td td-number">
 									<div class="item-number">
-										<span>×</span>{{$v->gct->gcount}}
+										<span>×</span>{{$v->count}}
 									</div>
 								</li>
 								<li class="td td-operation">
@@ -174,7 +174,6 @@
 											<p class="Mystatus">
 												交易成功</p>
 										@endif
-
 										<p class="order-info"><a href="logistics.html">查看物流</a></p>
 										<p class="order-info"><a href="#">延长收货</a></p>
 									</div>
@@ -190,7 +189,6 @@
 										<div class="am-btn am-btn-danger anniu">
 											交易成功</div>
 									@endif
-
 								</li>
 							</div>
 						</div>

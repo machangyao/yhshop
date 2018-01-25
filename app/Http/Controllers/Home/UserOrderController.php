@@ -20,6 +20,7 @@ class UserOrderController extends Controller
         //马长遥 返回订单页面
         $user = User::find(session('user_info')['id']);
         $orders = $user->orders;
+        
         // $goods = [];
         // foreach($orders as $v){
         //     $goods = $v->Goods;

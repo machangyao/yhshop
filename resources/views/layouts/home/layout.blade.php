@@ -16,6 +16,7 @@
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/jquery.min.js') }}"></script>
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/amazeui.min.js') }}"></script>
 
+
 	</head>
 
 	<body>
@@ -29,7 +30,7 @@
 							<a href="#" target="_top" class="h">亲，{{session('user_info')['user_name']}} </a>
 							<a href="{{url('/user/lgout')}}" target="_top">退出</a>
 							@else
-							<a href="{{url('/login').'?url='.\Illuminate\Support\Facades\Input::url()}}" target="_top" class="h">亲，请登录 </a>
+							<a href="{{url('/login')}}" target="_top" class="h">亲，请登录 </a>
 							<a href="{{url('/user/create')}}" target="_top">注册</a>
 							@endif
 						</div>
@@ -43,14 +44,7 @@
 						<div class="menu-hd MyShangcheng"><a href="{{url('/mycenter')}}" target="_top"><i class="am-icon-user am-icon-fw"></i>个人中心</a></div>
 					</div>
 					<div class="topMessage mini-cart">
-
-						<div class="menu-hd">
-						@if(session('user_info'))
-						<a id="mc-menu-hd" href="{{ url('/cart') }}" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> {{ count(session('cart')) }}</strong></a>
-						@else
-						<a id="mc-menu-hd" href="javascript:;" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h"> 0</strong></a>
-						@endif
-					</div>
+						<div class="menu-hd"><a id="mc-menu-hd" href="#" target="_top"><i class="am-icon-shopping-cart  am-icon-fw"></i><span>购物车</span><strong id="J_MiniCartNum" class="h">0</strong></a></div>
 					</div>
 					<div class="topMessage favorite">
 						<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
@@ -124,28 +118,20 @@
 							<span class="setting "></span>
 						</a>
 						<div class="ibar_login_box status_login ">
-                            @if(session('use_info'))
 							<div class="avatar_box ">
+								@if(session('user_info'))
 								<p class="avatar_imgbox "><img src="{{session('user_info')['avatar']}}" /></p>
+								@else
+								<p class="avatar_imgbox "><img src="/yh/home/images/no-img_mid_.jpg " /></p>
+								@endif
 								<ul class="user_info ">
 									<li>用户名：{{session('user_info')['user_name']}}</li>
-
 									<li>级&nbsp;别：普通会员</li>
 								</ul>
 							</div>
-                            @else
-                            <div class="avatar_box ">
-                                <p class="avatar_imgbox "><img src="/yh/home/images/getAvatar.do.jpg" /></p>
-                                <ul class="user_info ">
-                                    <li>用户名：游客</li>
-
-                                    <li>级&nbsp;别：普通会员</li>
-                                </ul>
-                            </div>
-                            @endif
 							<div class="login_btnbox ">
 								<a href="{{url('/user/order')}}" class="login_order ">我的订单</a>
-								<a href="{{url('/user/collect')}} " class="login_favorite ">我的收藏</a>
+								<a href="{{url('/user/collect')}}" class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>
@@ -181,11 +167,12 @@
 					</div>
 
 					<div id="brand " class="item ">
-						<a href="#">
+						<a href="{{url('/user/collect')}}">
 							<span class="wdsc "><img src="/yh/home/images/wdsc.png " /></span>
 						</a>
 						<div class="mp_tooltip ">
 							我的收藏
+
 							<i class="icon_arrow_right_black "></i>
 						</div>
 					</div>

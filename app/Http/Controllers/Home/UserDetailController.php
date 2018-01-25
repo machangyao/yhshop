@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Home;
 
-use App\Http\Models\Home\collects;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Session;
@@ -115,8 +114,9 @@ class UserDetailController extends Controller
     }
 
     public function mycenter(){
-        $collects = User::find(session('user_info')['id'])->collect;
-        return view('home.user.userdata',compact('collects'));
+        $data = User::find(session('user_info')['id'])->collects;
+
+        return view('home.user.userdata',compact('data'));
     }
 
     public function upload(Request $request)

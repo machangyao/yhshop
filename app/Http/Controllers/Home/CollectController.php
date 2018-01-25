@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\Home;
 
 use App\Http\Models\Home\collects;
 use App\Http\Models\Home\User;
@@ -10,34 +10,31 @@ use Illuminate\Support\Facades\Input;
 
 class CollectController extends Controller
 {
-    //添加收藏 马长遥
+    //
     public function create(){
-
-        if(!session('user_info'))
-            return redirect('/login');
-        $a = collects::where('gid',Input::get('id'))->where('user_id',session('user_info')['id'])->first();
-        if($a)
-            return back();
-        $data['gid'] = Input::get('id');
+        $data['gid'] = Input::get('gid');
         $data['user_id'] = session('user_info')['id'];
-        $res = collects::insert($data);
+        $res = collects::where('user_id',$data['user_id'])->where('gid',$data['gid'])->first();
         if($res){
             return back();
         }
+        collects::insert($data);
+        return back();
+
     }
 
     public function index(){
-        $data = User::find(session('user_info')['id'])->collect;
+
+        $data = User::find(session('user_info')['id'])->collects;
         return view('home.user.collect',compact('data'));
+
     }
 
-    public function del(Request $request){
-        $data = $request->except('_token');
-        $res = collects::where('gid',$data['gid'])->where('user_id',$data['user_id'])->delete();
+    public function del(){
+        $id = Input::get('cid');
+        $res = collects::find($id)->delete();
         if($res){
-            return 'ok';
-        }else{
-            return 'no';
+            return back();
         }
     }
 }

@@ -18,8 +18,8 @@ class User extends Model
         return $this->hasMany('App\Http\Models\Home\orders', 'user_id', 'id');
     }
 
-    public function collect(){
-        return $this->belongsToMany('App\Http\Models\Admin\Goods','collects','user_id','gid');
+    public function collects(){
+        return $this->hasMany('App\Http\Models\Home\collects', 'user_id', 'id');
 
     }
 }

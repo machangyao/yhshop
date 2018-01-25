@@ -47,47 +47,47 @@
 						<div class="order-list">
 
 							<!--不同状态订单-->
-							@foreach ($orders as $v)
 
 							<div class="order-status3">
+								@foreach ($orders as $v)
+
 								@if (empty($v))
 									break
 								@endif
-							
+
 								<div class="order-content">
 
 									<div class="order-left">
 										@foreach ($v->Goods as $n)
-
-										<ul class="item-list">
-											<li class="td td-item">
-												<div class="item-pic">
-													<a href="#" class="J_MakePoint">
-														<img src="/uploads/{{$n->pic}}" class="itempic J_ItemImg">
-													</a>
-												</div>
-												<div class="item-info" style='float:none;'>
-													<div class="item-basic-info">
-														<a href="{{url('/show').'/'.$n->id}}">
-															<p>{{$n->name}}</p>
-															<p class="info-little">颜色：12#川南玛瑙
-																<br/>包装：裸装 </p>
+											<ul class="item-list">
+												<li class="td td-item">
+													<div class="item-pic">
+														<a href="#" class="J_MakePoint">
+															<img src="/uploads/{{$n->pic}}" class="itempic J_ItemImg">
 														</a>
 													</div>
-												</div>
-											</li>
-											<li class="td td-price">
-												<div class="item-price">
-													{{$n->market_price}}
-												</div>
-											</li>
-											<li class="td td-number">
-												<div class="item-number">
-													<span>×</span>{{$n->gct->gcount}}
-												</div>
-											</li>
+													<div class="item-info" style='float:none;'>
+														<div class="item-basic-info">
+															<a href="{{url('/show').'/'.$n->id}}">
+																<p>{{$n->name}}</p>
+																<p class="info-little">颜色：12#川南玛瑙
+																	<br/>包装：裸装 </p>
+															</a>
+														</div>
+													</div>
+												</li>
+												<li class="td td-price">
+													<div class="item-price">
+														{{$n->market_price}}
+													</div>
+												</li>
+												<li class="td td-number">
+													<div class="item-number">
+														<span>×</span>{{$n->gct->gcount}}
+													</div>
+												</li>
 
-										</ul>
+											</ul>
 										@endforeach
 
 									</div>
@@ -135,9 +135,9 @@
 									</div>
 
 								</div>
+								@endforeach
 
 								</div>
-							@endforeach
 
 
 

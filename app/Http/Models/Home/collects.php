@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class collects extends Model
 {
-    //收藏表
+    //
     public $table = 'collects';
     public $primaryKey = 'id';
-    public $timestamps = false;
+    public function goods(){
+        return $this->belongsTo('App\Http\Models\Admin\Goods', 'gid', 'id');
 
-
+    }
 }
