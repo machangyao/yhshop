@@ -1,4 +1,6 @@
-   @extends('layouts.admin.layout')
+@extends('layouts.admin.layout')
+
+ 
 
  @section('content')
 
@@ -24,7 +26,9 @@
                         <div class="box-header with-border">
 
                         @if (count($errors) > 0)
+
                             <div>
+
                                 <ul>
                                     @if(is_object($errors))
                                         @foreach ($errors->all() as $error)
@@ -55,6 +59,7 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
 
                                     <div class="col-sm-4">
+
                                         <input id="file_upload" name="ads_img" type="file" multiple="true">
                                         <br>
                                         <img src="" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
@@ -107,6 +112,7 @@
 
                     </script>                           
 
+
                            
                             <div class="box-body">
                                 <div class="form-group">
@@ -119,8 +125,7 @@
                                 </div>
                             </div>
 
-                            
-                            
+
                                
 
                             <!-- /.box-body -->

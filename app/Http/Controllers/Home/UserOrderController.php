@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\orders;
 use App\Http\Models\Home\User;
+
+use Illuminate\Support\Facades\Input;
+
+
 class UserOrderController extends Controller
 {
     /**
@@ -16,8 +20,11 @@ class UserOrderController extends Controller
     public function index()
     {
         //马长遥 返回订单页面
-        $user = User::find(20);
+
+        $user = User::find(session('user_info')['id']);
         $orders = $user->orders;
+
+
         // $goods = [];
         // foreach($orders as $v){
         //     $goods = $v->Goods;
@@ -93,4 +100,18 @@ class UserOrderController extends Controller
     {
         //
     }
+
+
+    public function status(){
+        //执行确认收货 马长遥
+        $id = Input::get('id');
+        $data = ['order_status'=>3];
+        $res = orders::where('id',$id)->update($data);
+        if($res){
+            return back();
+        }else{
+            return back();
+        }
+    }
+
 }

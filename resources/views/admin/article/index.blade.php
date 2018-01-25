@@ -24,6 +24,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+
                         <div class="col-xs-8"></div>
 
                         <div class></div> 
@@ -47,6 +48,7 @@
 
 
                             
+
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
@@ -54,7 +56,7 @@
                                     <th>作者</th>
                                     <th>标题</th>
                                     <th>内容</th>
-                                   
+
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -64,6 +66,7 @@
                                     <td>{{ $v->article_id }}</td>
                                     <td>{{ $v->article_author }}</td>
                                     <td>{{ $v->article_title }}</td>
+
                                     <td>
                                     <a href="javascript:;" onclick="view({{ $v->article_id }})">点击查看</a>    
                                     <div id="nr" style="display:none;">{!! $v->article_content !!}</div>
@@ -128,4 +131,5 @@
     }    
     </script>
     
+
 @stop

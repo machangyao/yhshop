@@ -43,7 +43,9 @@
 
 
 
+
                         <form role="form" action="{{ url('admin/slide/'.$slide->slide_id) }}" method="post" enctype="multipart/form-data">
+
 
                         {{ csrf_field() }}
                         {{ method_field('PUT') }}
@@ -58,6 +60,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputFile">轮播图图片</label>
+
                                     <input id="file_upload" name="slide_mig" type="file" multiple="true">
                                            <br>
                                            <img src="{{ $slide->slide_mig }}" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
@@ -106,6 +109,7 @@
 
 
                     </script>                                
+
                             </div>
                             <!-- /.box-body -->
 

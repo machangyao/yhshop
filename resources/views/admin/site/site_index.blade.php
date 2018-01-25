@@ -52,8 +52,10 @@
                                     <td><font style="vertical-align: inherit;">{{ $v->site_describe }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->site_copyright }}</font></td>
                                     <td><font style="vertical-align: inherit;"><img src="{{ $v->site_logo }}" alt=""></font></td>
+
                                     </tr>
 							    @endforeach
+
 									
                            </tbody>
 

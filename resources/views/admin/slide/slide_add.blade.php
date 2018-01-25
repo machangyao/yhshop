@@ -63,11 +63,13 @@
                             <div class="box-body"> 
                                 <div class="form-group">
                                     <label for="exampleInputFile">轮播图图片</label>
+
                                    
                                     <input id="file_upload" name="slide_mig" type="file" multiple="true">
                                            <br>
                                            <img src="" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
                                                      
+
                                 </div>
                                 
                             </div>
@@ -95,6 +97,7 @@
                                 alert("请选择图片文件");
                                 return;
                             }
+
 
                             //只将文件上传表单项的内容放入formData对象
                                 var formData = new FormData();
@@ -140,5 +143,4 @@
     </div> 
 
 
-   
 @stop

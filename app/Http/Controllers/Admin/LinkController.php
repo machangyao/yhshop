@@ -13,6 +13,7 @@ class LinkController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
          $link = Links::orderBy('link_id','asc')
@@ -26,6 +27,7 @@ class LinkController extends Controller
             ->paginate($request->input('num', 5));
         return view('admin/link/index',['link'=>$link, 'request'=> $request]);
     }
+
 
 
     /**
@@ -61,13 +63,16 @@ class LinkController extends Controller
         //提示信息
         $mess = [
             'link_url.required'=>'连接不能为空',
+
             'link_text.required'=>'描述不能为空',
+
             
         ];
 
         $Validator = Validator::make($input, $rule, $mess);
 
         if($Validator->fails()){
+
             return redirect('admin/kink/create')
                 ->withErrors($Validator)
                 ->withInput(); 

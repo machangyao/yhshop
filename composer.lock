@@ -56,7 +56,11 @@
             },
             "require": {
                 "php": "^7.1"
+<<<<<<< HEAD
             },
+=======
+
+>>>>>>> origin/mcy
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",

@@ -27,6 +27,7 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">广告</h3>
                         </div>
+
                                
                                             
                                             
@@ -51,6 +52,7 @@
                              </form>   
                             </div>   
                         </div>
+
                             <div class="row"><div class="col-sm-12">
 
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" > 
@@ -99,6 +101,7 @@
                            </tbody>
 
                             </table>
+
                              <div class="page_list">
                                 {!! $ads->appends($request->all())->render() !!}
                             </div>
@@ -107,6 +110,7 @@
         </div>
     </div> 
 <script>
+
     function delAds(id){
         layer.confirm('您确定要删除吗？',{
             btn:['确定','取消']
@@ -128,5 +132,7 @@
         })
     },function(){});
 }
+
 </script>
+
  @stop

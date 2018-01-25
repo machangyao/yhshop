@@ -16,6 +16,7 @@
                 <li class="active">轮播图</li>
             </ol>
         </section>
+
         <!-- Main content -->
         <section class="content">
             <div class="row">
@@ -25,6 +26,7 @@
                         <div class="box-header with-border">
                             <h3 class="box-title">轮播图</h3>
                         </div>
+
                         <div class="box-body">
                         <div class="col-xs-9"></div>
                             <div class="col-xs-3">
@@ -49,6 +51,7 @@
                                 </thead>
                                 <tbody>
                                 @foreach($slide as $v)
+
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->slide_id }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_url }}</font></td>
@@ -56,6 +59,7 @@
                                     <img class="img" height="50" width="50" src="{{$v->slide_mig}}">
                                     </td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_text }}</font></td>
+
                                     
                                     <td><font style="vertical-align: inherit;"><a href=" {{ url('admin/slide/'.$v->slide_id.'/edit') }} ">编辑</a> | <a href="javascript:;" onclick="delSlide({{ $v->slide_id }})">删除</a></font> |  
                                     @if( $v->state == '0') <a href="javascript:;" onclick="stateSlide({{ $v->slide_id }})" class="state">上传</a> 
@@ -76,6 +80,7 @@
         </section>
         <!-- /.content --> 
     </div>
+
     <script>
 
     function delSlide(id){
@@ -95,6 +100,7 @@
                  setTimeout(function(){
                      window.location.href = location.href;
                         },1000);
+
                     }
                 })
             },function(){});
@@ -118,5 +124,6 @@
             //     }
             // });
         }
+
     </script>
 @stop

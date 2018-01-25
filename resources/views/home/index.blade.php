@@ -138,17 +138,35 @@
 							    
 						<div class="mod-vip">
 							<div class="m-baseinfo">
-								<a href="../person/index.html">
-									<img src="/yh/home/images/getAvatar.do.jpg">
+
+								@if (session('user_info'))
+								<a href="{{url('/mycenter')}}">
+									<img src="{{session('user_info')['avatar']}}">
 								</a>
 								<em>
-									Hi,<span class="s-name">小叮当</span>
+									Hi,<span class="s-name">{{session('user_info')['user_name']}}</span>
+
 									<a href="#"><p>点击更多优惠活动</p></a>									
 								</em>
 							</div>
 							<div class="member-logout">
-								<a class="am-btn-warning btn" href="login.html">登录</a>
-								<a class="am-btn-warning btn" href="register.html">注册</a>
+
+
+								@elseif (!session('user_info'))
+									<a href="{{url('/login')}}">
+										<img src="/yh/home/images/getAvatar.do.jpg">
+									</a>
+									<em>
+										Hi,<span class="s-name">游客</span>
+										<a href="#"><p>点击更多优惠活动</p></a>
+									</em>
+							</div>
+							<div class="member-logout">
+
+								<a class="am-btn-warning btn" href="{{url('/login')}}?url={{\Illuminate\Support\Facades\Input::url()}}">登录</a>
+								<a class="am-btn-warning btn" href="{{url('/user/create')}}">注册</a>
+									@endif
+
 							</div>
 							<div class="member-login">
 								<a href="#"><strong>0</strong>待收货</a>
@@ -192,7 +210,9 @@
 					<!--今日推荐 -->
 
 					<div class="am-g am-g-fixed recommendation">
-						<div class="clock am-u-sm-3" ">
+
+						<div class="clock am-u-sm-3">
+
 							<img src="/yh/home/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>

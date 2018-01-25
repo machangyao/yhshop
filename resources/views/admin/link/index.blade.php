@@ -19,13 +19,16 @@
 
         <!-- Main content -->
 
+
         <section class="content">
             <div class="row">
               <div class="col-md-12">
+
                     <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title">友情连接</h3>
                         </div>
+
                          <div class="col-xs-3"></div>       
                         <div class="col-xs-6"></div>                
                                 
@@ -50,6 +53,7 @@
                         <div class="box-body">
                         </div>   
                          <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info"> 
+
                                <thead>
                                 <tr role="row">
 
@@ -58,6 +62,7 @@
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 202px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">友情连接地址</font></font></th>
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 178px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">友情连接文字描述</font></font></th>
+
 
                                 <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 100px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">操作</font></font></th>
 
@@ -92,6 +97,7 @@
             </div>
             </section>
             </div>
+
 
 <script>
     function delLink(id){

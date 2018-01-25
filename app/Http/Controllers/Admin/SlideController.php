@@ -13,6 +13,7 @@ class SlideController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index(Request $request)
     {
         $slide = Slides::orderBy('slide_id','asc')
@@ -26,6 +27,7 @@ class SlideController extends Controller
             
             ->paginate($request->input('num', 5));
         return view('admin/slide/slide1',['slide'=>$slide, 'request'=> $request]);
+
     }
 
     /**
@@ -35,7 +37,7 @@ class SlideController extends Controller
      */ 
     public function create()
     {
-        //添加页面
+
         return view('admin/slide/slide_add');
     }
 
@@ -50,6 +52,7 @@ class SlideController extends Controller
     {
         //获取提交数据
         $input = $request->except('_token');
+
        // 请求中是否携带上传图片
        if($request->file('slide_mig')){
            //获取上传图片文件
@@ -67,6 +70,7 @@ class SlideController extends Controller
                 $input['slide_mig'] = $url;
             }
         }
+
         //验证数据
         $rule = [
             'slide_url'=>'required',
@@ -88,6 +92,7 @@ class SlideController extends Controller
                 ->withErrors($Validator)
                 ->withInput(); 
         }
+
 
         //添加操作
         $res = Slides::create($input);
@@ -130,6 +135,7 @@ class SlideController extends Controller
     //执行修改
     public function update(Request $request, $id)
     {
+
         
         //获取表单
         $input = $request->except('_token','_method');
@@ -151,20 +157,21 @@ class SlideController extends Controller
                 $input['slide_mig'] = $url;
             }
         }
+
          //验证数据
         $rule = [
             'slide_url'=>'required',
             'slide_text'=>'required',
-            'slide_mig'=>'image',
+
         ];
 
-        //提示信息
+        //提示信息 slide_mig
         $mess = [
             'slide_url.required'=>'连接不能为空',
             'slide_text.required'=>'文字描述不能为空',
-            'slide_mig.image'=>'上传文件必须是图片',
-        ];
 
+        ];
+        
         $Validator = Validator::make($input, $rule, $mess);
 
         if($Validator->fails()){
@@ -172,6 +179,7 @@ class SlideController extends Controller
                 ->withErrors($Validator)
                 ->withInput(); 
         }
+
         //修改记录
         $slide = Slides::find($id);
         $res = $slide->update($input);
@@ -183,6 +191,7 @@ class SlideController extends Controller
 
         }
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -207,6 +216,7 @@ class SlideController extends Controller
         }
         return $data;
     }
+
 
     //ajax图片
     public function upload(Request $request)

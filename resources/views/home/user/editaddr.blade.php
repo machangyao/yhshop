@@ -72,7 +72,9 @@
 						<div class="am-form-group">
 							<div class="am-u-sm-9 am-u-sm-push-3">
 								<a class="am-btn am-btn-danger" id='submit'>保存</a>
-								<a href="" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+
+								<a href="{{url('/user/addr')}}" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
+
 							</div>
 						</div>
 					</form>

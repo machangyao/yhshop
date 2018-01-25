@@ -23,7 +23,7 @@ Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
 
 //登陆页面的处理逻辑
 Route::post('admin/dologin','Admin\LoginController@dologin');
- 
+
 Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
 //后台首页
     Route::get('index','LoginController@index');
@@ -40,6 +40,7 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 
 
 //后台
+
 Route::get('/admin','Admin\IndexController@index');
 
 
@@ -47,9 +48,21 @@ Route::get('/admin','Admin\IndexController@index');
 Route::get('/admin/slide/state','Admin\SlideController@state');
 //图片
 Route::post('/admin/slide/upload','Admin\SlideController@upload');
+
+//后台修改订单状态
+Route::get('/admin/order/status','Admin\OrderController@status');
+//前台确认收货
+Route::get('/order/status','Home\UserOrderController@status');
+//订单管理
+Route::resource('/admin/order','Admin\OrderController');
+
+
+//首页
+Route::get('/admin','Admin\IndexController@index');
+
+
 //轮播图路由
 Route::resource('/admin/slide', 'Admin\SlideController');
-
 
 //网站配置
 Route::get('/admin/site', 'Admin\SiteController@index');
@@ -72,20 +85,32 @@ Route::resource('admin/article', 'Admin\ArticleController');
 //前台
 
 //个人订单
-Route::resource('/user/order','home\UserOrderController');
 
+Route::resource('/user/order','home\UserOrderController')->middleware('homeIsLogin');
+
+//个人收藏
+Route::get('/user/collect/create','home\CollectController@create');
+Route::get('/user/collect/del','home\CollectController@del')->middleware('homeIsLogin');
+Route::get('/user/collect','home\CollectController@index')->middleware('homeIsLogin');
 //个人安全信息
+
+
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由
 Route::resource('/user/password','home\UserPasswordController')->middleware('homeIsLogin');
 //个人地址管理
-Route::resource('/user/addr','home\UserAddrController');
+
+Route::post('/user/daddr','home\UserAddrController@daddr')->middleware('homeIsLogin');
+Route::resource('/user/addr','home\UserAddrController')->middleware('homeIsLogin');
+
 //城市联动ajax
 Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
-Route::resource('/user','home\UserController');
+
+Route::resource('/user','home\UserController')->middleware('homeIsLogin');
+
 //注册账号ajax路由
 //
 Route::post('/user/ajax','home\UserController@ajax');
@@ -125,5 +150,7 @@ Route::resource('/category','Admin\CategoryController');
 Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
-// 品牌路由oute
+
+// 品牌路由route
+
 Route::resource('/brand','Admin\BrandController');

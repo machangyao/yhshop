@@ -25,6 +25,7 @@
                                                     </div>
                         <!-- /.box-header -->
                         <!-- form start -->
+
                         
                         @if (count($errors) > 0)
                             <div >
@@ -42,6 +43,7 @@
 
                         <form action="{{ url('admin/article') }}" method="post" class="form-horizontal" enctype="multipart/form-data" style="">   
                             {{ csrf_field() }}
+
                             <div class="box-body">
                                 
                             </div>
@@ -49,8 +51,10 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章作者</label>
 
+
                                     <div class="col-sm-2">
                                         <input type="text" name="article_author" class="form-control" id="inputEmail3" placeholder="请输入作者名称">
+
                                     </div>
                                 </div>
                             </div>
@@ -61,12 +65,14 @@
 
                                     <div class="col-sm-3">
                                         <input type="text" name="article_title" class="form-control" id="inputEmail3" placeholder="请输文章标题">
+
                                     </div>
                                 </div>
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章内容</label>
+
 
                                     <div class="col-sm-9">
                                         <!-- 加载编辑器的容器 -->
@@ -79,6 +85,7 @@
                                         <script type="text/javascript">
                                             var ue = UE.getEditor('container');
                                         </script>
+
                                     </div>
                                 </div>
                             </div>

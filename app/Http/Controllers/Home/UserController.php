@@ -8,6 +8,9 @@ use App\Http\Models\Home\User;
 use Illuminate\Support\Facades\Crypt;
 use Gregwar\Captcha\CaptchaBuilder; 
 use Gregwar\Captcha\PhraseBuilder;
+
+use Illuminate\Support\Facades\Input;
+
 use Session;
 use Illuminate\Support\Facades\Cookie;
 class UserController extends Controller
@@ -163,6 +166,11 @@ class UserController extends Controller
         if(session('user_info')){
             return redirect('/');
         }
+
+        if(!session('back')){
+            Session::put('back',Input::get('url'));
+        }
+
         return view('Home.login');
     }
 
@@ -199,7 +207,9 @@ class UserController extends Controller
                     cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res);
-                return redirect('/mycenter');
+
+
+
                 if(session('back')){
                     return redirect(session('back'));
                 }else{

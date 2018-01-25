@@ -10,12 +10,17 @@ class orders extends Model
     public $table = 'orders';
     public $primaryKey = 'id';
 
+    public $timestamps = false;
+
+
     // public function User(){
     // 	return $this->belongsTo('App\Http\Models\Home\User','user_id','id');
     // }
 
     public function Goods(){
-    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','oid','gid');
+
+    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','order_sn','gid');
+
     }
 
     public function addr(){

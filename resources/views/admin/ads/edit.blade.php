@@ -67,13 +67,16 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告图片</label>
 
                                     <div class="col-sm-4">
+
                                         <input id="file_upload" name="ads_img" type="file" multiple="true">
                                         <br>
                                         <img src="{{ $ads->ads_img }}" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
+
                                     </div>
                                 </div>
                             </div>
                            
+
                     <script type="text/javascript">
                             $("#file_upload").change(function () {
                                 uploadImage();
@@ -116,6 +119,7 @@
                         }
                     </script> 
 
+
                             <!-- /.box-body -->
                             <div class="row">
                                 <div class="col-sm-2"></div>
@@ -126,13 +130,6 @@
                                 </div>
                                 <div class="col-sm-4"></div>
                             </div>
-                            <!-- /.box-footer -->
-
-
-                            
-
-
-
 
                         </form>
                     </div>

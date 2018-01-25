@@ -141,4 +141,19 @@ class UserAddrController extends Controller
 
         }
     }
+
+    public function daddr(Request $request){
+        $id = $request->input('id');
+
+        $res = Addr::where('addr_status',1)->first();
+        if($res){
+            Addr::where('addr_status',1)->update(['addr_status'=> 0]);
+        }
+
+        Addr::where('id',$id)->update(['addr_status'=>1]);
+
+
+    }
+
+
 }
