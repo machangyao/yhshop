@@ -160,7 +160,7 @@
 							</div>
 							<div class="member-logout">
 
-								<a class="am-btn-warning btn" href="{{url('/login')}}">登录</a>
+								<a class="am-btn-warning btn" href="{{url('/login')}}?url={{\Illuminate\Support\Facades\Input::url()}}">登录</a>
 								<a class="am-btn-warning btn" href="{{url('/user/create')}}">注册</a>
 									@endif
 							</div>
@@ -206,7 +206,7 @@
 					<!--今日推荐 -->
 
 					<div class="am-g am-g-fixed recommendation">
-						<div class="clock am-u-sm-3" ">
+						<div class="clock am-u-sm-3">
 							<img src="/yh/home/images/2016.png "></img>
 							<p>今日<br>推荐</p>
 						</div>

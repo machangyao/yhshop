@@ -322,7 +322,8 @@
 									<a id="LikBasket" title="加入购物车" href="{{ url('cart') }}"><i></i>加入购物车</a>
 								</div>
 							</li>
-							<li>							<div style="padding-left: 10px;padding-top: 5px;"><a href="{{url('/user/collect/create')}}?gid={{$data->id}}"> 收藏</a></div>
+							<li>
+								<div class="clearfix tb-btn tb-btn-basket theme-login" style="padding-left: 10px;"><a href="{{url('/user/collect/create')}}?gid={{$data->id}}&url={{\Illuminate\Support\Facades\Input::url()}}"> 收藏</a></div>
 							</li>
 						</div>
 

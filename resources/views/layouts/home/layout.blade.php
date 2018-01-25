@@ -27,10 +27,10 @@
 					<div class="topMessage">
 						<div class="menu-hd">
 							@if (session('user_info')) 
-							<a href="#" target="_top" class="h">亲，{{session('user_info')['user_name']}} </a>
+							<a href="{{url('/mycenter')}}" target="_top" class="h">亲，{{session('user_info')['user_name']}} </a>
 							<a href="{{url('/user/lgout')}}" target="_top">退出</a>
 							@else
-							<a href="{{url('/login')}}" target="_top" class="h">亲，请登录 </a>
+							<a href="{{url('/login')}}?url={{\Illuminate\Support\Facades\Input::url()}}" target="_top" class="h">亲，请登录 </a>
 							<a href="{{url('/user/create')}}" target="_top">注册</a>
 							@endif
 						</div>
