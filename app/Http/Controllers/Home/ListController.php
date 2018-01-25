@@ -10,9 +10,11 @@ use App\Http\Models\Home\Categorys;
 
 class ListController extends Controller
 {
+
     /*
-	* 列表页
-	* list
+    * 列表页
+    * @author taidmin
+    * @return 返回列表页视图
     */
     public function index(Request $request,$id)
     {

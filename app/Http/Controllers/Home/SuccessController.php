@@ -9,7 +9,11 @@ use App\Http\Models\Home\orders;
 class SuccessController extends Controller
 {
 
-    //付款成功页面
+    /*
+    * 下单成功、付款成功
+    * @author taidmin
+    * @return 返回下单成功、付款成功视图
+    */
     public function index($order_sn)
     {
     	$data = orders::where('order_sn',$order_sn)->with('orderaddr')->first();	

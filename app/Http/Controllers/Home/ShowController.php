@@ -8,9 +8,11 @@ use App\Http\Models\Home\Goods;
 
 class ShowController extends Controller
 {
+
     /*
-	* 详情页
-	* show
+    * 详情页
+    * @author taidmin
+    * @return 返回商品详情页视图
     */
     public function show($id)
     {

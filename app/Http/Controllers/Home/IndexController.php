@@ -8,9 +8,11 @@ use App\Http\Models\Home\Categorys;
 
 class IndexController extends Controller
 {
+
     /*
-	* 首页
-	* index
+    * 前台首页
+    * @author taidmin
+    * @return 返回首页视图
     */
     public function index()
     {
@@ -25,7 +27,12 @@ class IndexController extends Controller
     	return view('home.index',compact('cates'));
     }
 
-    //递归获取子分类
+
+    /*
+    * 递归获取子分类
+    * @author taidmin
+    * @return 返回子孙数组
+    */
     function findSubTree($cates,$id=0,$lev=1){
         $subtree = [];//子孙数组
         foreach ($cates as $v) {

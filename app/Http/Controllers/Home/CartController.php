@@ -10,7 +10,10 @@ use Session;
 class CartController extends Controller
 {
 
-	//加入购物车
+    /*
+    * 加入购物车
+    * @author taidmin
+    */
 	public function addCart(Request $request)
 	{
 		//1、判断用户是否登录,如果没有登录则跳转到登录页
@@ -51,7 +54,7 @@ class CartController extends Controller
 	    		'goodinfo' => Goods::where('id',$_GET['id'])->first(),
 	    	];
     	}
-    	
+
 
     	//3、把商品信息存入到session,追加
     	$request->session()->put('cart',$data);
@@ -61,14 +64,24 @@ class CartController extends Controller
 
 	}
 
-    //购物车页面
+    /*
+    * 购物车页面
+    * @author taidmin
+    * @return 返回购物车页面
+    */
     public function index()
     {
     	// dd(session('cart'));
-    	return view('home.cart');
+
+    	return view('home.cart',compact('gn'));
     }
 
-    //数量增加
+
+   /*
+    * 数量增加
+    * @author taidmin
+    * @return 返回数量增加状态
+    */
     public function addnum(Request $request)
     {
     	//获取id
@@ -94,7 +107,12 @@ class CartController extends Controller
 
     }
 
-    //数量减少
+
+   /*
+    * 数量减少
+    * @author taidmin
+    * @return 返回数量减少状态
+    */
     public function minnum(Request $request)
     {
     	//获取id
@@ -120,7 +138,11 @@ class CartController extends Controller
     }
 
 
-    //删除购物车商品
+   /*
+    * 删除购物车商品
+    * @author taidmin
+    * @return 返回删除后的状态
+    */
     public function delcart(Request $request)
     {
     	$id = $request->input('id');
@@ -143,7 +165,12 @@ class CartController extends Controller
     	echo 1;
     }
 
-    //删除购物车选中的商品
+
+   /*
+    * 删除购物车选中的商品
+    * @author taidmin
+    * @return 返回删除后的状态
+    */
     public function clearcart(Request $request)
     {
     	$idstr = $request->input('id');

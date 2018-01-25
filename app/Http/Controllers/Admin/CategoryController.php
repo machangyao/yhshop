@@ -9,11 +9,11 @@ use App\Http\Models\Admin\Categorys;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 分类列表
+    * @author taidmin
+    * @return 返回分类列表视图
+    */
     public function index(Request $request)
     {
         $title = '分类列表';
@@ -30,11 +30,11 @@ class CategoryController extends Controller
         return view('admin.category.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword]]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 添加分类
+    * @author taidmin
+    * @return 返回添加分类视图
+    */
     public function create()
     {
         $title = '添加分类';
@@ -45,12 +45,10 @@ class CategoryController extends Controller
         return view('admin.category.create',['title'=>$title,'cates'=>$cates,'id'=>$id]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行添加分类
+    * @author taidmin
+    */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -95,12 +93,11 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 修改分类
+    * @author taidmin
+    * @return 返回修改分类视图
+    */
     public function edit($id)
     {
         //
@@ -109,13 +106,10 @@ class CategoryController extends Controller
         return view('admin.category.edit',['title'=>$title,'data'=>$data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行修改分类
+    * @author taidmin
+    */
     public function update(Request $request, $id)
     {
         //
@@ -132,12 +126,11 @@ class CategoryController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 删除分类
+    * @author taidmin
+    * @return 返回删除状态
+    */
     public function destroy($id)
     {
         $res = Categorys::find($id)->delete();
