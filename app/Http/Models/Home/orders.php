@@ -9,6 +9,8 @@ class orders extends Model
     //订单表 马长遥
     public $table = 'orders';
     public $primaryKey = 'id';
+    public $guarded = [];
+    public $timestamps = false;
 
     public $timestamps = false;
 
@@ -25,5 +27,10 @@ class orders extends Model
 
     public function addr(){
     	return $this->hasOne('App\Http\Models\Home\Addr','id','addr_id');
+    }
+
+    public function orderaddr()
+    {
+        return $this->belongsTo('App\Http\Models\Home\Addr','addr_id','id');
     }
 }

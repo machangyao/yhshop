@@ -11,11 +11,6 @@
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
 //登录页面路由
 Route::get('admin/login','Admin\LoginController@login');
 
@@ -151,6 +146,25 @@ Route::get('/list/{id}','Home\ListController@index');
 Route::get('/show/{id}','Home\ShowController@show');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
+
+//ajax购物车页面数量增加
+Route::post('/addnum','Home\CartController@addnum');
+//ajax购物车页面数量减少
+Route::post('/minnum','Home\CartController@minnum');
+//删除单个购物车商品
+Route::post('/delcart','Home\CartController@delcart');
+//删除购物车选中的商品
+Route::post('/clearcart','Home\CartController@clearcart');
+//订单页面
+Route::get('/order','Home\OrderController@index');
+//ajax订单页面数量增加
+Route::post('/orderaddnum','Home\OrderController@orderaddnum');
+//ajax订单页面数量减少
+Route::post('/orderminnum','Home\OrderController@orderminnum');
+//结算
+Route::post('/pay','Home\PayController@index');
+//下单成功
+Route::get('/success/{id}','Home\SuccessController@index');
 // 后台
 
 // 分类路由
