@@ -12,6 +12,8 @@ class User extends Model
     	public $primarykey = 'id';
     	public $timestamp = false;
 
+
     //不允许批量修改的字段
     	public $guarded = [];
 }
+

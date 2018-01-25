@@ -12,6 +12,10 @@
 */
 
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
 //登录页面路由
 Route::get('admin/login','Admin\LoginController@login');
 
@@ -49,6 +53,7 @@ Route::get('/admin/slide/state','Admin\SlideController@state');
 //图片
 Route::post('/admin/slide/upload','Admin\SlideController@upload');
 
+
 //后台修改订单状态
 Route::get('/admin/order/status','Admin\OrderController@status');
 //前台确认收货
@@ -59,6 +64,7 @@ Route::resource('/admin/order','Admin\OrderController');
 
 //首页
 Route::get('/admin','Admin\IndexController@index');
+
 
 
 //轮播图路由
@@ -83,6 +89,7 @@ Route::resource('admin/article', 'Admin\ArticleController');
 
 
 //前台
+
 
 //个人订单
 
@@ -134,6 +141,7 @@ Route::resource('/userdetail','home\UserDetailController')->middleware('homeIsLo
 //个人头像上传ajax
 Route::post('/userdetail/upload','home\UserDetailController@upload');
 
+
 // 前台
 // 首页路由
 Route::get('/','Home\IndexController@index');
@@ -144,6 +152,7 @@ Route::get('/show/{id}','Home\ShowController@show');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
 // 后台
+
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
 // 商品路由
@@ -151,6 +160,25 @@ Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
 
+
+
+//评论管理路由
+Route::get('admin/comment','Admin\CommentController@comment');
+
+//商品活动路由
+Route::resource('admin/activity','Admin\ActController');
+
+//配送管理路由
+Route::get('admin/dispatchs','Admin\DisController@dispatchs');
+
+//推荐管理路由
+Route::get('admin/recommend','Admin\ReController@recommend');
+
+//支付管理路由
+Route::get('admin/pay','Admin\PayController@pay');
+Route::get('admin/pay/{id}','Admin\PayController@pays');
+
 // 品牌路由route
 
 Route::resource('/brand','Admin\BrandController');
+

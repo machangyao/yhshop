@@ -55,9 +55,11 @@
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->slide_id }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_url }}</font></td>
+
                                     <td width="10%">
                                     <img class="img" height="50" width="50" src="{{$v->slide_mig}}">
                                     </td>
+
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_text }}</font></td>
 
                                     
@@ -124,6 +126,7 @@
             //     }
             // });
         }
+
 
     </script>
 @stop

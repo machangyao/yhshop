@@ -16,7 +16,6 @@
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/jquery.min.js') }}"></script>
 		<script src="{{ asset('/yh/home/AmazeUI-2.4.2/assets/js/amazeui.min.js') }}"></script>
 
-
 	</head>
 
 	<body>
@@ -63,8 +62,10 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
+
 						<form action="{{ url('/list') }}" method="get">
 							<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off">
+
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>

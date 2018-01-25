@@ -4,11 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Models\Admin\Brands;
+
+class BrandController extends Controller
+
 use DB;
 use App\Http\Models\Admin\Brands;
 
 
 class BrandController extends Controller
+
 
 
 {
@@ -17,6 +22,12 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+        //
+        $title = "品牌列表";
+        $data = Brands::all();
+        return view('admin.brand.index',['title'=>$title,'data'=>$data]);
+
     public function index(Request $request)
     {
 
@@ -29,6 +40,7 @@ class BrandController extends Controller
         $data = Brands::where('name','like','%'. $keyword .'%')->paginate($num);
         return view('admin.brand.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
 
+
     }
 
     /**
@@ -39,9 +51,15 @@ class BrandController extends Controller
     public function create()
     {
 
+        //
+        $title = "添加品牌";
+        return view('admin.brand.create',['title'=>$title]);
+
+
         //添加
         $title = "添加品牌";
         return view('admin.brand.create',['title'=>$title]);
+
     }
 
     /**
@@ -53,6 +71,7 @@ class BrandController extends Controller
     public function store(Request $request)
     {
         //
+
         $input = $request->except('_token');
         $data = new Brands;
         $data -> name = $input['name'];
@@ -61,12 +80,6 @@ class BrandController extends Controller
         if($res)
         {
             return redirect('/brand')->with('info','添加成功');
-        }else{
-            return back()->with('info','添加失败');
-        }   
-
-    }
-
 
     /**
      * Display the specified resource.

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\Site_config;
+
 class SiteController extends Controller
 {
     //1-16 18:58
@@ -31,6 +32,7 @@ class SiteController extends Controller
     	//获取信息
     	$input = $request->except('_token');
 
+
         // 请求中是否携带上传图片
        if($request->file('site_logo')){
            //获取上传图片文件
@@ -49,7 +51,6 @@ class SiteController extends Controller
             }
         }
 
-
     	  //验证数据
         $rule = [
             'site_keyword'=>'required',
@@ -57,6 +58,7 @@ class SiteController extends Controller
             'site_copyright'=>'required',
 
             'site_logo'=>'required',
+
 
         ];
 
@@ -67,6 +69,7 @@ class SiteController extends Controller
             'site_copyright.required'=>'网站版权声明不能为空',
 
             'site_logo.required'=>'网站logo不能为空',
+
 
         ];
 
@@ -79,7 +82,9 @@ class SiteController extends Controller
         }
 
         //修改记录
+
         $site = Site_config::find(1);
+
         $res = $site->update($input);
 
         

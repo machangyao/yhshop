@@ -76,7 +76,9 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
+
 								<li class="index"><a href="{{ url('/') }}">首页</a></li>
+
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -140,12 +142,16 @@
 							</script>
 
 							<div class="tb-booth tb-pic tb-s310">
+
 								<a href="../images/01.jpg"><img src="/uploads/{{ $data->pic }}" alt="细节展示放大镜特效" rel="/uploads/{{ $data->pic }}" class="jqzoom" /></a>
+
 							</div>
 							<ul class="tb-thumb" id="thumblist">
 								<li class="tb-selected">
 									<div class="tb-pic tb-s40">
+
 										<a href="#"><img src="/uploads/s_{{ $data->pic }}" mid="/uploads/{{ $data->pic }}" big="/uploads/{{ $data->pic }}"></a>
+
 									</div>
 								</li>
 							</ul>
@@ -160,13 +166,16 @@
 						<!--名称-->
 						<div class="tb-detail-hd">
 							<h1>	
+
 				 {{ $data->name }}
+
 	          </h1>
 						</div>
 						<div class="tb-detail-list">
 							<!--价格-->
 							<div class="tb-detail-price">
 								<li class="price iteminfo_price">
+
 									<dt>价格</dt>
 									<dd><em>¥</em><b class="sys_item_price">{{ $data->price }}</b>  </dd>                                 
 								</li>
@@ -257,7 +266,9 @@
 															<input id="min" class="am-btn am-btn-default" name="" type="button" value="-" />
 															<input id="text_box" name="" type="text" value="1" style="width:30px;" />
 															<input id="add" class="am-btn am-btn-default" name="" type="button" value="+" />
+
 															<span id="Stock" class="tb-hidden">库存<span class="stock">{{ $data->number }}</span>件</span>
+
 														</dd>
 
 													</div>
@@ -322,6 +333,7 @@
 							</li>
 							<li>
 								<div class="clearfix tb-btn tb-btn-basket theme-login">
+
 									<a id="LikBasket" title="加入购物车" href="{{ url('cart') }}"><i></i>加入购物车</a>
 								</div>
 							</li>
@@ -386,6 +398,7 @@
 							      	</a>
 							      	</div>
 							      	<div class="p-price"><strong>￥35.90</strong></div>
+
 							      </li>							      
 					      
 						     </ul>					
@@ -419,9 +432,11 @@
 
 								<div class="am-tab-panel am-fade am-in am-active">
 
+
 									<div class="details">
 										<div class="twlistNews" style="text-align:left">
 											{!! $data->desc !!}
+
 										</div>
 									</div>
 									<div class="clear"></div>

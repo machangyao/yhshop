@@ -63,7 +63,41 @@
 				</div>
 			</div>
 
-			<div class="clear"></div>
+
+			<aside class="menu">
+				<ul>
+					<li class="person active">
+						<a href="{{url('/mycenter')}}">个人中心</a>
+					</li>
+					<li class="person">
+
+						<a href="javascript:;">个人资料</a>
+
+						<ul>
+							<li> <a href="{{url('/userdetail')}}">个人信息</a></li>
+							<li> <a href="{{url('/user/safety')}}">安全设置</a></li>
+							<li> <a href="{{url('/user/addr')}}">收货地址</a></li>
+						</ul>
+					</li>
+					<li class="person">
+
+						<a href="javascript:;">我的交易</a>
+						<ul>
+							<li><a href="{{url('/user/order')}}">订单管理</a></li>
+						</ul>
+					</li>
+					<li class="person">
+						<a href="javascript:;">我的小窝</a>
+						<ul>
+							<li> <a href="{{url('/user/collect')}}">收藏</a></li>
+							<li> <a href="comment.html">评价</a></li>
+
+						</ul>
+					</li>
+
+				</ul>
+
+			</aside>
 		</div>
 		</div>
 	</article>

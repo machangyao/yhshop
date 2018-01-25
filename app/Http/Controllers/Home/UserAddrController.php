@@ -16,6 +16,7 @@ class UserAddrController extends Controller
      */
     public function index()
     {
+
         //返回收货地址页面 马长遥
         $addr = Addr::where('user_id',session('user_info')['id'])->get();
         $sheng = citys::where('LevelType',1)->get();
@@ -34,6 +35,7 @@ class UserAddrController extends Controller
         return $data;
 
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -52,6 +54,7 @@ class UserAddrController extends Controller
      */
     public function store(Request $request)
     {
+
         //增加新的地址 马长遥
         $this->validate($request, [
             'addr_name' => 'required|',
@@ -76,6 +79,7 @@ class UserAddrController extends Controller
             return back();
 
         }
+
     }
 
     /**
@@ -86,12 +90,14 @@ class UserAddrController extends Controller
      */
     public function show($id)
     {
+
         //返回修改地址 马长遥
         $addr = Addr::find($id);
         $sheng = citys::where('LevelType',1)->get();
         $shi = citys::where('LevelType',2)->first();
         $qu = citys::where('ParentId',110100)->get();
         return view('home.user.editaddr',compact('addr','sheng','shi','qu'));
+
     }
 
     /**
@@ -114,6 +120,7 @@ class UserAddrController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         //执行修改地址 马长遥
         $data = $request->except('_token','_method','qu');
         $city = citys::find($request->input('qu'));
@@ -122,6 +129,7 @@ class UserAddrController extends Controller
         if($res){
             return redirect('/user/addr');
         }
+
     }
 
     /**
@@ -132,6 +140,7 @@ class UserAddrController extends Controller
      */
     public function destroy($id)
     {
+
         //删除地址 马长遥
         $res = Addr::where('id',$id)->delete();
         if($res){

@@ -43,7 +43,9 @@
 							        </ul>
 							    </div>
 							@endif
+
 							<p id='p'>{{ session('tel')}}{{session('email')}}{{session('msg')}}{{session('size')}}</p>
+
 							<div class="am-tabs-bd">
 								<div class="am-tab-panel am-active">
 

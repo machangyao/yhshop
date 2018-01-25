@@ -43,6 +43,7 @@
                         <form action="{{ url('admin/link') }}" method="post" class="form-horizontal" enctype="multipart/form-data" style="">   
                            {{ csrf_field() }}
                            
+
                             <div class="box-body">
                                 
                             </div>
@@ -51,7 +52,9 @@
                                     <label for="inputEmail3" class="col-sm-2 control-label">友情链接地址</label>
 
                                     <div class="col-sm-4">
+
                                         <input type="text" name="link_url" class="form-control" id="inputEmail3" placeholder="请输入连接">
+
                                     </div>
                                 </div>
                             </div>
@@ -60,11 +63,14 @@
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">友情连接文字描述</label>
 
+
                                     <div class="col-sm-4">
                                         <input type="text" name="link_text" class="form-control" id="inputEmail3" placeholder="请输入文字">
+
                                     </div>
                                 </div>
                             </div>
+
 
                             
                            

@@ -25,7 +25,9 @@
                 <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header with-border">
+
                             <h3 class="box-title">广告</h3>
+
                         </div>
 
                                
@@ -53,9 +55,11 @@
                             </div>   
                         </div>
 
+
                             <div class="row"><div class="col-sm-12">
 
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info" > 
+
                                <thead>
                                 <tr role="row">
 
@@ -80,6 +84,7 @@
 								@foreach($ads as $v)
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->ads_id }}</font></td>
+
                                     <td >
                                         
                                         <font style="vertical-align: inherit;">{{ $v->ads_url }}</font>
@@ -93,6 +98,7 @@
                                     <td ><font style="vertical-align: inherit;">{{ $v->ads_text }}</font></td>
 
                                     <td><a href="{{ url('admin/ads/'.$v->ads_id.'/edit') }}">编辑</a> | <a href="javascript:;" onclick="delAds({{ $v->ads_id }})">删除</a></td>
+
 
                                 </tr>
 
@@ -110,6 +116,7 @@
         </div>
     </div> 
 <script>
+
 
     function delAds(id){
         layer.confirm('您确定要删除吗？',{
@@ -134,5 +141,6 @@
 }
 
 </script>
+
 
  @stop

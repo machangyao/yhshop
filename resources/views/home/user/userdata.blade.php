@@ -1,22 +1,73 @@
 @extends('layouts.home.user_layout')
 
 @section('content')
-	<div class="center">
-		<div class="col-main">
-			<div class="main-wrap">
-				<div class="wrap-left">
-					<div class="wrap-list">
-						<div class="m-user">
-							<!--个人信息 -->
-							<div class="m-bg"></div>
-							<div class="m-userinfo">
-								<div class="m-baseinfo">
-									<a href="">
-										<img src="{{session('user_info')['avatar']}}">
-									</a>
-									<em class="s-name"> {{session('user_info')['user_name']}} <span class="vip1"></em>
-									<div class="s-prestige am-btn am-round">
-										</span>会员福利</div>
+
+		<div class="center">
+			<div class="col-main">
+				<div class="main-wrap">
+					<div class="wrap-left">
+						<div class="wrap-list">
+							<div class="m-user">
+								<!--个人信息 -->
+								<div class="m-bg"></div>
+								<div class="m-userinfo">
+									<div class="m-baseinfo">
+										<a href="">
+											<img src="{{session('user_info')['avatar']}}">
+										</a>
+										<em class="s-name"> {{session('user_info')['user_name']}} <span class="vip1"></em>
+										<div class="s-prestige am-btn am-round">
+											</span>会员福利</div>
+									</div>
+
+									<div class="m-right">
+										<div class="m-new">
+											<a href="news.html"><i class="am-icon-bell-o"></i>消息</a>
+										</div>
+										<div class="m-address">
+											<a href="address.html" class="i-trigger">我的收货地址</a>
+										</div>
+									</div>
+								</div>
+
+								<!--个人资产-->
+								<div class="m-userproperty">
+									<div class="s-bar">
+										<i class="s-icon"></i>个人资产
+									</div>
+									<p class="m-bonus">
+										<a href="bonus.html">
+											<i><img src="/yh/home/images/bonus.png"/></i>
+											<span class="m-title">红包</span>
+											<em class="m-num">2</em>
+										</a>
+									</p>
+									<p class="m-coupon">
+										<a href="coupon.html">
+											<i><img src="/yh/home/images/coupon.png"/></i>
+											<span class="m-title">优惠券</span>
+											<em class="m-num">2</em>
+										</a>
+									</p>
+									<p class="m-bill">
+										<a href="bill.html">
+											<i><img src="/yh/home/images/wallet.png"/></i>
+											<span class="m-title">钱包</span>
+											<em class="m-num">2</em>
+										</a>
+									</p>
+									<p class="m-big">
+										<a href="#">
+											<i><img src="/yh/home/images/day-to.png"/></i>
+											<span class="m-title">签到有礼</span>
+										</a>
+									</p>
+									<p class="m-big">
+										<a href="#">
+											<i><img src="/yh/home/images/72h.png"/></i>
+											<span class="m-title">72小时发货</span>
+										</a>
+									</p>
 								</div>
 
 							</div>
@@ -104,22 +155,23 @@
 
 							</div>
 
-						</div>
 
-						<!--收藏夹 -->
-						<div class="you-like">
-							<div class="s-bar">我的收藏
-								<a class="am-badge am-badge-danger am-round">降价</a>
-								<a class="am-badge am-badge-danger am-round">下架</a>
-								<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
-							</div>
-							<div class="s-content">
-								@foreach ($data as $v)
+							<!--收藏夹 -->
+							<div class="you-like">
+								<div class="s-bar">我的收藏
+									<a class="am-badge am-badge-danger am-round">降价</a>
+									<a class="am-badge am-badge-danger am-round">下架</a>
+									<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
+								</div>
+								<div class="s-content">
+
+									@foreach ($data as $v)
 
 									<div class="s-item-wrap">
 										<div class="s-item">
 
 											<div class="s-pic">
+
 												<a href="{{url('/show')}}/{{$v->goods->id}}" class="s-pic-link">
 													<img src="/uploads/{{$v->goods->pic}}" alt="" title="" class="s-pic-img s-guess-item-img">
 												</a>
@@ -130,6 +182,7 @@
 
 											</div>
 											<div class="s-title"><a href="{{url('/show')}}/{{$v->goods->id}}" title="">{{$v->goods->name}}</a></div>
+
 											<div class="s-extra-box">
 												<span class="s-comment">好评: 98.03%</span>
 												<span class="s-sales">月销: 219</span>
@@ -137,7 +190,9 @@
 											</div>
 										</div>
 									</div>
+
 								@endforeach
+
 
 
 
@@ -158,6 +213,7 @@
 						<div class="s-bar">
 							<a class="i-history-trigger s-icon" href="#"></a>我的日历
 							<a class="i-setting-trigger s-icon" href="#"></a>
+
 						</div>
 						<div class="s-care s-care-noweather">
 							<div class="s-date">

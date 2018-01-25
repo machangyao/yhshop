@@ -43,6 +43,7 @@
 
 
 
+
                         <form role="form" action="{{ url('admin/slide') }}" method="post"  id="form_upload"  enctype="multipart/form-data">
 
                         {{ csrf_field() }}
@@ -61,6 +62,7 @@
                                 </div>
                             
                             <div class="box-body"> 
+
                                 <div class="form-group">
                                     <label for="exampleInputFile">轮播图图片</label>
 
@@ -78,7 +80,6 @@
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary">添加</button>
                             </div>
-
 
                     <script type="text/javascript">
                             $("#file_upload").change(function () {
@@ -128,8 +129,9 @@
                         
                  
 
-                </form>
-        </div>
+
+                        </form>
+                    </div>
 
 </div>
 

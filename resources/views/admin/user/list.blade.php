@@ -27,7 +27,9 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <table id="example2" class="table table-bordered table-hover">
+
                             <form action="{{ url('/admin/user') }}" method="get" >
+
                             	<div class="row">
                             		<div class="col-md-2">
                             		      
@@ -63,10 +65,12 @@
                                         <td>{{ $v->id }}</td>
                                         <td>{{ $v->nickname }}</td>
                                         <td>{{ $v->email }}</td>
+
                                         <td><img width="60" src="/uploads/{{ $v->avatar }}"></td>
                                         <td>{{ $v->tel }}</td>
                                         <td><a href="{{ url('admin/user/' .$v->id.' /edit') }}">编辑 </a>
                                                 <a href="javascript:;" onclick="delUser({{ $v->id }})"> 删除</a> 
+
                                         </td>
                                     </tr>
                                  @endforeach
@@ -82,8 +86,6 @@
 
 
 
-    </script>
-                    
                 </div>
                 <!-- /.col -->
             </div>
@@ -92,6 +94,7 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
     <script>
     function delUser(id){
         layer.confirm('您确定要删除吗？',{
@@ -121,4 +124,5 @@
 
 
 	
+
 

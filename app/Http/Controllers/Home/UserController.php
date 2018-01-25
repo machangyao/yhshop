@@ -57,10 +57,11 @@ class UserController extends Controller
      * @param 用户注册信息
      * @return 返回一个前台的提交注册
      */
+
         if(strlen($request->input('user_tel')) != 11){
             return back()->with('size','手机号必须11位');
         }
-        
+
         $this->validate($request, [
             'user_password' => 'required|',
             'user_email' => 'required|email',
@@ -183,6 +184,7 @@ class UserController extends Controller
          * @param 用户登陆
          * @return 返回一个前台的提交登陆
          */
+
         $data = $request->except('_token','captcha');
         $this->validate($request, [
                 'user_name' => 'required|',

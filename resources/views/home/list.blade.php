@@ -6,7 +6,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<title>商品列表页</title>
+
 		<link rel="stylesheet" href="{{asset('css/app.css')}}">
+
 		<link href="{{ asset('/yh/home/AmazeUI-2.4.2/assets/css/amazeui.css') }}" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('/yh/home/AmazeUI-2.4.2/assets/css/admin.css') }}" rel="stylesheet" type="text/css" />
 
@@ -56,8 +58,10 @@
 
 					<div class="search-bar pr">
 						<a name="index_none_header_sysc" href="#"></a>
+
 						<form action="{{ url('/list') }}" method="get">
 							<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" value="{{ $where['keyword'] }}">
+
 							<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 						</form>
 					</div>
@@ -73,7 +77,9 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
+
 								<li class="index"><a href="{{ url('/') }}">首页</a></li>
+
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -91,7 +97,7 @@
 						<div class="am-u-sm-12 am-u-md-12">
 	                  	<div class="theme-popover">														
 							<div class="searchAbout">
-								
+
 
 							</div>
 							<ul class="select">
@@ -114,9 +120,11 @@
 									
 										 <div class="dd-conent">										
 											<dd class="select-all selected"><a href="#">全部</a></dd>
+
 											@foreach($brands as $v)
 												<dd><a href="#">{{ $v->name }}</a></dd>
 											@endforeach
+
 										 </div>
 						
 									</dl>
@@ -126,9 +134,11 @@
 										<dt class="am-badge am-round">种类</dt>
 										<div class="dd-conent">
 											<dd class="select-all selected"><a href="#">全部</a></dd>
+
 											@foreach($cates as $v)
 											<dd><a href="#">{{ $v->name }}</a></dd>
 											@endforeach
+
 										</div>
 									</dl>
 								</li>
@@ -146,6 +156,7 @@
 								<div class="clear"></div>
 
 								<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+
 									@if(count($data))
 										@foreach($data as $v)
 										<li>
@@ -169,6 +180,7 @@
 											</div>
 										</li>
 									@endif
+
 								</ul>
 							</div>
 							<div class="search-side">
@@ -186,7 +198,9 @@
 											<strong>29.90</strong>
 										</p>
 										<p class="number fl">
+
 											销量<span>0</span>
+
 										</p>
 									</div>
 								</li>
@@ -194,7 +208,9 @@
 							</div>
 							<div class="clear"></div>
 							<!--分页 -->
+
 							<!-- <ul class="am-pagination am-pagination-right">
+
 								<li class="am-disabled"><a href="#">&laquo;</a></li>
 								<li class="am-active"><a href="#">1</a></li>
 								<li><a href="#">2</a></li>
@@ -202,8 +218,9 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
 								<li><a href="#">&raquo;</a></li>
-							</ul> -->
+					</ul> -->
 							<div class="pagination">{!! $data->appends($where)->render() !!}</div>
+
 						</div>
 					</div>
 
@@ -406,5 +423,7 @@
 		<script type="text/javascript " src="{{ asset('/yh/home/basic/js/quick_links.js') }}"></script>
 	</body>
 
+
 </html>
+
 

@@ -21,7 +21,9 @@
 					   <div class="long-title"><span class="all-goods">全部分类</span></div>
 					   <div class="nav-cont">
 							<ul>
+
 								<li class="index"><a href="{{ url('/') }}">首页</a></li>
+
                                 <li class="qc"><a href="#">闪购</a></li>
                                 <li class="qc"><a href="#">限时抢</a></li>
                                 <li class="qc"><a href="#">团购</a></li>
@@ -36,6 +38,7 @@
 						<div id="nav" class="navfull">
 							<div class="area clearfix">
 								<div class="category-content" id="guide_2">
+
 									<div class="category">
 										<ul class="category-list" id="js_climit_li">
 											@foreach($cates as $v)
@@ -43,12 +46,14 @@
 											<li class="appliance js_toggle relative first">
 												<div class="category-info">
 													<h3 class="category-name b-category-name"><i><img src="/yh/home/images/cake.png"></i><a class="ml-22" title="点心">{{ $v->name }}</a></h3>
+
 													<em>&gt;</em></div>
 												<div class="menu-item menu-in top">
 													<div class="area-in">
 														<div class="area-bg">
 															<div class="menu-srot">
 																<div class="sort-side">
+
 																	@foreach($cates as $vv)
 																	@if($v->id == $vv->pid)
 																	<dl class="dl-sort">
@@ -61,6 +66,7 @@
 																	</dl>
 																	@endif
 																	@endforeach
+
 																</div>
 															</div>
 														</div>
@@ -68,8 +74,10 @@
 												</div>
 											<b class="arrow"></b>	
 											</li>
+
 											@endif
 											@endforeach
+
 										</ul>
 									</div>
 								</div>

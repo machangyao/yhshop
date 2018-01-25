@@ -22,11 +22,13 @@ class UserController extends Controller
 
         //2.获取分页数据
 
+
         $data = User::orderBy('id','asc') -> paginate(6);
         // return view('admin.user.list',compact('data'));
         //3.单条件搜索
         $input = $request -> input('keywords');
         $data = User::where('nickname' , 'like' , '%' .$input. '%') -> paginate(6);
+
         return view('admin.user.list',compact('data','input'));
     }
 
@@ -50,9 +52,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //1.接收表单提交过来的参数
+
        //  $input = $request ->all();
        // dd($input);
         $input = $request->except('_token','re-password');
+
         //2.检测表单验证规则
 
            $this->validate($request, [
@@ -77,8 +81,7 @@ class UserController extends Controller
                   'email.required' =>' 邮箱不能为空',
                   'avatar.image' =>'请上传一张正确的图片'
              ]);
-
-           //处理上传
+     //处理上传
     if($request->hasFile('avatar'))
     {
         $file = $request->file('avatar');
@@ -104,8 +107,7 @@ class UserController extends Controller
     {
         $input['avatar'] = 'default.jpg';
     }
-       
-    
+
         //3.将提交的数据添加到user表中
         //向数据表中添加数据
         $input['password'] = Crypt::encrypt($input['password']);
@@ -139,9 +141,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         //通过传过来的id获取到要修改的用户
         $user = User::find($id);
         return view('admin.user.edit',compact('user'));
+
     }
 
     /**
@@ -153,6 +157,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $input = $request -> except('_token','_method','updated_at');
          //处理上传
     if($request->hasFile('avatar'))
@@ -185,6 +190,7 @@ class UserController extends Controller
         }else{
             return back() -> with('msg', '修改失败');
         }
+
     }
 
     /**
@@ -195,6 +201,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+
         $res = User::find($id) -> delete();
         if($res){
             $data = [
@@ -209,5 +216,6 @@ class UserController extends Controller
             ];
         }
             return $data;
+
     }
 }

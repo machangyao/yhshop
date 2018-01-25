@@ -45,12 +45,15 @@
                             {{ csrf_field() }}
                                 
                             
+
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">广告链接</label>
 
                                     <div class="col-sm-4">
+
                                         <input type="text" name="ads_url" class="form-control" id="inputEmail3" placeholder="请输入链接">
+
                                     </div>
                                 </div>
                             </div>
@@ -63,6 +66,7 @@
                                         <input id="file_upload" name="ads_img" type="file" multiple="true">
                                         <br>
                                         <img src="" alt="" id="file_upload_img" style="max-width: 350px; max-height:100px;">
+
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +130,6 @@
                             </div>
 
 
-                               
 
                             <!-- /.box-body -->
                             <div class="row">
@@ -139,16 +142,13 @@
                                 <div class="col-sm-4"></div>
                             </div>
                             <!-- /.box-footer -->
-
-
-
-
-                        </form>
+                             </form>
                     </div>
                         <!-- /.box-header -->
                         <!-- form start -->
                         
                     </div>
+
                     <!-- /.box -->
                 </div>
                 <!--/.col (right) -->

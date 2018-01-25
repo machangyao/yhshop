@@ -10,12 +10,14 @@ use App\Http\Models\Admin\Goods;
 use App\Http\Models\Home\Brands;
 use App\Http\Models\Home\Categorys;
 
+
 class ListController extends Controller
 {
     /*
 	* 列表页
 	* list
     */
+
     public function index(Request $request,$id)
     {
     	//获取搜索条件,只显示状态为1上架的商品
@@ -35,6 +37,7 @@ class ListController extends Controller
     	// return view('home.list',compact('data'));
     	return view('home.list',['data'=>$data,'where'=>['keyword'=>$keyword],'brands'=>$brands,'cates'=>$cates]);
     }
+
 
 
 }
