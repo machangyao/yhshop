@@ -164,14 +164,31 @@
 							<div class="move-right">
 								<li class="td td-status">
 									<div class="item-status">
-										<p class="Mystatus">卖家已发货</p>
+										@if ($order->order_status == 1)
+											<p class="Mystatus">
+												买家已付款</p>
+										@elseif ($order->order_status == 2)
+											<p class="Mystatus">
+												卖家已发货</p>
+										@elseif ($order->order_status == 3)
+											<p class="Mystatus">
+												交易成功</p>
+										@endif
 										<p class="order-info"><a href="logistics.html">查看物流</a></p>
 										<p class="order-info"><a href="#">延长收货</a></p>
 									</div>
 								</li>
 								<li class="td td-change">
-									<div class="am-btn am-btn-danger anniu">
-										确认收货</div>
+									@if ($order->order_status == 1)
+										<div class="am-btn am-btn-danger anniu" disabled="true">
+											等待发货</div>
+									@elseif ($order->order_status ==2)
+										<a href="{{url('/order/status')}}?id={{$v->id}}"><div class="am-btn am-btn-danger anniu" id="fahuo">
+												确认收货</div></a>
+									@elseif ($order->order_status == 3)
+										<div class="am-btn am-btn-danger anniu">
+											交易成功</div>
+									@endif
 								</li>
 							</div>
 						</div>

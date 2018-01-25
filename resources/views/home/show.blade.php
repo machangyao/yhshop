@@ -310,8 +310,12 @@
 						<div class="pay">
 							<div class="pay-opt">
 							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
+<<<<<<< HEAD
 							<a><span class="am-icon-heart am-icon-fw">收藏</span></a>
 							
+=======
+
+>>>>>>> origin/mcy
 							</div>
 							<li>
 								<div class="clearfix tb-btn tb-btn-buy theme-login">
@@ -323,6 +327,12 @@
 									<a id="LikBasket" title="加入购物车" href="{{ url('cart') }}"><i></i>加入购物车</a>
 								</div>
 							</li>
+<<<<<<< HEAD
+=======
+							<li>
+								<div class="clearfix tb-btn tb-btn-basket theme-login" style="padding-left: 10px;"><a href="{{url('/user/collect/create')}}?gid={{$data->id}}&url={{\Illuminate\Support\Facades\Input::url()}}"> 收藏</a></div>
+							</li>
+>>>>>>> origin/mcy
 						</div>
 
 					</div>
@@ -931,6 +941,7 @@
 													</p>
 												</div>
 											</li>
+<<<<<<< HEAD
 											<li>
 												<div class="i-pic limit">
 													<img src="/yh/home/images/imgsearch1.jpg" />
@@ -1041,6 +1052,9 @@
 													</p>
 												</div>
 											</li>
+=======
+
+>>>>>>> origin/mcy
 										</ul>
 									</div>
 									<div class="clear"></div>

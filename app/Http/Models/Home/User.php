@@ -17,4 +17,9 @@ class User extends Model
 
         return $this->hasMany('App\Http\Models\Home\orders', 'user_id', 'id');
     }
+
+    public function collects(){
+        return $this->hasMany('App\Http\Models\Home\collects', 'user_id', 'id');
+
+    }
 }

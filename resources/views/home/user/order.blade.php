@@ -15,11 +15,6 @@
 
 		<div class="am-tabs am-tabs-d2 am-margin" data-am-tabs>
 
-			<ul class="am-avg-sm-5 am-tabs-nav am-nav am-nav-tabs">
-				<li class="am-active"><a href="#tab1">所有订单</a></li>
-
-			</ul>
-
 			<div class="am-tabs-bd">
 				<div class="am-tab-panel am-fade am-in am-active" id="tab1">
 					<div class="order-top">
@@ -50,52 +45,51 @@
 						<div class="order-list">
 
 							<!--不同状态订单-->
-							
+
 							<div class="order-status3">
-							@foreach ($orders as $v)
+								@foreach ($orders as $v)
+
 								@if (empty($v))
 									break
 								@endif
-							
+
 								<div class="order-content">
 
 									<div class="order-left">
 										@foreach ($v->Goods as $n)
-										<ul class="item-list">
-											<li class="td td-item">
-												<div class="item-pic">
-													<a href="#" class="J_MakePoint">
-														<img src="{{$n->pic}}" class="itempic J_ItemImg">
-													</a>
-												</div>
-												<div class="item-info" style='float:none;'>
-													<div class="item-basic-info">
-														<a href="#">
-															<p>{{$n->name}}</p>
-															<p class="info-little">颜色：12#川南玛瑙
-																<br/>包装：裸装 </p>
+											<ul class="item-list">
+												<li class="td td-item">
+													<div class="item-pic">
+														<a href="#" class="J_MakePoint">
+															<img src="/uploads/{{$n->pic}}" class="itempic J_ItemImg">
 														</a>
 													</div>
-												</div>
-											</li>
-											<li class="td td-price">
-												<div class="item-price">
-													{{$n->market_price}}
-												</div>
-											</li>
-											<li class="td td-number">
-												<div class="item-number">
-													<span>×</span>{{$n->count}}
-												</div>
-											</li>
-											<li class="td td-operation">
-												<div class="item-operation">
-													<a href="refund.html">退款/退货</a>
-												</div>
-											</li>
-										</ul>
+													<div class="item-info" style='float:none;'>
+														<div class="item-basic-info">
+															<a href="{{url('/show').'/'.$n->id}}">
+																<p>{{$n->name}}</p>
+																<p class="info-little">颜色：12#川南玛瑙
+																	<br/>包装：裸装 </p>
+															</a>
+														</div>
+													</div>
+												</li>
+												<li class="td td-price">
+													<div class="item-price">
+														{{$n->market_price}}
+													</div>
+												</li>
+												<li class="td td-number">
+													<div class="item-number">
+														<span>×</span>{{$n->gct->gcount}}
+													</div>
+												</li>
+
+											</ul>
 										@endforeach
+
 									</div>
+
 									<div class="order-right">
 										<li class="td td-amount">
 											<div class="item-amount">
@@ -106,25 +100,44 @@
 										<div class="move-right">
 											<li class="td td-status">
 												<div class="item-status">
-													<p class="Mystatus">卖家已发货</p>
+														@if ($v->order_status == 1)
+														<p class="Mystatus">
+															买家已付款</p>
+														@elseif ($v->order_status == 2)
+														<p class="Mystatus">
+															卖家已发货</p>
+														@elseif ($v->order_status == 3)
+														<p class="Mystatus">
+															交易成功</p>
+														@endif
+
 													<p class="ordeFr-info"><a href="{{url('/user/order')}}/{{$v->id}}">订单详情</a></p>
 													<p class="order-info"><a href="logistics.html">查看物流</a></p>
 													<p class="order-info"><a href="#">延长收货</a></p>
 												</div>
 											</li>
 											<li class="td td-change">
-												<div class="am-btn am-btn-danger anniu">
-													确认收货</div>
+												@if ($v->order_status == 1)
+												<div class="am-btn am-btn-danger anniu" disabled="true">
+													等待发货</div>
+												@elseif ($v->order_status ==2)
+													<a href="{{url('/order/status')}}?id={{$v->id}}"><div class="am-btn am-btn-danger anniu" id="fahuo">
+														确认收货</div></a>
+												@elseif ($v->order_status == 3)
+													<div class="am-btn am-btn-danger anniu">
+														交易成功</div>
+													@endif
+
 											</li>
 										</div>
 									</div>
 
 								</div>
-							@endforeach
+								@endforeach
 
 								</div>
-							
-							
+
+
 
 						</div>
 
