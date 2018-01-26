@@ -132,10 +132,10 @@
 
 		<!--走马灯 -->
 
-
 		<div class="marqueen">
 			<span class="marqueen-title">商城头条</span>
 			<div class="demo">
+
 
 				<ul>
 					<li class="title-first"><a target="_blank" href="#">
@@ -207,7 +207,6 @@
 	<div class="shopMain" id="shopmain">
 
 		<!--今日推荐 -->
-
 
 		<div class="am-g am-g-fixed recommendation">
 			<div class="clock am-u-sm-3" ">

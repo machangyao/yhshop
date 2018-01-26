@@ -43,7 +43,6 @@
 									{{ csrf_field() }}
 							   <div class="user-name">
 								    <label for="user"><i class="am-icon-user"></i></label>
-
 								    <input type="text" name="user_name" id="user" placeholder="邮箱/手机/用户名" value="{{session('user_name')}}">
 
                  </div>

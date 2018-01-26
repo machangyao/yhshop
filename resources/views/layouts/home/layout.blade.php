@@ -15,7 +15,6 @@
 	</head>
 
 	<body>
-
 	{{--header头开始--}}
 	@include('layouts.home.header')
 	{{--header尾结束--}}

@@ -19,7 +19,6 @@
 										<div class="s-prestige am-btn am-round">
 											</span>会员福利</div>
 									</div>
-
 									<div class="m-right">
 										<div class="m-new">
 											<a href="news.html"><i class="am-icon-bell-o"></i>消息</a>
@@ -69,7 +68,6 @@
 										</a>
 									</p>
 								</div>
-
 							</div>
 
 							<!--个人资产-->
@@ -164,14 +162,12 @@
 									<a class="i-load-more-item-shadow" href="#"><i class="am-icon-refresh am-icon-fw"></i>换一组</a>
 								</div>
 								<div class="s-content">
-
 									@foreach ($data as $v)
 
 									<div class="s-item-wrap">
 										<div class="s-item">
 
 											<div class="s-pic">
-
 												<a href="{{url('/show')}}/{{$v->goods->id}}" class="s-pic-link">
 													<img src="/uploads/{{$v->goods->pic}}" alt="" title="" class="s-pic-img s-guess-item-img">
 												</a>
@@ -182,7 +178,6 @@
 
 											</div>
 											<div class="s-title"><a href="{{url('/show')}}/{{$v->goods->id}}" title="">{{$v->goods->name}}</a></div>
-
 											<div class="s-extra-box">
 												<span class="s-comment">好评: 98.03%</span>
 												<span class="s-sales">月销: 219</span>
@@ -190,7 +185,6 @@
 											</div>
 										</div>
 									</div>
-
 								@endforeach
 
 

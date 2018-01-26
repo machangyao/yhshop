@@ -72,7 +72,6 @@
 					<li class="person">
 
 						<a href="javascript:;">个人资料</a>
-
 						<ul>
 							<li> <a href="{{url('/userdetail')}}">个人信息</a></li>
 							<li> <a href="{{url('/user/safety')}}">安全设置</a></li>
@@ -91,7 +90,6 @@
 						<ul>
 							<li> <a href="{{url('/user/collect')}}">收藏</a></li>
 							<li> <a href="comment.html">评价</a></li>
-
 						</ul>
 					</li>
 

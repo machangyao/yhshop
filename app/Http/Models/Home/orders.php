@@ -10,6 +10,7 @@ class orders extends Model
     public $table = 'orders';
     public $primaryKey = 'id';
     public $guarded = [];
+
     public $timestamps = false;
 
     // public function User(){
@@ -17,7 +18,6 @@ class orders extends Model
     // }
 
     public function Goods(){
-
     	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','order_sn','gid');
 
     }

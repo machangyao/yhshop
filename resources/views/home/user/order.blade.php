@@ -45,8 +45,6 @@
 						<div class="order-list">
 
 							<!--不同状态订单-->
-
-
 							<div class="order-status3">
 								@foreach ($orders as $v)
 
@@ -58,7 +56,6 @@
 
 									<div class="order-left">
 										@foreach ($v->Goods as $n)
-
 											<ul class="item-list">
 												<li class="td td-item">
 													<div class="item-pic">
@@ -102,7 +99,6 @@
 										<div class="move-right">
 											<li class="td td-status">
 												<div class="item-status">
-
 														@if ($v->order_status == 1)
 														<p class="Mystatus">
 															买家已付款</p>
@@ -120,7 +116,6 @@
 												</div>
 											</li>
 											<li class="td td-change">
-
 												@if ($v->order_status == 1)
 												<div class="am-btn am-btn-danger anniu" disabled="true">
 													等待发货</div>
@@ -137,7 +132,6 @@
 									</div>
 
 								</div>
-
 								@endforeach
 
 								</div>

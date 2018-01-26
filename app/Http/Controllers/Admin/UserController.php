@@ -5,10 +5,58 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\User;
+use App\Http\Models\Admin\Role;
 use Illuminate\Support\Facades\Crypt;
+use DB;
 
 class UserController extends Controller
 {
+    //返回用户授权页面
+    public function auth($id)
+    {
+        //根据id找到相关的用户
+        $user = User::find($id);
+        //获取角色列表
+        $roles = Role::get();
+        //获取当前用户已经拥有的角色列表
+        $own_roles = $user ->roles;
+        //存放当前用户拥有的角色ID
+        $own = [];
+        foreach($own_roles as $v)
+        {
+            $own[] = $v -> id;
+        }
+        return view('admin.user.auth',compact('user','roles','own'));
+    }
+    //处理用户授权操作
+    public function doAuth(Request $request)
+    {
+        //1.获取传过来的参数(要授权的用户的ID,要授予的角色的ID)
+        $input = $request -> except('_token');
+      
+        //2.提交到user_roles这个表中
+        DB::beginTransaction();
+        try{
+            //删除当前用户的所有权限
+            DB::table('user_roles') -> where('user_id', $input['id']) -> delete();
+
+            if(!empty($input['id']['\'role\''])){
+                //关联表中记录（给用户授权）前，应该检查一下，当前用户是否已经拥有了此角色，如果没有再添加
+                foreach($input['id']['\'role\''] as $v){
+                    // dd($v);
+                    DB::table('user_roles') -> insert([
+                        'user_id' => $input['id']['\'id\''],
+                        'role_id' => $v,
+                     ]);
+                }
+            }
+            DB::commit();
+            return redirect('admin/user');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect() -> back() -> withErrors(['error' => $e->getMessage()]);
+        }
+    }
     /**
      * Display a listing of the resource.
      *

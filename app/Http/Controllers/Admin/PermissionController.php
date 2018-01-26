@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\home;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Models\Home\orders;
-use App\Http\Models\Home\User;
-use Illuminate\Support\Facades\Input;
+use App\Http\Models\Admin\Permission;
 
-class UserOrderController extends Controller
+class PermissionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,17 +15,8 @@ class UserOrderController extends Controller
      */
     public function index()
     {
-        //马长遥 返回订单页面
-
-
-        $user = User::find(session('user_info')['id']);
-        $orders = $user->orders;
-
-        // $goods = [];
-        // foreach($orders as $v){
-        //     $goods = $v->Goods;
-        // }
-        return view('home.user.order',compact('orders'));
+        $per = Permission::get();
+        return view('admin.permission.list',compact('per'));
     }
 
     /**
@@ -37,7 +26,7 @@ class UserOrderController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.permission.add');
     }
 
     /**
@@ -48,7 +37,15 @@ class UserOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request -> except('_token');
+        $res = Permission::create($input);
+
+        // dd($res); 
+        if($res){
+            return redirect('admin/permission')->with('msg','添加成功');
+        }else{
+            return back()->with('msg','添加失败');
+        }
     }
 
     /**
@@ -59,10 +56,7 @@ class UserOrderController extends Controller
      */
     public function show($id)
     {
-        //订单详情 马长遥
-        $order = orders::find($id);
-        $addr = $order->addr;
-        return view('home.user.orderdetail',compact('addr','order'));
+        //
     }
 
     /**
@@ -73,7 +67,8 @@ class UserOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $per = Permission::find($id);
+        return view('admin.permission.edit',compact('per'));
     }
 
     /**
@@ -85,7 +80,15 @@ class UserOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request -> except('_token','_method');
+        // dd($input);
+        $res = Permission:: where('id',$id) -> update($input);
+
+        if($res){
+            return redirect('admin/permission');
+        }else{
+            return back()->with('msg','修改失败');
+        }
     }
 
     /**
@@ -96,19 +99,19 @@ class UserOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
-
-
-    public function status(){
-        //执行确认收货 马长遥
-        $id = Input::get('id');
-        $data = ['order_status'=>3];
-        $res = orders::where('id',$id)->update($data);
+        $res = Permission::find($id) -> delete();
         if($res){
-            return back();
+            $data = [
+                'status' => 0,
+                'message' => '删除成功'
+            ];
         }else{
-            return back();
+
+            $data = [
+                'status' => 1,
+                'message' => '删除失败'
+            ];
         }
+            return $data;
     }
 }

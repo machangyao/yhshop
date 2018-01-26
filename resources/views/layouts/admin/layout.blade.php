@@ -355,6 +355,30 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>角色管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/role/create') }}"><i class="fa fa-circle-o"></i>添加角色</a></li>
+                        <li><a href="{{ url('/admin/role') }}"><i class="fa fa-circle-o"></i>角色列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>权限管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/permission/create') }}"><i class="fa fa-circle-o"></i>添加权限</a></li>
+                        <li><a href="{{ url('/admin/permission') }}"><i class="fa fa-circle-o"></i>权限列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-dashboard"></i> <span>分类管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -389,8 +413,6 @@
                         <li><a href="{{ url('/brand') }}"><i class="fa fa-circle-o"></i>浏览品牌</a></li>
                     </ul>
                 </li>
-
-
                 <li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>订单管理</span>
@@ -402,9 +424,6 @@
                             <li><a href="{{url('/admin/order')}}"><i class="fa fa-circle-o"></i>浏览订单</a></li>
                         </ul>
                 </li>
-
-
-
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>轮播图管理</span>

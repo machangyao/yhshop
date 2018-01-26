@@ -235,6 +235,27 @@
 
 							</div>
 
+
+						<div class="pay">
+							<div class="pay-opt">
+							<a href="home.html"><span class="am-icon-home am-icon-fw">首页</span></a>
+
+							</div>
+							<li>
+								<div class="clearfix tb-btn tb-btn-buy theme-login">
+									<a id="LikBuy" title="点此按钮到下一步确认购买信息" href="#">立即购买</a>
+								</div>
+							</li>
+							<li>
+								<div class="clearfix tb-btn tb-btn-basket theme-login">
+									<a id="LikBasket" title="加入购物车" href="{{ url('cart') }}"><i></i>加入购物车</a>
+								</div>
+							</li>
+
+							<li>
+								<div class="clearfix tb-btn tb-btn-basket theme-login" style="padding-left: 10px;"><a href="{{url('/user/collect/create')}}?gid={{$data->id}}&url={{\Illuminate\Support\Facades\Input::url()}}"> 收藏</a></div>
+							</li>
+
 						</div>
 
 
@@ -444,6 +465,23 @@
 												颜色分类：柠檬黄&nbsp;&nbsp;尺码：S
 											</div>
 										</div>
+
+								<div class="am-tab-panel am-fade">
+									<div class="like">
+										<ul class="am-avg-sm-2 am-avg-md-3 am-avg-lg-4 boxes">
+											<li>
+												<div class="i-pic limit">
+													<img src="/yh/home/images/imgsearch1.jpg" />
+													<p>【良品铺子_开口松子】零食坚果特产炒货
+														<span>东北红松子奶油味</span></p>
+													<p class="price fl">
+														<b>¥</b>
+														<strong>298.00</strong>
+													</p>
+												</div>
+											</li>
+
+										</ul>
 
 									</div>
 									<!-- 评论内容 -->
