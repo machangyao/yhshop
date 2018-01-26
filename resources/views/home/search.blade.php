@@ -1,5 +1,5 @@
 @extends('layouts.home.layout')
-@section('title','列表页')
+@section('title','搜索页')
 @section('style')
 <link rel="stylesheet" href="{{asset('css/app.css')}}">
 <link href="{{ asset('/yh/home/AmazeUI-2.4.2/assets/css/amazeui.css') }}" rel="stylesheet" type="text/css" />
@@ -111,7 +111,7 @@
 						@else
 							<li style="width:100%; height: 100px; line-height: 100px;">
 								<div style="text-align:center;">
-									该分类下暂无商品
+									没有搜索到你想要的商品
 								</div>
 							</li>
 						@endif
@@ -140,16 +140,7 @@
 				</div>
 				<div class="clear"></div>
 				<!--分页 -->
-				<!-- <ul class="am-pagination am-pagination-right">
-					<li class="am-disabled"><a href="#">&laquo;</a></li>
-					<li class="am-active"><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">&raquo;</a></li>
-				</ul> -->
-				<div class="pagination">{!! $data->render() !!}</div>
+				<div class="pagination">{!! $data->appends($where)->render() !!}</div>
 			</div>
 		</div>
 @stop

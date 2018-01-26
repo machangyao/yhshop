@@ -42,11 +42,10 @@
 			<div class="logoBig">
 				<li><img src="/yh/home/images/logobig.png" /></li>
 			</div>
-
 			<div class="search-bar pr">
 				<a name="index_none_header_sysc" href="#"></a>
-				<form action="{{ url('/list') }}" method="get">
-					<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off">
+				<form action="{{ url('/search') }}" method="get">
+					<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" @if(!empty($where['keyword'])) value="{{ $where['keyword'] }}" @else value="" @endif>
 					<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
 				</form>
 			</div>
