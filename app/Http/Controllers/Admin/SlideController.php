@@ -76,6 +76,7 @@ class SlideController extends Controller
             'slide_url'=>'required',
             'slide_text'=>'required',
             'slide_mig'=>'required',
+            'slide_mig'=>'image',
         ];
 
         //提示信息
@@ -83,6 +84,7 @@ class SlideController extends Controller
             'slide_url.required'=>'连接不能为空',
             'slide_text.required'=>'文字描述不能为空',
             'slide_mig.required'=>'图片不能为空',
+            'slide_mig.image'=>'上传文件必须是图片'
         ];
 
         $Validator = Validator::make($input, $rule, $mess);

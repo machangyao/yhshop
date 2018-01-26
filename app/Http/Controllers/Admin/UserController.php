@@ -54,7 +54,7 @@ class UserController extends Controller
        // dd($input);
         $input = $request->except('_token','re-password');
         //2.检测表单验证规则
-
+        dd
            $this->validate($request, [
                 'nickname' =>'required|min:6|max:18',
                 'password' => 'required|min:6|max:18',
