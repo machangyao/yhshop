@@ -68,7 +68,9 @@
                                     </td>
                                     <td>{{ $v->pid }}</td>
                                     <!-- <td>{{ $v->path }}</td> -->
-                                    <td><a class="del-link" href="javascript:;">添加子分类</a> <a href="{{ url('/category/') }}/{{ $v->id }}/edit">修改</a> <a href="javascript:;" onclick="del({{ $v->id }})">删除</a></td>
+                                    <td style="width:30%"><a class="del-link" href="javascript:;">添加子分类</a> <a href="{{ url('/category/') }}/{{ $v->id }}/edit">修改</a> 
+                                    <a href="javascript:;" onclick="del({{ $v->id }})">删除</a>
+                                </td>
                                 </tr>
 
                                 @endforeach
@@ -102,7 +104,7 @@
             }, function(){
                 //ajax
                 $.ajax({
-                    url:'{{ url('/category/') }}/'+id,
+                    url:"{{ url('/category/') }}/"+id,
                     data:{'_method':'delete','_token':'{{ csrf_token() }}'},
                     type:'post',
                     success:function(data){
@@ -110,6 +112,10 @@
                         {
                             layer.msg(data.message, {icon: 6});
                             window.location.href = location.href;
+                        }else if(data.status == 2){
+                            layer.msg(data.message, {icon: 5});
+                        }else if(data.status == 3){
+                            layer.msg(data.message, {icon: 5});
                         }else{
                             layer.msg(data.message, {icon: 5});
                             window.location.href = location.href;  

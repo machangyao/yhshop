@@ -161,6 +161,8 @@ Route::post('/userdetail/upload','home\UserDetailController@upload');
 // 前台
 // 首页路由
 Route::get('/','Home\IndexController@index');
+//商品搜索
+Route::get('/search','Home\ListController@search');
 // 商品列表页路由
 Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
@@ -194,6 +196,5 @@ Route::resource('/category','Admin\CategoryController');
 Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
-
-// 品牌路由route
+// 品牌路由
 Route::resource('/brand','Admin\BrandController');

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Http\Models\Admin\Categorys;
+use App\Http\Models\Admin\Goods;
 
 class CategoryController extends Controller
 {
@@ -133,22 +134,51 @@ class CategoryController extends Controller
     */
     public function destroy($id)
     {
-        $res = Categorys::find($id)->delete();
-        if($res)
+        $cate = Categorys::find($id);
+
+        //判断,如果父类底下有子类,则父类不允许删除
+        $count = Categorys::where('pid',$id)->count();
+
+        //判断分类下面是否有商品,如果有商品也不能删除
+        $gcount = Goods::where('cid',$id)->count();
+
+        // return $count;
+        // if($data->pid == 0 && $count)
+        if($cate->pid == 0 || $count)
         {
-            // return response()->json(['status'=>1]);
             $data = [
-                'status' => 1,
-                'message' => '删除成功'
+                'status' => 2,
+                'message' => '分类下有子类,不能删除'
             ];
+
+            return $data;
+        }elseif($gcount){
+            $data = [
+                'status' => 3,
+                'message' => '分类下有商品,不能删除'
+            ];
+
+            return $data;
         }else{
-            // return response()->json(['stauts'=>0]);
-            $data = [
-                'status' => 0,
-                'message' => '删除失败'
-            ];
+            $res = $cate->delete();
+            if($res)
+            {
+                // return response()->json(['status'=>1]);
+                $data = [
+                    'status' => 1,
+                    'message' => '删除成功'
+                ];
+            }else{
+                // return response()->json(['stauts'=>0]);
+                $data = [
+                    'status' => 0,
+                    'message' => '删除失败'
+                ];
+            }
+
+            return $data;
         }
 
-        return $data;
+        
     }
 }
