@@ -45,7 +45,7 @@
 										</span>
 									</div>
 									@if($v->addr_status == 1)
-									<ins class="deftip">默认地址</ins>
+									<ins class="deftip" >默认地址</ins>
 									@endif
 								</div>
 								<div class="address-right">
@@ -56,12 +56,12 @@
 
 								<div class="new-addr-btn">
 									@if($v->addr_status == 0)
-									<a href="#">设为默认</a>
+									<a href="javascript:;"  onclick="daddr({{$v->id}})" >设为默认</a>
 									@endif
 									<span class="new-addr-bar hidden">|</span>
 									<a href="#">编辑</a>
 									<span class="new-addr-bar">|</span>
-									<a href="javascript:void(0);" onclick="delClick(this);">删除</a>
+									<a href="javascript:void(0);"	 class='del' Common="{{$v->id}}" >删除</a>
 								</div>
 
 							</li>
@@ -329,36 +329,42 @@
 				<hr/>
 
 				<div class="am-u-md-12">
-					<form class="am-form am-form-horizontal">
-
+					{{--增加新地址 马长遥--}}
+					<form id='form' class="am-form am-form-horizontal" action="{{url('/user/addr/')}}" method='post'>
+						{{csrf_field()}}
 						<div class="am-form-group">
 							<label for="user-name" class="am-form-label">收货人</label>
 							<div class="am-form-content">
-								<input type="text" id="user-name" placeholder="收货人">
+								<input type="text" id="name" placeholder="收货人" name='addr_name'>
 							</div>
 						</div>
 
 						<div class="am-form-group">
 							<label for="user-phone" class="am-form-label">手机号码</label>
 							<div class="am-form-content">
-								<input id="user-phone" placeholder="手机号必填" type="email">
+								<input id="tel" placeholder="手机号必填" type="number" name='addr_tel'>
 							</div>
 						</div>
 
 						<div class="am-form-group">
-							<label for="user-phone" class="am-form-label">所在地</label>
+							<label for="user-address" class="am-form-label">所在地</label>
 							<div class="am-form-content address">
-								<select data-am-selected>
-									<option value="a">浙江省</option>
-									<option value="b">湖北省</option>
+
+								<select id='s' >
+
+									@foreach ($sheng as $v)
+										<option value="{{$v->id}}">{{$v->Name}}</option>
+									@endforeach
 								</select>
-								<select data-am-selected>
-									<option value="a">温州市</option>
-									<option value="b">武汉市</option>
+
+								<select id='shi' >
+									<option value="{{$shi['id']}}">{{$shi['Name']}}</option>
 								</select>
-								<select data-am-selected>
-									<option value="a">瑞安区</option>
-									<option value="b">洪山区</option>
+								<select id='qu' name='qu'>
+									@foreach ($qu as $v)
+										<option value="{{$v->id}}">{{$v->Name}}</option>
+									@endforeach
+
 								</select>
 							</div>
 						</div>
@@ -366,14 +372,14 @@
 						<div class="am-form-group">
 							<label for="user-intro" class="am-form-label">详细地址</label>
 							<div class="am-form-content">
-								<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址"></textarea>
+								<textarea class="" rows="3" name='addrdetail' id="user-intro" placeholder="输入详细地址"></textarea>
 								<small>100字以内写出你的详细地址...</small>
 							</div>
 						</div>
 
 						<div class="am-form-group theme-poptit">
 							<div class="am-u-sm-9 am-u-sm-push-3">
-								<div class="am-btn am-btn-danger">保存</div>
+								<div class="am-btn am-btn-danger" id='submit'>保存</div>
 								<div class="am-btn am-btn-danger close">取消</div>
 							</div>
 						</div>
@@ -468,6 +474,70 @@
 						}
 					});
 				});
+
+            $('#submit').on('click',function(){
+                $('#form').submit();
+            });
+
+            $('#s').on('change',function(){
+                var val = $(this).val();
+                $.ajax({
+                    url:"{{url('/city/ajax')}}",
+                    type:'post',
+                    data:{'val':val,'_token':'{{ csrf_token()}}'},
+                    success:function(data){
+                        $("#shi").empty();
+                        $("#qu").empty();
+                        $.each(data['shi'],function(k,v){
+                            var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+                            $("#shi").append(op);
+                        });
+                        $.each(data['qu'],function(k,v){
+                            var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+                            $("#qu").append(op);
+                        });
+                    }
+                });
+            });
+            $('#shi').on('change',function(){
+                var val = $(this).val();
+                $.ajax({
+                    url:"{{url('/city/ajax')}}",
+                    type:'post',
+                    data:{'val':val,'_token':'{{ csrf_token()}}'},
+                    success:function(data){
+                        $("#qu").empty();
+                        $.each(data['shi'],function(k,v){
+                            var op = $('<option value='+v.id+'>'+v.Name+'</option>');
+                            $("#qu").append(op);
+                        });
+                    }
+                });
+            });
+
+            function daddr(id) {
+                $.ajax({
+                    url:'{{url("/user/daddr")}}',
+                    type:'post',
+                    data:{'id':id,'_token':'{{csrf_token()}}'},
+                    success: function (data) {
+                        location.reload();
+                    }
+                });
+            }
+
+            $('.del').on('click',function(){
+                var id = $(this).attr('Common');
+                $.ajax({
+                    url:"{{url('/user/addr')}}/"+id,
+                    type:'post',
+                    data:{'_token':'{{csrf_token()}}','_method':'delete','id':id},
+                    success:function(){
+                        location.reload();
+                    }
+                });
+
+            });
 
 			</script>
 @stop

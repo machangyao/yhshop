@@ -142,6 +142,10 @@ class UserAddrController extends Controller
     {
 
         //删除地址 马长遥
+        $res = Addr::where('id',$id)->where('addr_status',1)->first();
+        if($res){
+            return back();
+        }
         $res = Addr::where('id',$id)->delete();
         if($res){
             return back();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Models\Home\citys;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\Addr;
@@ -50,8 +51,11 @@ class OrderController extends Controller
         }
 
         // dd($newdata);
+        $sheng = citys::where('LevelType',1)->get();
+        $shi = citys::where('LevelType',2)->first();
+        $qu = citys::where('ParentId',110100)->get();
 
-    	return view('home.order',compact('addr','newdata'));
+    	return view('home.order',compact('addr','newdata','sheng','shi','qu'));
     }
 
 
