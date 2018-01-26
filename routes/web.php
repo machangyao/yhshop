@@ -144,9 +144,10 @@ Route::get('/','Home\IndexController@index');
 Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
 Route::get('/show/{id}','Home\ShowController@show');
+//加入购物车
+Route::get('/addcart','Home\CartController@addcart');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
-
 //ajax购物车页面数量增加
 Route::post('/addnum','Home\CartController@addnum');
 //ajax购物车页面数量减少
@@ -166,33 +167,11 @@ Route::post('/pay','Home\PayController@index');
 //下单成功
 Route::get('/success/{id}','Home\SuccessController@index');
 // 后台
-
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
 // 商品路由
 Route::resource('/good','Admin\GoodController');
 //商品上下架
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
-
-
-
-//评论管理路由
-Route::get('admin/comment','Admin\CommentController@comment');
-
-//商品活动路由
-Route::resource('admin/activity','Admin\ActController');
-
-//配送管理路由
-Route::get('admin/dispatchs','Admin\DisController@dispatchs');
-
-//推荐管理路由
-Route::get('admin/recommend','Admin\ReController@recommend');
-
-//支付管理路由
-Route::get('admin/pay','Admin\PayController@pay');
-Route::get('admin/pay/{id}','Admin\PayController@pays');
-
-// 品牌路由route
-
+// 品牌路由
 Route::resource('/brand','Admin\BrandController');
-

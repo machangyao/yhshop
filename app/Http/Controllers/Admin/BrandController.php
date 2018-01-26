@@ -5,12 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\Brands;
-
-class BrandController extends Controller
-
 use DB;
-use App\Http\Models\Admin\Brands;
-
 
 class BrandController extends Controller
 {
@@ -42,11 +37,6 @@ class BrandController extends Controller
     public function create()
     {
 
-        //
-        $title = "添加品牌";
-        return view('admin.brand.create',['title'=>$title]);
-
-
         //添加
         $title = "添加品牌";
         return view('admin.brand.create',['title'=>$title]);
@@ -63,12 +53,13 @@ class BrandController extends Controller
 
         $input = $request->except('_token');
         $data = new Brands;
-        $data -> name = $input['name'];
-        $data -> url = $input['url'];
-        $res = $data -> save();
-        if($res)
-        {
-            return redirect('/brand')->with('info','添加成功');
+        $data->name = $input['name'];
+        $data->url = $input['url'];
+        $res = $data->save();
+        if ($res) {
+            return redirect('/brand')->with('info', '添加成功');
+        }
+    }
 
     /**
      * Display the specified resource.

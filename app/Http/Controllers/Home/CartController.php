@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Input;
+use Session;
+use App\Http\Models\Admin\Goods;
 class CartController extends Controller
 {
 
@@ -15,9 +17,11 @@ class CartController extends Controller
     */
 	public function addCart(Request $request)
 	{
+
 		//1、判断用户是否登录,如果没有登录则跳转到登录页
     	if( !session::get('user_info') )
     	{
+    	    session::put('gocart',Input::all());
     		return redirect('login')->with('info','您还没有登录,请先登录');
     	}
 

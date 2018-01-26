@@ -211,7 +211,9 @@ class UserController extends Controller
                 Session::put('user_info',$res);
 
 
-
+                if(session('gocart')){
+                    return redirect('/addcart?id='.session('gocart')['id'].'&num='.session('gocart')['num']);
+                }
                 if(session('back')){
                     return redirect(session('back'));
                 }else{

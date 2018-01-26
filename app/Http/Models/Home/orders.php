@@ -12,9 +12,6 @@ class orders extends Model
     public $guarded = [];
     public $timestamps = false;
 
-    public $timestamps = false;
-
-
     // public function User(){
     // 	return $this->belongsTo('App\Http\Models\Home\User','user_id','id');
     // }

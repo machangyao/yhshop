@@ -61,10 +61,10 @@
                                         <td>{{$v->id}}</td>
                                         <td>{{$v->order_number}}</td>
                                         <td>{{$v->order_price}}</td>
-                                        <td>@if ($v->order_status == 1) 等待发货 @elseif ($v->order_status == 2) 等待收货 @elseif ($v->order_status == 3 ) 已收货 @endif </td>
+                                        <td>@if ($v->order_status == 0 ) 未付款 @elseif ($v->order_status == 1) 等待发货 @elseif ($v->order_status == 2) 等待收货 @elseif ($v->order_status == 3 ) 已收货 @endif </td>
                                         <td>{{$v->pay_type}}</td>
                                         <td>{{$v->order_addr}}</td>
-                                        <td>  @if ($v->order_status == 1) <a href="{{url('/admin/order/status/')}}?id=
+                                        <td>@if ($v->order_status == 0) 等待付款 @elseif ($v->order_status == 1) <a href="{{url('/admin/order/status/')}}?id=
                                     {{$v->id}}"> 发货 </a> @elseif ($v->order_status == 2)已发货 @elseif ($v->order_status == 3)已收货 @endif  <a href="{{url('/admin/order/'.$v->id.'/edit')}}">修改</a> <a href="javascript:;" onclick="">删除</a></td>
                                     </tr>
                                 @endforeach
