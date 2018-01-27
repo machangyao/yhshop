@@ -36,11 +36,14 @@
 			    </div>
 			</div>
 </div>
-	<ol class="am-breadcrumb am-breadcrumb-slash">
-		<li><a href="#">首页</a></li>
-		<li><a href="#">分类</a></li>
-		<li class="am-active">内容</li>
-	</ol>
+<ol class="am-breadcrumb" style="margin-top:4px;margin-bottom:0px;margin-left:14px;">
+	<span>当前位置：</span>
+	<li><a href="{{ url('/') }}">首页</a></li>
+	<li><a href="#">{{ $navs[0]->one }}</a></li>
+	<li><a href="#">{{ $navs[0]->two }}</a></li>
+	<li><a href="#">{{ $navs[0]->three }}</a></li>
+	<li class="am-active">{{ $data->name }}</li>
+</ol>
 	<script type="text/javascript">
 		$(function() {});
 		$(window).load(function() {

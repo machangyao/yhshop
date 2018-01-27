@@ -75,7 +75,7 @@ class PayController extends Controller
         foreach($or as $v)
         {
             //获取商品信息
-            $g = Goods::where('id',$v['gid'])->select('id','number')->get()->toArray();
+            $g = Goods::where('id',$v['gid'])->select('id','number','salenum')->get()->toArray();
             //把三维数组转成二维数组
             $newgood[] = $g[0];
             foreach($newgood as &$vv)
@@ -84,8 +84,9 @@ class PayController extends Controller
                 if($v['gid'] == $vv['id'])
                 {
                     $vv['number'] = $vv['number'] - $v['gcount'];
-                    //更新Goods表商品数量字段
-                    Goods::where('id',$vv['id'])->update(['number'=>$vv['number']]);
+                    $vv['salenum'] = $vv['salenum'] + $v['gcount'];
+                    //更新Goods表商品数量字段和销量字段
+                    Goods::where('id',$vv['id'])->update(['number'=>$vv['number'],'salenum'=>$vv['salenum']]);
                 }
             }
             
