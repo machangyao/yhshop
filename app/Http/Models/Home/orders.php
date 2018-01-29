@@ -18,7 +18,7 @@ class orders extends Model
     // }
 
     public function Goods(){
-    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','order_sn','gid');
+    	return $this->belongsToMany('App\Http\Models\Admin\Goods','order_goods','oid','gid');
 
     }
 
