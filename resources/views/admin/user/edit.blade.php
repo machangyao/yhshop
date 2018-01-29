@@ -6,12 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                用户管理
+                用户编辑
             </h1>
             <ol class="breadcrumb">
-                <li>管理员: {{ session('user')->nickname }}</li>
-                <li><a href="#">修改密码</a></li>
-                <li><a href="{{ url('admin/logout') }}">退出</a></li>
+                <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li class="active">用户编辑</li>
             </ol>
         </section>
 

@@ -27,15 +27,17 @@ Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
 //登陆页面的处理逻辑
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
-
-Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','hasRole']],function(){
-// Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
-
-//后台首页
-    Route::get('index','LoginController@index');
-
+Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
 //退出登录
     Route::get('logout','LoginController@logout');
+
+//修改密码
+    Route::get('/user/pass','UserController@pass');
+
+    Route::post('/user/dopass','UserController@dopass');
+
+//用户模块
+     Route::resource('user','UserController');
 
 //用户授权页面
     Route::get('user/auth/{id}','UserController@auth');
@@ -43,21 +45,21 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','
 //添加用户授权逻辑
     Route::post('user/doauth','UserController@doAuth');
 
-//用户模块
-	Route::resource('user','UserController');
-
     Route::get('role/auth/{id}','RoleController@auth');
 
     Route::post('role/doauth','RoleController@doAuth');
+//权限相关路由
+    Route::resource('permission','PermissionController');
+});
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','hasRole']],function(){
+// Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
+
+//后台首页
+    Route::get('index','LoginController@index');
 
 //角色相关的路由
 	Route::resource('role','RoleController');
-
-//权限相关路由
-	Route::resource('permission','PermissionController');
-
-//用户模块
-	Route::resource('user','UserController');
 	
 });
 
