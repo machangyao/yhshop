@@ -133,8 +133,7 @@ Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
-
-Route::resource('/user','home\UserController')->middleware('homeIsLogin');
+Route::resource('/user','home\UserController');
 //注册账号ajax路由
 Route::post('/user/ajax','home\UserController@ajax');
 //修改手机号ajax路由
