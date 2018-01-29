@@ -67,6 +67,14 @@ class PayController extends Controller
     	
     	$data->save();
 
+
+        //读取当前下的订单表id，插入order_goods表中的oid中
+        $idarr = orders::where('order_sn',$order_sn)->select('id')->get()->toArray();
+        $oid = $idarr[0]['id'];
+        $order_goods = new Order_goods;
+        $order_goods->where('order_sn',$order_sn)->update(['oid'=>$oid]);
+
+
         //下单成功后原商品数量减去已经购买过的商品数量,减库存
         $or = Order_goods::where('order_sn',$order_sn)->select('gid','gcount')->get()->toArray();
         // dd($or);
