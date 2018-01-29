@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\Goods;
 use App\Http\Models\Home\Brands;
 use App\Http\Models\Home\Categorys;
+use DB;
 
 
 class ListController extends Controller
@@ -26,12 +27,15 @@ class ListController extends Controller
     	//获取所有分类
     	$cates = Categorys::where('pid',0)->get();
 
+        //面包屑导航
+        $navs = DB::select("select C1.name as 'one',C2.name as 'two',C3.name as 'three' from categorys as C1 INNER JOIN categorys as C2 on C1.id = C2.pid INNER JOIN categorys as C3 on C2.id = C3.pid where C3.id = ?",[$id]);
+        // dd($navs[0]->one);
 
     	$data = Goods::where('cid',$id)->where('status',1)->where('number','>',0)->paginate(8);
 
     	// dd($data);
     	// return view('home.list',compact('data'));
-    	return view('home.list',['data'=>$data,'brands'=>$brands,'cates'=>$cates]);
+    	return view('home.list',['data'=>$data,'navs'=>$navs,'brands'=>$brands,'cates'=>$cates]);
     }
 
 

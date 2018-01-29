@@ -103,7 +103,7 @@
 										<strong>{{ $v->price }}</strong>
 									</p>
 									<p class="number fl">
-										销量<span>0</span>
+										销量 <span>{{ $v->salenum }}</span>
 									</p>
 								</div>
 							</li>

@@ -36,10 +36,13 @@
 		<div class="am-g am-g-fixed">
 			<div class="am-u-sm-12 am-u-md-12">
           	<div class="theme-popover">														
-				<div class="searchAbout">
-					
-
-				</div>
+				<ol class="am-breadcrumb" style="margin-top:4px;margin-bottom:0px;">
+					<span>当前位置：</span>
+					<li><a href="{{ url('/') }}">首页</a></li>
+					<li><a href="#">{{ $navs[0]->one }}</a></li>
+					<li><a href="#">{{ $navs[0]->two }}</a></li>
+					<li class="am-active">{{ $navs[0]->three }}</li>
+				</ol>
 				<ul class="select">
 					<p class="title font-normal">
 						<span class="fl">松子</span>
@@ -104,7 +107,7 @@
 										<strong>{{ $v->price }}</strong>
 									</p>
 									<p class="number fl">
-										销量<span>0</span>
+										销量 <span>{{ $v->salenum }}</span>
 									</p>
 								</div>
 							</li>

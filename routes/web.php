@@ -188,7 +188,21 @@ Route::post('/orderminnum','Home\OrderController@orderminnum');
 Route::post('/pay','Home\PayController@index');
 //下单成功
 Route::get('/success/{id}','Home\SuccessController@index');
+
+
 // 后台
+// Route::group(['namespace'=>'Admin','middleware'=>['islogin','hasRole']],function(){
+//     // 分类路由
+//     Route::resource('/category','CategoryController');
+//     // 商品路由
+//     Route::resource('/good','GoodController');
+//     //商品上下架
+//     Route::get('/good/jia/{id}','GoodController@jia');
+//     // 品牌路由
+//     Route::resource('/brand','BrandController');
+// });
+
+
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
 // 商品路由
@@ -197,3 +211,5 @@ Route::resource('/good','Admin\GoodController');
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
 // 品牌路由
 Route::resource('/brand','Admin\BrandController');
+
+

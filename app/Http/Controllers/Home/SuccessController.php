@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\orders;
+use App\Http\Models\Home\Order_goods;
 
 class SuccessController extends Controller
 {
@@ -16,6 +17,11 @@ class SuccessController extends Controller
     */
     public function index($order_sn)
     {
+
+
+
+
+
     	$data = orders::where('order_sn',$order_sn)->with('orderaddr')->first();	
     	return view('home.success',compact('data'));
     }

@@ -67,6 +67,14 @@ class PayController extends Controller
     	
     	$data->save();
 
+
+        //读取当前下的订单表id，插入order_goods表中的oid中
+        $idarr = orders::where('order_sn',$order_sn)->select('id')->get()->toArray();
+        $oid = $idarr[0]['id'];
+        $order_goods = new Order_goods;
+        $order_goods->where('order_sn',$order_sn)->update(['oid'=>$oid]);
+
+
         //下单成功后原商品数量减去已经购买过的商品数量,减库存
         $or = Order_goods::where('order_sn',$order_sn)->select('gid','gcount')->get()->toArray();
         // dd($or);
@@ -75,7 +83,7 @@ class PayController extends Controller
         foreach($or as $v)
         {
             //获取商品信息
-            $g = Goods::where('id',$v['gid'])->select('id','number')->get()->toArray();
+            $g = Goods::where('id',$v['gid'])->select('id','number','salenum')->get()->toArray();
             //把三维数组转成二维数组
             $newgood[] = $g[0];
             foreach($newgood as &$vv)
@@ -84,8 +92,9 @@ class PayController extends Controller
                 if($v['gid'] == $vv['id'])
                 {
                     $vv['number'] = $vv['number'] - $v['gcount'];
-                    //更新Goods表商品数量字段
-                    Goods::where('id',$vv['id'])->update(['number'=>$vv['number']]);
+                    $vv['salenum'] = $vv['salenum'] + $v['gcount'];
+                    //更新Goods表商品数量字段和销量字段
+                    Goods::where('id',$vv['id'])->update(['number'=>$vv['number'],'salenum'=>$vv['salenum']]);
                 }
             }
             
