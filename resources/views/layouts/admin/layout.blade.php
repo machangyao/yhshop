@@ -38,7 +38,7 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{url('/admin')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -267,41 +267,35 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/yh/admin/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                            <span class="hidden-xs">Alexander Pierce</span>
+                            <img src="/uploads/{{session('user')['avatar']}}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ session('user')->nickname }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/yh/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                                <img src="/uploads/{{session('user')['avatar']}}" class="img-circle" alt="User Image">
 
                                 <p>
-                                    Alexander Pierce - Web Developer
-                                    <small>Member since Nov. 2012</small>
+                                    {{ session('user')->nickname }}
+                                    <small></small>
                                 </p>
                             </li>
                             <!-- Menu Body -->
                             <li class="user-body">
                                 <div class="row">
+                                    
                                     <div class="col-xs-4 text-center">
-                                        <a href="#">Followers</a>
+                                        <a href="{{ url('admin/user/pass') }}">修改密码</a>
                                     </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Sales</a>
-                                    </div>
-                                    <div class="col-xs-4 text-center">
-                                        <a href="#">Friends</a>
-                                    </div>
+                                    
                                 </div>
                                 <!-- /.row -->
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                </div>
+                                
                                 <div class="pull-right">
-                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{ url('admin/logout') }}" class="btn btn-default btn-flat">退出</a>
                                 </div>
                             </li>
                         </ul>
@@ -319,13 +313,13 @@
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
             <!-- Sidebar user panel -->
-            <div class="user-panel">
-                <div class="pull-left image">
-                    <img src="/yh/admin/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <div class="user-panel" >
+                <div class="pull-left image"    >
+                    <img src="/uploads/{{session('user')['avatar']}}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
-                    <p>Alexander Pierce</p>
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <p>{{ session('user')->nickname }}</p>
+                    
                 </div>
             </div>
             <!-- search form -->
@@ -495,62 +489,11 @@
                     </ul>
                 </li>
 
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>支付管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/pay') }}"><i class="fa fa-circle-o"></i>支付管理</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>评论管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('admin/comment') }}"><i class="fa fa-circle-o"></i>评论列表</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>活动管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/activity') }}"><i class="fa fa-circle-o"></i>商品活动详情</a></li>
-                        <li><a href="{{ url('/admin/activity/create') }}"><i class="fa fa-circle-o"></i>添加活动</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>配送管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/admin/dispatchs') }}"><i class="fa fa-circle-o"></i>配送详情</a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>推荐管理</span>
-                        <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ url('/good') }}"><i class="fa fa-circle-o"></i>开启|关闭</a></li>
-                    </ul>
-                </li>
+  
+          
+       
+     
+           
 
             </ul>
         </section>

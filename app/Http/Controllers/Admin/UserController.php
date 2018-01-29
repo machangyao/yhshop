@@ -11,6 +11,38 @@ use DB;
 
 class UserController extends Controller
 {
+    //修改密码
+  public function pass()
+  {
+    return view('admin.user.pass');
+  }
+  public function dopass(Request $request)
+  {
+    $this->validate($request,[
+      'password'=>'required',
+      'editpassword'=>'same:password',
+    ],[
+      'password.required'=>'密码不能为空',
+      'editpassword.same'=>'两次输入密码不一致',
+    ]);
+
+    $pass = $request->input('pass');  //获取原密码
+    $editpassword = $request->input('password');  //获取原密码
+
+    $id = session('user')->id;
+    $user = User::find($id);
+    $password = Crypt::decrypt($user->password);
+    if($password == $pass){
+      $user->password =  Crypt::encrypt($editpassword);
+      $res = $user->save();
+      if($res){
+        \Session::flush('user');
+        return redirect('admin/login');
+      }
+    }else{
+      return back();
+    }
+  }
     //返回用户授权页面
     public function auth($id)
     {
@@ -106,7 +138,6 @@ class UserController extends Controller
         $input = $request->except('_token','re-password');
 
         //2.检测表单验证规则
-        dd
            $this->validate($request, [
                 'nickname' =>'required|min:6|max:18',
                 'password' => 'required|min:6|max:18',

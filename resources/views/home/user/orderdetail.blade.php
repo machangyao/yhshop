@@ -45,18 +45,15 @@
 			<div class="order-logistics">
 				<a href="logistics.html">
 					<div class="icon-log">
-						<i><img src="../images/receive.png"></i>
+						
 					</div>
 					<div class="latest-logistics">
-						<p class="text">已签收,签收人是青年城签收，感谢使用天天快递，期待再次为您服务</p>
+						
 						<div class="time-list">
-							<span class="date">2015-12-19</span><span class="week">周六</span><span class="time">15:35:42</span>
+							
 						</div>
 						<div class="inquire">
-							<span class="package-detail">物流：天天快递</span>
-							<span class="package-detail">快递单号: </span>
-							<span class="package-number">373269427868</span>
-							<a href="logistics.html">查看</a>
+							
 						</div>
 					</div>
 					<span class="am-icon-angle-right icon"></span>
@@ -94,7 +91,7 @@
 					<td class="td-inner">数量</td>
 				</div>
 				<div class="th th-operation">
-					<td class="td-inner">商品操作</td>
+					<td class="td-inner">&nbsp;</td>
 				</div>
 				<div class="th th-amount">
 					<td class="td-inner">合计</td>
@@ -129,8 +126,7 @@
 										<div class="item-basic-info">
 											<a href="#">
 												<p>{{$v->name}}</p>
-												<p class="info-little">颜色：12#川南玛瑙
-													<br/>包装：裸装 </p>
+												
 											</a>
 										</div>
 									</div>
@@ -142,14 +138,10 @@
 								</li>
 								<li class="td td-number">
 									<div class="item-number">
-										<span>×</span>{{$v->count}}
+										<span>×</span>{{$v->gct->gcount}}
 									</div>
 								</li>
-								<li class="td td-operation">
-									<div class="item-operation">
-										退款/退货
-									</div>
-								</li>
+								
 							</ul>
 						@endforeach
 
@@ -158,7 +150,6 @@
 							<li class="td td-amount">
 								<div class="item-amount">
 									合计：{{$order->order_price}}
-									<p>含运费：<span>10.00</span></p>
 								</div>
 							</li>
 							<div class="move-right">
@@ -177,8 +168,7 @@
 											<p class="Mystatus">
 												交易成功</p>
 										@endif
-										<p class="order-info"><a href="javascript:;">查看物流</a></p>
-										<p class="order-info"><a href="javascript:;">延长收货</a></p>
+										
 									</div>
 								</li>
 								<li class="td td-change">

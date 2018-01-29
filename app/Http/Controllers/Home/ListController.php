@@ -41,6 +41,7 @@ class ListController extends Controller
     	// dd($data);
     	// return view('home.list',compact('data'));
 
+
     	return view('home.list',['data'=>$data,'navs'=>$navs,'brands'=>$brands,'cates'=>$cates,'link'=>$link,'site'=>$site]);
     }
 
@@ -62,9 +63,11 @@ class ListController extends Controller
         $cates = Categorys::where('pid',0)->get();
 
         $data = Goods::where('name','like','%'.$keyword.'%')->where('status',1)->where('number','>',0)->paginate(8);
-        // dd($data);
-
-        return view('home.search',['data'=>$data,'where'=>['keyword'=>$keyword],'brands'=>$brands,'cates'=>$cates]);
+         //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.search',['data'=>$data,'where'=>['keyword'=>$keyword],'brands'=>$brands,'cates'=>$cates,'site'=>$site,'link'=>$link]);
    }
 
 }

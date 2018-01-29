@@ -22,7 +22,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <form action="" method="get">
+                            <form action="{{url('/admin/order')}}" method="get">
                                 <div class="row">
                                     <div class="col-xs-2">
                                             <select name="num" class="form-control">
@@ -50,7 +50,6 @@
                                     <th>订单编号</th>
                                     <th>订单价格</th>
                                     <th>订单状态</th>
-                                    <th>支付类型</th>
                                     <th>订单收货地址</th>
                                     <th>操作</th>
                                 </tr>
@@ -59,17 +58,16 @@
                                @foreach ($orders as $v)
                                     <tr>
                                         <td>{{$v->id}}</td>
-                                        <td>{{$v->order_number}}</td>
+                                        <td>{{$v->order_sn}}</td>
                                         <td>{{$v->order_price}}</td>
-                                        <td>@if ($v->order_status == 0 ) 未付款 @elseif ($v->order_status == 1) 等待发货 @elseif ($v->order_status == 2) 等待收货 @elseif ($v->order_status == 3 ) 已收货 @endif </td>
-                                        <td>{{$v->pay_type}}</td>
+                                        <td>@if ($v->order_status == 0) 未付款 @elseif ($v->order_status == 1) 等待发货 @elseif ($v->order_status == 2) 等待收货 @elseif ($v->order_status == 3) 已收货 @endif </td>
                                         <td>{{$v->order_addr}}</td>
                                         <td>@if ($v->order_status == 0) 等待付款 @elseif ($v->order_status == 1) <a href="{{url('/admin/order/status/')}}?id=
                                     {{$v->id}}"> 发货 </a> @elseif ($v->order_status == 2)已发货 @elseif ($v->order_status == 3)已收货 @endif  <a href="{{url('/admin/order/'.$v->id.'/edit')}}">修改</a> <a href="javascript:;" onclick="">删除</a></td>
                                     </tr>
                                 @endforeach
                                     <tr>
-                                        <td style="text-align:center;" colspan="11">暂无品牌信息</td>
+                                        <td style="text-align:center;" colspan="11">暂无订单信息</td>
                                     </tr>
                                 </tfoot>
                             </table>

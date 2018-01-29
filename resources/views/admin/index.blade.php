@@ -7,13 +7,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Data Tables
-                <small>advanced tables</small>
+                Home Page
             </h1>
             <ol class="breadcrumb">
-                <li>管理员: @if(session('user')){{ session('user')->nickname }}@else @endif</li>
-                <li><a href="#">修改密码</a></li>
-                <li><a href="{{ url('admin/logout') }}">退出</a></li>
+                <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li class="active">Home Page</li>
             </ol>
         </section>
 
@@ -74,7 +72,7 @@
                                 <tbody>
                                 <tr>
                                     <td style="width:130px">官方交流网站</td>
-                                    <td><a href="#">http://yhshop196.com</a></td>
+                                    <td><a href="#">www.youhuo.com</a></td>
                                 </tr>
                                 <tr>
                                     <td style="width:100px">官方交流QQ群</td>

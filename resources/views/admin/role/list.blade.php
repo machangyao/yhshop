@@ -6,13 +6,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                用户管理
-                <small>列表</small>
+                角色列表
             </h1>
             <ol class="breadcrumb">
-                <li>管理员: {{ session('user')->nickname }}</li>
-                <li><a href="#">修改密码</a></li>
-                <li><a href="{{ url('admin/logout') }}">退出</a></li>
+                <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>首页</a></li>
+                <li class="active">角色列表</li>
             </ol>
         </section>
 
@@ -22,7 +20,7 @@
                 <div class="col-xs-12">
                     <div class="box">
                         <div class="box-header">
-                            <h3 class="box-title">Hover Data Table</h3>
+                            
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">

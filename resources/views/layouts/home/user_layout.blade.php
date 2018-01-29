@@ -60,10 +60,10 @@
 
 				<div class="search-bar pr">
 					<a name="index_none_header_sysc" href="#"></a>
-					<form>
-						<input id="searchInput" name="index_none_header_sysc" type="text" placeholder="搜索" autocomplete="off">
-						<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
-					</form>
+					<form action="{{ url('/search') }}" method="get">
+					<input id="searchInput" name="keyword" type="text" placeholder="搜索" autocomplete="off" @if(!empty($where['keyword'])) value="{{ $where['keyword'] }}" @else value="" @endif>
+					<input id="ai-topsearch" class="submit am-btn" value="搜索" index="1" type="submit">
+				</form>
 				</div>
 			</div>
 
@@ -93,7 +93,6 @@
 						<a href="javascript:;">我的小窝</a>
 						<ul>
 							<li> <a href="{{url('/user/collect')}}">收藏</a></li>
-							<li> <a href="comment.html">评价</a></li>
 						</ul>
 					</li>
 
@@ -166,7 +165,6 @@
 			<a href="javascript:;">我的小窝</a>
 			<ul>
 				<li> <a href="{{url('/user/collect')}}">收藏</a></li>
-				<li> <a href="comment.html">评价</a></li>
 			</ul>
 		</li>
 

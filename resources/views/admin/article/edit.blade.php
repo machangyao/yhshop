@@ -1,8 +1,8 @@
- @extends('layouts.admin.layout')
+@extends('layouts.admin.layout')
 
- @section('content')
+@section('content')
 
-<div class="content-wrapper" style="min-height: 871px;">
+    <div class="content-wrapper" style="min-height: 871px;">
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
@@ -22,10 +22,10 @@
                     <!-- Horizontal Form -->
                     <div class="box box-info" style="">
                         <div class="box-header with-border">
-                                                    </div>
+                        </div>
                         <!-- /.box-header -->
                         <!-- form start -->
-                        
+
                         @if (count($errors) > 0)
                             <div >
                                 <ul>
@@ -34,36 +34,36 @@
                                             <li style="color:red">{{ $error }}</li>
                                         @endforeach
                                     @else
-                                            <li style="color:red">{{ $errors }}</li>
+                                        <li style="color:red">{{ $errors }}</li>
                                     @endif
                                 </ul>
                             </div>
                         @endif
 
-                        <form action="{{ url('admin/article/'.$article->article_id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="form_upload"  enctype="multipart/form-data">   
+                        <form action="{{ url('admin/article/'.$article->article_id) }}" method="post" class="form-horizontal" enctype="multipart/form-data" id="form_upload"  enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 
-                            
+
                             <div class="box-body">
-                                
+
                             </div>
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章作者</label>
 
                                     <div class="col-sm-2">
-                                        <input type="text" name="article_author" class="form-control" id="inputEmail3" placeholder="请输入作者名称">
+                                        <input type="text" name="article_author" class="form-control" id="inputEmail3" value="{{ $article->article_author }}">
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">文章标题</label>
 
                                     <div class="col-sm-3">
-                                        <input type="text" name="article_title" class="form-control" id="inputEmail3" placeholder="请输文章标题">
+                                        <input type="text" name="article_title" class="form-control" id="inputEmail3" value="{{ $article->article_title }}">
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
 
                                     <div class="col-sm-9">
                                         <!-- 加载编辑器的容器 -->
-                                        <script id="container" name="article_content" type="text/plain"></script>
+                                        <script id="container" name="article_content" type="text/plain">{!! $article->article_content !!}</script>
                                         <!-- 配置文件 -->
                                         <script type="text/javascript" src="/yh/ueditor/ueditor.config.js"></script>
                                         <!-- 编辑器源码文件 -->
@@ -85,9 +85,9 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                           
-                           
+
+
+
 
                             <!-- /.box-body -->
                             <div class="row">
@@ -97,18 +97,3 @@
                                         <button type="submit" class="btn btn-default">添加</button>
                                     </div>
                                 </div>
-                                <div class="col-sm-4"></div>
-                            </div>
-                            <!-- /.box-footer -->
-                        </form>
-                    </div>
-                    <!-- /.box -->
-                </div>
-                <!--/.col (right) -->
-            </div>
-            <!-- /.row -->
-        </section>
-        <!-- /.content -->
-    </div>
-
- @stop

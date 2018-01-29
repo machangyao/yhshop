@@ -28,7 +28,7 @@
 							<td class="td-inner">数量</td>
 						</div>
 						<div class="th th-operation">
-							<td class="td-inner">商品操作</td>
+							<td class="td-inner">&nbsp;</td>
 						</div>
 						<div class="th th-amount">
 							<td class="td-inner">合计</td>
@@ -59,7 +59,7 @@
 											<ul class="item-list">
 												<li class="td td-item">
 													<div class="item-pic">
-														<a href="#" class="J_MakePoint">
+														<a href="{{url('/show').'/'.$n->id}}" class="J_MakePoint">
 															<img src="/uploads/{{$n->pic}}" class="itempic J_ItemImg">
 														</a>
 													</div>
@@ -67,15 +67,14 @@
 														<div class="item-basic-info">
 															<a href="{{url('/show').'/'.$n->id}}">
 																<p>{{$n->name}}</p>
-																<p class="info-little">颜色：12#川南玛瑙
-																	<br/>包装：裸装 </p>
+																
 															</a>
 														</div>
 													</div>
 												</li>
 												<li class="td td-price">
 													<div class="item-price">
-														{{$n->market_price}}
+														{{$n->price}}
 													</div>
 												</li>
 												<li class="td td-number">
@@ -83,6 +82,7 @@
 														<span>×</span>{{$n->gct->gcount}}
 													</div>
 												</li>
+												
 
 											</ul>
 										@endforeach
@@ -90,10 +90,11 @@
 									</div>
 
 									<div class="order-right">
+
 										<li class="td td-amount">
 											<div class="item-amount">
 												合计：{{$v->order_price}}
-												<p>含运费：<span>10.00</span></p>
+												
 											</div>
 										</li>
 										<div class="move-right">
@@ -111,8 +112,7 @@
 														@endif
 
 													<p class="ordeFr-info"><a href="{{url('/user/order')}}/{{$v->id}}">订单详情</a></p>
-													<p class="order-info"><a href="javascript:;">查看物流</a></p>
-													<p class="order-info"><a href="javascript:;">延长收货</a></p>
+													
 												</div>
 											</li>
 											<li class="td td-change">

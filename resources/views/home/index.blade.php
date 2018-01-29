@@ -177,10 +177,12 @@
 						<a href="#"><p>点击更多优惠活动</p></a>									
 					</em>
 				</div>
+				@if (!session('user_info'))
 				<div class="member-logout">
 					<a class="am-btn-warning btn" href="{{url('/login')}}">登录</a>
 					<a class="am-btn-warning btn" href="{{url('/user/create')}}">注册</a>
 				</div>
+				@endif
 				<div class="member-login">
 					<a href="#"><strong>0</strong>待收货</a>
 					<a href="#"><strong>0</strong>待发货</a>

@@ -36,15 +36,22 @@
 						</a>
 						<div class="ibar_login_box status_login ">
 							<div class="avatar_box ">
-								<p class="avatar_imgbox "><img src="/yh/home/images/no-img_mid_.jpg " /></p>
+								@if (session('user_info'))
+								<p class="avatar_imgbox "><img src="{{session('user_info')['avatar']}}" /></p>
 								<ul class="user_info ">
-									<li>用户名：sl1903</li>
+									
+									<li>用户名：{{session('user_info')['user_name']}}</li>
+									@else
+									<p class="avatar_imgbox "><img src="/yh/home/images/no-img_mid_.jpg " /></p>
+								<ul class="user_info ">
+									<li>用户名：游客</li>
+									@endif
 									<li>级&nbsp;别：普通会员</li>
 								</ul>
 							</div>
 							<div class="login_btnbox ">
-								<a href="# " class="login_order ">我的订单</a>
-								<a href="# " class="login_favorite ">我的收藏</a>
+								<a href="{{url('/user/order')}}" class="login_order ">我的订单</a>
+								<a href="{{url('/user/collect')}} " class="login_favorite ">我的收藏</a>
 							</div>
 							<i class="icon_arrow_white "></i>
 						</div>

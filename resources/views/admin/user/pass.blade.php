@@ -6,11 +6,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                角色编辑
+                用户管理
             </h1>
             <ol class="breadcrumb">
-                <li><a href="{{ url('admin/index') }}"><i class="fa fa-dashboard"></i>首页</a></li>
-                <li class="active">角色编辑</li>
+                <li>管理员: {{ session('user')->nickname }}</li>
+                <li><a href="{{ url('admin/user/pass') }}">修改密码</a></li>
+                <li><a href="{{ url('admin/logout') }}">退出</a></li>
             </ol>
         </section>
 
@@ -21,7 +22,9 @@
                     <!-- Horizontal Form -->
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title"></h3>
+                            @if(session('msg'))
+                            <h3 class="box-title">{{ session('msg') }}</h3>
+                            @endif
                         </div>
                         <!-- /.box-header -->
                         <!-- form start -->
@@ -38,22 +41,30 @@
                                     </ul>
                                 </div>
                          @endif
-                        <form class="form-horizontal" action="{{ url('/admin/role/'.$role->id) }}" method="post" enctype="multipart/form-data">
+                        <form class="form-horizontal" action="{{ url('admin/user/dopass') }}" method="post" enctype="multipart/form-data">
                         	{{ csrf_field() }}
-                            {{ method_field('PUT') }}
+                            
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label for="inputEmail3" class="col-sm-2 control-label">角色名称 :</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">旧密码</label>
 
                                     <div class="col-sm-10">
-                                        <input name="name" value="{{ $role -> name }}" type="text" class="form-control" id="inputEmail3">
+                                        <input name="pass" type="password" value="" class="form-control" id="inputEmail3" placeholder="请输入原密码">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputPassword3" class="col-sm-2 control-label">角色描述 :</label>
+                                    <label for="inputEmail3" class="col-sm-2 control-label">新密码 :</label>
 
                                     <div class="col-sm-10">
-                                        <input name="description" value="{{ $role -> description }}" type="textd" class="form-control" id="inputPassword3">
+                                        <input name="password" type="password" value="" class="form-control" id="inputEmail3" placeholder="请输入新密码">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPassword3" class="col-sm-2 control-label">确认密码 :</label>
+
+                                    <div class="col-sm-10">
+                                        <input name="editpassword" type="password" value="" class="form-control" id="inputPassword3"
+                                               placeholder="再次确认密码">
                                     </div>
                                 </div>
                             </div>

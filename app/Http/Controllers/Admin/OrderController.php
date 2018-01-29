@@ -17,7 +17,12 @@ class OrderController extends Controller
     public function index()
     {
         //返回浏览订单页面 马长遥
-        $orders = orders::get();
+        $key = Input::get('keyword');
+        if($key == ''){
+            $orders = orders::get();
+        }else{
+            $orders = orders::where('order_sn','like','%'.$key.'%')->get();
+        }
         return view('admin.order.list',compact('orders'));
     }
 
