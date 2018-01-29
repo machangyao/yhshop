@@ -307,364 +307,58 @@
 		
 		<div class="am-container ">
 			<div class="shopTitle ">
-				<h4>甜品</h4>
+				<h4>笔记本一楼</h4>
 				<h3>每一道甜品都有一个故事</h3>
-				<div class="today-brands ">
-					<a href="# ">桂花糕</a>
-					<a href="# ">奶皮酥</a>
-					<a href="# ">栗子糕 </a>
-					<a href="# ">马卡龙</a>
-					<a href="# ">铜锣烧</a>
-					<a href="# ">豌豆黄</a>
-				</div>
 				<span class="more ">
-        <a class="more-link " href="# ">更多美味</a>
+        <a class="more-link " href="{{ url('/list/34') }}">更多</a>
             </span>
 			</div>
 		</div>
 		
 		<div class="am-g am-g-fixed floodOne ">
-			<div class="am-u-sm-5 am-u-md-3 am-u-lg-4 text-one ">
-				<a href="# ">
-					<div class="outer-con ">
-						<div class="title ">
-							零食大礼包开抢啦
-						</div>					
-						<div class="sub-title ">
-							当小鱼儿恋上软豆腐
-						</div>
-					</div>
-                      <img src="/yh/home/images/act1.png " />								
-				</a>
-			</div>
+			@foreach($data as $v)
 			<div class="am-u-sm-7 am-u-md-5 am-u-lg-4">
 				<div class="text-two">
 					<div class="outer-con ">
 						<div class="title ">
-							雪之恋和风大福
+							<a target="_blank" href="{{ url('/show/').'/'.$v->id }}">{{ $v->name }}</a>
 						</div>									
 						<div class="sub-title ">
-							仅售：¥13.8
+							仅售：¥{{ $v->price }}
 						</div>
 						
 					</div>
-					<a href="# "><img src="/yh/home/images/act2.png " /></a>
+					<a target="_blank" href="{{ url('/show/').'/'.$v->id }}"><img src="/uploads/s_{{ $v->pic }}" /></a>
 				</div>
-				<div class="text-two last">
-					<div class="outer-con ">
-						<div class="title ">
-							雪之恋和风大福
-						</div>
-						<div class="sub-title ">
-							仅售：¥13.8
-						</div>
-						
-					</div>
-					<a href="# "><img src="/yh/home/images/act2.png " /></a>
-			    </div>
 			</div>
-         <div class="am-u-sm-12 am-u-md-4 ">
-			<div class="am-u-sm-3 am-u-md-6 text-three">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
+			@endforeach
 
-			<div class="am-u-sm-3 am-u-md-6 text-three">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
 
-			<div class="am-u-sm-3 am-u-md-6 text-three">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
-
-			<div class="am-u-sm-3 am-u-md-6 text-three last ">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
-		</div>
 
 		</div>
      <div class="clear "></div>
-		<!--坚果-->
 		<div class="am-container ">
 			<div class="shopTitle ">
-				<h4>坚果</h4>
-				<h3>酥酥脆脆，回味无穷</h3>
-				<div class="today-brands ">
-					<a href="# ">腰果</a>
-					<a href="# ">松子</a>
-					<a href="# ">夏威夷果 </a>
-					<a href="# ">碧根果</a>
-					<a href="# ">开心果</a>
-					<a href="# ">核桃仁</a>
-				</div>
-				<span class="more ">
-        <a class="more-link " href="# ">更多美味</a>
-            </span>
-			</div>
-		</div>
-		<div class="am-g am-g-fixed floodTwo ">
-			
-			
-			<div class="am-u-sm-5 am-u-md-4 text-one ">
-				<a href="# ">
-					<img src="/yh/home/images/act1.png " />
-					<div class="outer-con ">
-						<div class="title ">
-							零食大礼包开抢啦
-						</div>
-						<div class="sub-title ">
-							当小鱼儿恋上软豆腐
-						</div>
-						
-					</div>
-				</a>
-			</div>
-			<div class="am-u-sm-7 am-u-md-4 am-u-lg-2 text-two">
-					<div class="outer-con ">
-						<div class="title ">
-							雪之恋和风大福
-						</div>
-						
-						<div class="sub-title ">
-							仅售：¥13.8
-						</div>
-					</div>
-					<a href="# "><img src="/yh/home/images/5.jpg " /></a>						
-			</div>
-			
-			<div class="am-u-md-4 am-u-lg-2 text-three">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
-			<div class="am-u-md-4 am-u-lg-2 text-three">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>
-			<div class="am-u-sm-6 am-u-md-4 am-u-lg-2 text-two ">
-					<div class="outer-con ">
-						<div class="title ">
-							雪之恋和风大福
-						</div>
-						
-						<div class="sub-title ">
-							仅售：¥13.8
-						</div>
-					</div>
-					<a href="# "><img src="/yh/home/images/5.jpg " /></a>						
-			</div>						
-			<div class="am-u-sm-6 am-u-md-3 am-u-lg-2 text-four ">
-					<div class="outer-con ">
-						<div class="title ">
-							雪之恋和风大福
-						</div>
-						
-						<div class="sub-title ">
-							仅售：¥13.8
-						</div>
-					</div>
-					<a href="# "><img src="/yh/home/images/5.jpg " /></a>						
-			</div>				
-			<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>								
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-					
-				</div>
-				<a href="# "><img src="/yh/home/images/act2.png " /></a>
-			</div>	
-			<div class="am-u-sm-4 am-u-md-3 am-u-lg-2 text-six">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-				</div>
-				<a href="# "><img src="/yh/home/images/act3.png " /></a>
-			</div>	
-			<div class="am-u-sm-4 am-u-md-3 am-u-lg-4 text-five">
-				<div class="outer-con ">
-					<div class="title ">
-						小优布丁
-					</div>
-					<div class="sub-title ">
-						尝鲜价：¥4.8
-					</div>
-					
-				</div>
-				<a href="# "><img src="/yh/home/images/act2.png " /></a>
-			</div>							
-		</div>
-
-		<div class="clear "></div>
-
-
-     
-		<div class="am-container ">
-			<div class="shopTitle ">
-				<h4>海味</h4>
+				<h4>笔记本二楼</h4>
 				<h3>你是我的优乐美么？不，我是你小鱼干</h3>
-				<div class="today-brands ">
-					<a href="# ">小鱼干</a>
-					<a href="# ">海苔</a>
-					<a href="# ">鱿鱼丝</a>
-					<a href="# ">海带丝</a>
-				</div>
 				<span class="more ">
-        <a class="more-link " href="# ">更多美味</a>
+        <a class="more-link " href="{{ url('/list/34') }}">更多</a>
             </span>
 			</div>
 		</div>
 		<div class="am-g am-g-fixed flood method3 ">
 			<ul class="am-thumbnails ">
+				@foreach($data1 as $v)
 				<li>
 					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp.jpg " />
-							<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-							<span class="e-price ">￥29.90</span>
+						<a target="_blank" href="{{ url('/show/').'/'.$v->id }}">
+							<img src="/uploads/s_{{ $v->pic }}" />
+							<div class="pro-title ">{{ $v->name }}</div>
+							<span class="e-price ">￥{{ $v->price }}</span>
 						</a>
 					</div>
 				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp2.jpg " />
-							<div class="pro-title ">ZEK 原味海苔</div>
-							<span class="e-price ">￥8.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp.jpg " />
-							<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-							<span class="e-price ">￥29.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp2.jpg " />
-							<div class="pro-title ">ZEK 原味海苔</div>
-							<span class="e-price ">￥8.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp.jpg " />
-							<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-							<span class="e-price ">￥29.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp2.jpg " />
-							<div class="pro-title ">ZEK 原味海苔</div>
-							<span class="e-price ">￥8.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp.jpg " />
-							<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-							<span class="e-price ">￥29.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp2.jpg " />
-							<div class="pro-title ">ZEK 原味海苔</div>
-							<span class="e-price ">￥8.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp.jpg " />
-							<div class="pro-title ">萨拉米 1+1小鸡腿</div>
-							<span class="e-price ">￥29.90</span>
-						</a>
-					</div>
-				</li>
-				<li>
-					<div class="list ">
-						<a href="# ">
-							<img src="/yh/home/images/cp2.jpg " />
-							<div class="pro-title ">ZEK 原味海苔</div>
-							<span class="e-price ">￥8.90</span>
-						</a>
-					</div>
-				</li>
-
+				@endforeach
 			</ul>
 
 		</div>

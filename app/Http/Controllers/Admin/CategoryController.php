@@ -144,7 +144,8 @@ class CategoryController extends Controller
 
         // return $count;
         // if($data->pid == 0 && $count)
-        if($cate->pid == 0 || $count)
+        // if($cate->pid == 0 || $count)
+        if($count)
         {
             $data = [
                 'status' => 2,
@@ -152,7 +153,7 @@ class CategoryController extends Controller
             ];
 
             return $data;
-        }elseif($gcount){
+        }else if($gcount){
             $data = [
                 'status' => 3,
                 'message' => '分类下有商品,不能删除'

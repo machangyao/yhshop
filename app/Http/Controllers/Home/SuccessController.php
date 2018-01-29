@@ -17,11 +17,6 @@ class SuccessController extends Controller
     */
     public function index($order_sn)
     {
-
-
-
-
-
     	$data = orders::where('order_sn',$order_sn)->with('orderaddr')->first();	
     	return view('home.success',compact('data'));
     }

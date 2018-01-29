@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\Categorys;
+use App\Http\Models\Home\Goods;
 
 class IndexController extends Controller
 {
@@ -17,14 +18,14 @@ class IndexController extends Controller
     public function index()
     {
     	//获取所有一级父类
-    	// $cates = Categorys::where('pid',0)->get();
-    	// dd($cate);
     	$cate = Categorys::all();
-    	
     	$cates = $this->findSubTree($cate,0,0);
-    	// dd($cates[0]);
+    	
+        //获取商品
+        $data = Goods::where('cid',34)->orderBy('id','asc')->take(6)->get();
+        $data1 = Goods::where('cid',34)->orderBy('id','desc')->take(6)->get();
 
-    	return view('home.index',compact('cates'));
+    	return view('home.index',compact('cates','data','data1'));
     }
 
 

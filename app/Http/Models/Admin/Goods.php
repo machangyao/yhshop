@@ -31,8 +31,6 @@ class Goods extends Model
  //    	return $this->belongsTo('App\Http\Models\Home\orders','gid','id');
 	// }
 
-    //
-    public $timestamps = false;
 
     public $guarded = [];
 
