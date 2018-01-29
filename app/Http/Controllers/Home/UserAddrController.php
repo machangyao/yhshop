@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Session;
 use App\Http\Models\Home\Addr;
 use App\Http\Models\Home\citys;
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class UserAddrController extends Controller
 {
     /**
@@ -22,7 +24,11 @@ class UserAddrController extends Controller
         $sheng = citys::where('LevelType',1)->get();
         $shi = citys::where('LevelType',2)->first();
         $qu = citys::where('ParentId',110100)->get();
-        return view('home.user.address',compact('addr','sheng','shi','qu'));
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.address',compact('addr','sheng','shi','qu','site','link'));
 
     }
 
@@ -96,7 +102,11 @@ class UserAddrController extends Controller
         $sheng = citys::where('LevelType',1)->get();
         $shi = citys::where('LevelType',2)->first();
         $qu = citys::where('ParentId',110100)->get();
-        return view('home.user.editaddr',compact('addr','sheng','shi','qu'));
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.editaddr',compact('addr','sheng','shi','qu','site','link'));
 
     }
 

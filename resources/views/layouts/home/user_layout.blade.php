@@ -50,9 +50,13 @@
 			<!--悬浮搜索框-->
 
 			<div class="nav white">
+			<!-- 轮播图 -->
+				@foreach($site as $v)
+				
 				<div class="logoBig">
-					<li><img src="/yh/home/images/logobig.png" /></li>
+					<li><img src="{{ $v->site_logo }}" /></li>
 				</div>
+				@endforeach
 
 				<div class="search-bar pr">
 					<a name="index_none_header_sysc" href="#"></a>
@@ -123,23 +127,16 @@
 @show
 <div class="footer">
 	<div class="footer-hd">
-		<p>
-			<a href="#">恒望科技</a>
-			<b>|</b>
-			<a href="#">商城首页</a>
-			<b>|</b>
-			<a href="#">支付宝</a>
-			<b>|</b>
-			<a href="#">物流</a>
-		</p>
+
+	@foreach($link as $v)
+			<a href="{{ $v->link_url }}">{{ $v->link_text }}</a>
+	@endforeach
 	</div>
 	<div class="footer-bd">
 		<p>
-			<a href="#">关于恒望</a>
-			<a href="#">合作伙伴</a>
-			<a href="#">联系我们</a>
-			<a href="#">网站地图</a>
-			<em>© 2015-2025 Hengwang.com 版权所有</em>
+			@foreach($site as $v)
+				{{ $v->site_copyright }}
+			@endforeach
 		</p>
 	</div>
 </div>

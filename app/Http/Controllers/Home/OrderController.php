@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\Addr;
 use Session;
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 
 class OrderController extends Controller
 {
@@ -54,8 +56,13 @@ class OrderController extends Controller
         $sheng = citys::where('LevelType',1)->get();
         $shi = citys::where('LevelType',2)->first();
         $qu = citys::where('ParentId',110100)->get();
+                //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
 
-    	return view('home.order',compact('addr','newdata','sheng','shi','qu'));
+    	return view('home.order',compact('addr','newdata','sheng','shi','qu','site','link'));
+
     }
 
 

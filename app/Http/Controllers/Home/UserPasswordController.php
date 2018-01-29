@@ -7,7 +7,8 @@ use App\Http\Controllers\Controller;
 use Session;
 use Illuminate\Support\Facades\Crypt;
 use App\Http\Models\Home\User;
-
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class UserPasswordController extends Controller
 {
     /**
@@ -18,7 +19,11 @@ class UserPasswordController extends Controller
     public function index()
     {
         //返回修改密码页面
-        return view('home.user.password');
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.password',compact('site','link'));
     }
 
     /**

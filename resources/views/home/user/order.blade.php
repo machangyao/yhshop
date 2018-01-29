@@ -111,8 +111,8 @@
 														@endif
 
 													<p class="ordeFr-info"><a href="{{url('/user/order')}}/{{$v->id}}">订单详情</a></p>
-													<p class="order-info"><a href="logistics.html">查看物流</a></p>
-													<p class="order-info"><a href="#">延长收货</a></p>
+													<p class="order-info"><a href="javascript:;">查看物流</a></p>
+													<p class="order-info"><a href="javascript:;">延长收货</a></p>
 												</div>
 											</li>
 											<li class="td td-change">

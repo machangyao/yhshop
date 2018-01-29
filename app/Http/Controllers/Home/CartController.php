@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Session;
 use App\Http\Models\Admin\Goods;
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class CartController extends Controller
 {
 
@@ -75,8 +77,11 @@ class CartController extends Controller
     public function index()
     {
     	// dd(session('cart'));
-
-    	return view('home.cart',compact('gn'));
+        //获取友情连接
+        $link = Links::all();
+        //获取网站配置信息
+        $site = Site_config::all();
+    	return view('home.cart',compact('gn','site','link'));
     }
 
 

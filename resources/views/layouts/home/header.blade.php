@@ -38,10 +38,14 @@
 		<!--悬浮搜索框-->
 
 		<div class="nav white">
-			<div class="logo"><img src="/yh/home/images/logo.png" /></div>
+			@foreach($site as $v)
+			<div class="logo"><img src="{{ $v->site_logo }}" /></div>
+			
 			<div class="logoBig">
-				<li><img src="/yh/home/images/logobig.png" /></li>
+				<li><img src="{{ $v->site_logo }}" /></li>
 			</div>
+
+			@endforeach
 			<div class="search-bar pr">
 				<a name="index_none_header_sysc" href="#"></a>
 				<form action="{{ url('/search') }}" method="get">

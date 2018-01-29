@@ -57,9 +57,6 @@ class SiteController extends Controller
             'site_describe'=>'required',
             'site_copyright'=>'required',
 
-            'site_logo'=>'required',
-
-
         ];
 
         //提示信息
@@ -67,9 +64,6 @@ class SiteController extends Controller
             'site_keyword.required'=>'网站关键字不能为空',
             'site_describe.required'=>'网站描述不能为空',
             'site_copyright.required'=>'网站版权声明不能为空',
-
-            'site_logo.required'=>'网站logo不能为空',
-
 
         ];
 
