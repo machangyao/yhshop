@@ -8,7 +8,7 @@ class Addr extends Model
 {
 	//地址表模型
     public $table = 'addrs';
-    public $primaryket = 'id';
+    public $primarykey = 'id';
 	public $timestamps = false;
     public $guarded = [];
 	

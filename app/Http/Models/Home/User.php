@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+
       //用户表模型 马长遥
+
 	public $table = 'users';
 	public $primaryket = 'id';
 	public $guarded = [];
@@ -22,5 +24,4 @@ class User extends Model
         return $this->hasMany('App\Http\Models\Home\collects', 'user_id', 'id');
 
     }
-
 }

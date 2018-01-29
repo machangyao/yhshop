@@ -122,7 +122,7 @@
 								<li class="td td-item">
 									<div class="item-pic">
 										<a href="#" class="J_MakePoint">
-											<img src="{{$v->pic}}" class="itempic J_ItemImg">
+											<img src="/uploads/{{$v->pic}}" class="itempic J_ItemImg">
 										</a>
 									</div>
 									<div class="item-info" style='float:none;'>
@@ -164,8 +164,10 @@
 							<div class="move-right">
 								<li class="td td-status">
 									<div class="item-status">
-
-										@if ($order->order_status == 1)
+										@if ($order->order_status == 0)
+											<p class="Mystatus">
+												等待付款</p>
+										@elseif ($order->order_status == 1)
 											<p class="Mystatus">
 												买家已付款</p>
 										@elseif ($order->order_status == 2)
@@ -175,13 +177,11 @@
 											<p class="Mystatus">
 												交易成功</p>
 										@endif
-
 										<p class="order-info"><a href="logistics.html">查看物流</a></p>
 										<p class="order-info"><a href="#">延长收货</a></p>
 									</div>
 								</li>
 								<li class="td td-change">
-
 									@if ($order->order_status == 1)
 										<div class="am-btn am-btn-danger anniu" disabled="true">
 											等待发货</div>
@@ -192,7 +192,6 @@
 										<div class="am-btn am-btn-danger anniu">
 											交易成功</div>
 									@endif
-
 								</li>
 							</div>
 						</div>

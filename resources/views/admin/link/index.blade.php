@@ -81,7 +81,9 @@
                                     
                                     <td><font style="vertical-align: inherit;">{{ $v->link_text }}</font></td>
 
+
                                     <td><a href="{{ url('admin/link/'.$v->link_id.'/edit') }}">编辑</a> | <a href="javascript:;" onclick="delLink({{ $v->link_id }})">删除</a></td>
+
 
                                 </tr>
                     
@@ -97,6 +99,7 @@
             </div>
             </section>
             </div>
+
 
 
 <script>
@@ -123,5 +126,6 @@
 }
 
     </script>
+
 
  @stop

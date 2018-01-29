@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\orders;
 use App\Http\Models\Home\User;
-
 use Illuminate\Support\Facades\Input;
-
-
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class UserOrderController extends Controller
 {
     /**
@@ -21,15 +20,19 @@ class UserOrderController extends Controller
     {
         //马长遥 返回订单页面
 
+
         $user = User::find(session('user_info')['id']);
         $orders = $user->orders;
-
 
         // $goods = [];
         // foreach($orders as $v){
         //     $goods = $v->Goods;
         // }
-        return view('home.user.order',compact('orders'));
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.order',compact('orders','site','link'));
     }
 
     /**
@@ -64,7 +67,11 @@ class UserOrderController extends Controller
         //订单详情 马长遥
         $order = orders::find($id);
         $addr = $order->addr;
-        return view('home.user.orderdetail',compact('addr','order'));
+                //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.orderdetail',compact('addr','order','site','link'));
     }
 
     /**
@@ -113,5 +120,4 @@ class UserOrderController extends Controller
             return back();
         }
     }
-
 }

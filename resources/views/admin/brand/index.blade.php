@@ -1,4 +1,5 @@
 @extends('layouts.admin.layout')
+
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -23,6 +24,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
+
                             <form action="{{ url('/brand') }}" method="get">
                                 <div class="row">
                                     <div class="col-xs-2">
@@ -42,6 +44,7 @@
                                     </div>
                                 </div>
                             </form>
+
 							<br>
 
                             <table id="example2" class="table table-bordered table-hover">
@@ -55,7 +58,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+
                                 @if(count($data))
+
                                     @foreach($data as $v)
                                     <tr>
                                         <td>{{ $v->id }}</td>
@@ -72,7 +77,9 @@
                                 @endif
                                 </tfoot>
                             </table>
+
                             {!! $data->appends($where)->render() !!}
+
                         </div>
                         <!-- /.box-body -->
                     </div>

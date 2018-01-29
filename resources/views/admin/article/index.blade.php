@@ -43,11 +43,7 @@
                                     </td>
                                     </tr>
                                 </table>
-
                             </form>
-
-
-                            
 
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
@@ -56,7 +52,6 @@
                                     <th>作者</th>
                                     <th>标题</th>
                                     <th>内容</th>
-
                                     <th>操作</th>
                                 </tr>
                                 </thead>
@@ -89,9 +84,7 @@
                 </section>
                 </div>
                             
-
     <!-- /.content-wrapper -->
-
 
     <script>
     function delArticle(id){
@@ -115,7 +108,7 @@
                 })
             },function(){});
         }
-
+    //查看详情
     function view(id){
         $.get('{{ url('admin/article/') }}/'+id,{'_method':'delete','_token':"{{ csrf_token() }}"},function (data){
                 data = '<table>'+data['article_content']+'</table>';
@@ -127,7 +120,6 @@
                 });
         });
 
-        
     }    
     </script>
     

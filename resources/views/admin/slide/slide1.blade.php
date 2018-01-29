@@ -55,16 +55,16 @@
                                     <tr role="row" class="odd">
                                     <td width="7%" class="sorting_1"><font style="vertical-align: inherit;">{{ $v->slide_id }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_url }}</font></td>
+
                                     <td width="10%">
                                     <img class="img" height="50" width="50" src="{{$v->slide_mig}}">
                                     </td>
+
                                     <td ><font style="vertical-align: inherit;">{{ $v->slide_text }}</font></td>
 
                                     
-                                    <td><font style="vertical-align: inherit;"><a href=" {{ url('admin/slide/'.$v->slide_id.'/edit') }} ">编辑</a> | <a href="javascript:;" onclick="delSlide({{ $v->slide_id }})">删除</a></font> |  
-                                    @if( $v->state == '0') <a href="javascript:;" onclick="stateSlide({{ $v->slide_id }})" class="state">上传</a> 
-                                    @else( $v->state == '1') <a href="javascript:;"  onclick="stateSlide({{ $v->slide_id }})" class="state">下架</a>
-                                    @endif
+                                    <td><font style="vertical-align: inherit;"><a href=" {{ url('admin/slide/'.$v->slide_id.'/edit') }} ">编辑</a> | <a href="javascript:;" onclick="delSlide({{ $v->slide_id }})">删除</a></font>
+                                  
                                     </td>
                                     
                                 </tr>
@@ -106,24 +106,6 @@
             },function(){});
         }
 
-        function  stateSlide(){
-           
-            // $.ajax({
-            //     type: "get",
-            //     url: "/admin/slide/state",
-            //     data: formData,
-            //     async: true,
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     success: function(data) {
-            //        console.log(data);
-            //     },
-            //     error: function(XMLHttpRequest, textStatus, errorThrown) {
-            //         alert("上传失败，请检查网络后重试");
-            //     }
-            // });
-        }
 
     </script>
 @stop

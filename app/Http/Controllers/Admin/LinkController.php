@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Models\Admin\Links;
+
 class LinkController extends Controller
 {
     /**
@@ -37,12 +38,15 @@ class LinkController extends Controller
      */
     public function create()
     {
+
         //添加页面
+
         return view('admin.link.add');
     }
 
     /**
      * Store a newly created resource in storage.
+
      *执行添加
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -90,6 +94,7 @@ class LinkController extends Controller
             //如果添加失败，返回到添加页
             return back();
         }
+
     }
 
     /**
@@ -109,6 +114,7 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     //返回一个编辑页面
     public function edit($id)
     {
@@ -117,6 +123,7 @@ class LinkController extends Controller
         $link = Links::find($id);
         //把数据传到页面
         return view('admin.link.edit',compact('link'));
+
     }
 
     /**
@@ -126,6 +133,7 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     //执行修改
     public function update(Request $request, $id)
     {
@@ -169,6 +177,7 @@ class LinkController extends Controller
             return back();
 
         }
+
     }
 
     /**
@@ -177,6 +186,7 @@ class LinkController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     //删除
     public function destroy($id)
     {
@@ -195,5 +205,6 @@ class LinkController extends Controller
             ];
         }
         return $data;
+
     }
 }

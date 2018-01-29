@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Session;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Models\Home\User;
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class UserDetailController extends Controller
 {
     /**
@@ -17,7 +19,11 @@ class UserDetailController extends Controller
     public function index()
     {
         //
-        return view('home.user.userdetail');        
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.userdetail',compact('site','link'));        
         
     }
 
@@ -88,12 +94,10 @@ class UserDetailController extends Controller
         unset($data['month']);
         unset($data['day']);
         $data['birthday'] = $birthday;
-
         if(!$data['avatar']){
             $data['avatar'] = session('user_info')['avatar'];
         }
 //        dd($data);
-
         $res = User::where('id',$id)->update($data);
         $user = User::where('id',$id)->first();
         if($res){
@@ -116,10 +120,12 @@ class UserDetailController extends Controller
     }
 
     public function mycenter(){
-
         $data = User::find(session('user_info')['id'])->collects;
-
-        return view('home.user.userdata',compact('data'));
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.user.userdata',compact('data','site','link'));
 
     }
 

@@ -12,6 +12,10 @@
 */
 
 
+
+//授权页面
+Route::get('admin/auth','Admin\LoginController@auth');
+
 //登录页面路由
 Route::get('admin/login','Admin\LoginController@login');
 
@@ -24,13 +28,34 @@ Route::get('/code/captcha/{tmp}', 'Admin\LoginController@captcha');
 //登陆页面的处理逻辑
 Route::post('admin/dologin','Admin\LoginController@dologin');
 
-Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
+
+Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','hasRole']],function(){
+// Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],function(){
+
 //后台首页
     Route::get('index','LoginController@index');
 
 //退出登录
     Route::get('logout','LoginController@logout');
 
+//用户授权页面
+    Route::get('user/auth/{id}','UserController@auth');
+
+//添加用户授权逻辑
+    Route::post('user/doauth','UserController@doAuth');
+
+//用户模块
+	Route::resource('user','UserController');
+
+    Route::get('role/auth/{id}','RoleController@auth');
+
+    Route::post('role/doauth','RoleController@doAuth');
+
+//角色相关的路由
+	Route::resource('role','RoleController');
+
+//权限相关路由
+	Route::resource('permission','PermissionController');
 
 //用户模块
 	Route::resource('user','UserController');
@@ -49,6 +74,8 @@ Route::get('/admin/slide/state','Admin\SlideController@state');
 //图片
 Route::post('/admin/slide/upload','Admin\SlideController@upload');
 
+
+
 //后台修改订单状态
 Route::get('/admin/order/status','Admin\OrderController@status');
 //前台确认收货
@@ -59,7 +86,6 @@ Route::resource('/admin/order','Admin\OrderController');
 
 //首页
 Route::get('/admin','Admin\IndexController@index');
-
 
 //轮播图路由
 Route::resource('/admin/slide', 'Admin\SlideController');
@@ -84,6 +110,7 @@ Route::resource('admin/article', 'Admin\ArticleController');
 
 //前台
 
+
 //个人订单
 
 Route::resource('/user/order','home\UserOrderController')->middleware('homeIsLogin');
@@ -94,12 +121,10 @@ Route::get('/user/collect/del','home\CollectController@del')->middleware('homeIs
 Route::get('/user/collect','home\CollectController@index')->middleware('homeIsLogin');
 //个人安全信息
 
-
 Route::resource('/user/safety','home\UserSafetyController')->middleware('homeIsLogin');
 //修改密码路由
 Route::resource('/user/password','home\UserPasswordController')->middleware('homeIsLogin');
 //个人地址管理
-
 Route::post('/user/daddr','home\UserAddrController@daddr')->middleware('homeIsLogin');
 Route::resource('/user/addr','home\UserAddrController')->middleware('homeIsLogin');
 
@@ -109,10 +134,8 @@ Route::post('/city/ajax','home\UserAddrController@ajax');
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
 
-Route::resource('/user','home\UserController')->middleware('homeIsLogin');
-
+Route::resource('/user','home\UserController');
 //注册账号ajax路由
-//
 Route::post('/user/ajax','home\UserController@ajax');
 //修改手机号ajax路由
 //登陆路由
@@ -134,6 +157,7 @@ Route::resource('/userdetail','home\UserDetailController')->middleware('homeIsLo
 //个人头像上传ajax
 Route::post('/userdetail/upload','home\UserDetailController@upload');
 
+
 // 前台
 // 首页路由
 Route::get('/','Home\IndexController@index');
@@ -141,8 +165,28 @@ Route::get('/','Home\IndexController@index');
 Route::get('/list/{id}','Home\ListController@index');
 // 商品详情页
 Route::get('/show/{id}','Home\ShowController@show');
+//加入购物车
+Route::get('/addcart','Home\CartController@addcart');
 //购物车页面
 Route::get('/cart','Home\CartController@index');
+//ajax购物车页面数量增加
+Route::post('/addnum','Home\CartController@addnum');
+//ajax购物车页面数量减少
+Route::post('/minnum','Home\CartController@minnum');
+//删除单个购物车商品
+Route::post('/delcart','Home\CartController@delcart');
+//删除购物车选中的商品
+Route::post('/clearcart','Home\CartController@clearcart');
+//订单页面
+Route::get('/order','Home\OrderController@index');
+//ajax订单页面数量增加
+Route::post('/orderaddnum','Home\OrderController@orderaddnum');
+//ajax订单页面数量减少
+Route::post('/orderminnum','Home\OrderController@orderminnum');
+//结算
+Route::post('/pay','Home\PayController@index');
+//下单成功
+Route::get('/success/{id}','Home\SuccessController@index');
 // 后台
 // 分类路由
 Route::resource('/category','Admin\CategoryController');
@@ -152,5 +196,4 @@ Route::resource('/good','Admin\GoodController');
 Route::get('/good/jia/{id}','Admin\GoodController@jia');
 
 // 品牌路由route
-
 Route::resource('/brand','Admin\BrandController');

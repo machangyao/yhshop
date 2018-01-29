@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\Ads;
+
+
 class AdsController extends Controller
 {
     /**
@@ -45,6 +48,7 @@ class AdsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     //
     public function store(Request $request)
     {
@@ -106,6 +110,7 @@ class AdsController extends Controller
             return back();
         }
         
+
     }
 
     /**
@@ -120,6 +125,7 @@ class AdsController extends Controller
     }
 
     /**
+
      * 
      *广告编辑
      * return 一个页面
@@ -131,11 +137,13 @@ class AdsController extends Controller
         $ads = Ads::find($id);
 
         return view('admin.ads.edit',compact('ads'));
+
     }
 
     /**
      * Update the specified resource in storage.
      *
+
      * 
      * 执行修改
      * 
@@ -197,6 +205,7 @@ class AdsController extends Controller
             return back();
 
         }
+
     }
 
     /**
@@ -205,6 +214,7 @@ class AdsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     //删除
     public function destroy($id)
     {
@@ -224,5 +234,5 @@ class AdsController extends Controller
         }
         return $data;
     }
-  
+
 }

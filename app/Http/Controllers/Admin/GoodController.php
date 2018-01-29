@@ -12,7 +12,12 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class GoodController extends Controller
 {
-    //商品上下架
+
+    /*
+    * 商品上下架
+    * @author taidmin
+    * @return 返回上下架成功后状态
+    */
     public function jia($id)
     {
         $data = Goods::find($id);
@@ -33,7 +38,11 @@ class GoodController extends Controller
         return $data;
     }
 
-
+    /*
+    * 图片上传
+    * @author taidmin
+    * @return 返回文件路径
+    */
     public function upload()
     {
         //获取上传的文件对象
@@ -48,16 +57,19 @@ class GoodController extends Controller
             return  $filepath;
         }
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+
+    /*
+    * 商品列表
+    * @author taidmin
+    * @return 返回商品列表视图
+    */
     public function index(Request $request)
     {
         //
         $title = "商品列表";
         $keyword = $request->input('keyword','');
+
         $num = $request->input('num',6);
 
         //取商品分类信息
@@ -66,11 +78,12 @@ class GoodController extends Controller
         return view('admin.good.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    /*
+    * 添加商品
+    * @author taidmin
+    * @return 返回添加商品视图
+    */
     public function create()
     {
         //
@@ -78,20 +91,21 @@ class GoodController extends Controller
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
 
+
         //从分类数组中取出pid列
         $pid = array_column($cates,'pid');
         //去除重复
         $pid = array_unique($pid);
         
         return view('admin.good.create',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'pid'=>$pid]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行添加商品
+    * @author taidmin
+    * @return 返回添加后的状态
+    */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -99,7 +113,9 @@ class GoodController extends Controller
                 'price' => 'required|numeric',
                 'market_price' => 'required|numeric',
                 'number' => 'required|numeric',
+
                 'content' => 'required',
+
             ], [
                 'name.required' => '商品名称不能为空',
                 'name.min' => '商品名称最少两位',
@@ -108,8 +124,10 @@ class GoodController extends Controller
                 'market_price.required' => '市场价格不能为空',
                 'market_price.numeric' => '市场价格必须是数字',
                 'number.required' => '库存不能为空',
+
                 'number.numeric' => '库存必须是数字',
                 'content.required' => '商品详情不能为空'
+
             ]);
         // 获取提交的数据
         $input = $request->except('_token');
@@ -122,6 +140,8 @@ class GoodController extends Controller
         $data->bid = $input['bid'];
         $data->sn = $input['sn'];
         $data->number = $input['number'];
+
+
         $data->keyword = $input['keyword'];
         $data->description = $input['description'];
         $data->desc = $input['content'];
@@ -165,12 +185,11 @@ class GoodController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 商品详情页
+    * @author taidmin
+    * @return 返回商品详情页视图
+    */
     public function show($id)
     {
         //
@@ -179,12 +198,11 @@ class GoodController extends Controller
         return view('admin.good.show',['title'=>$title,'data'=>$data]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 修改商品
+    * @author taidmin
+    * @return 返回修改商品视图
+    */
     public function edit($id)
     {
         //
@@ -197,21 +215,21 @@ class GoodController extends Controller
         $cates = \DB::select("select *,concat(path,id,',') path from categorys order by path");
         $brands = \DB::table("brands")->get();
 
+
         //从分类数组中取出一列pid
         $pid = array_column($cates,'pid');
         //去除重复
         $pid = array_unique($pid);
 
         return view('admin.good.edit',['title'=>$title,'cates'=>$cates,'brands'=>$brands,'data'=>$data,'cid'=>$cid,'bid'=>$bid,'pid'=>$pid]);
+
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行修改商品
+    * @author taidmin
+    * @return 返回修改后状态
+    */
     public function update(Request $request, $id)
     {
         //
@@ -263,12 +281,11 @@ class GoodController extends Controller
         
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 删除商品
+    * @author taidmin
+    * @return 返回删除后状态
+    */
     public function destroy($id)
     {
         //

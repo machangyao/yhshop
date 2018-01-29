@@ -5,10 +5,58 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Admin\User;
+use App\Http\Models\Admin\Role;
 use Illuminate\Support\Facades\Crypt;
+use DB;
 
 class UserController extends Controller
 {
+    //返回用户授权页面
+    public function auth($id)
+    {
+        //根据id找到相关的用户
+        $user = User::find($id);
+        //获取角色列表
+        $roles = Role::get();
+        //获取当前用户已经拥有的角色列表
+        $own_roles = $user ->roles;
+        //存放当前用户拥有的角色ID
+        $own = [];
+        foreach($own_roles as $v)
+        {
+            $own[] = $v -> id;
+        }
+        return view('admin.user.auth',compact('user','roles','own'));
+    }
+    //处理用户授权操作
+    public function doAuth(Request $request)
+    {
+        //1.获取传过来的参数(要授权的用户的ID,要授予的角色的ID)
+        $input = $request -> except('_token');
+      
+        //2.提交到user_roles这个表中
+        DB::beginTransaction();
+        try{
+            //删除当前用户的所有权限
+            DB::table('user_roles') -> where('user_id', $input['id']) -> delete();
+
+            if(!empty($input['id']['\'role\''])){
+                //关联表中记录（给用户授权）前，应该检查一下，当前用户是否已经拥有了此角色，如果没有再添加
+                foreach($input['id']['\'role\''] as $v){
+                    // dd($v);
+                    DB::table('user_roles') -> insert([
+                        'user_id' => $input['id']['\'id\''],
+                        'role_id' => $v,
+                     ]);
+                }
+            }
+            DB::commit();
+            return redirect('admin/user');
+        }catch(Exception $e){
+            DB::rollBack();
+            return redirect() -> back() -> withErrors(['error' => $e->getMessage()]);
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -22,11 +70,13 @@ class UserController extends Controller
 
         //2.获取分页数据
 
+
         $data = User::orderBy('id','asc') -> paginate(6);
         // return view('admin.user.list',compact('data'));
         //3.单条件搜索
         $input = $request -> input('keywords');
         $data = User::where('nickname' , 'like' , '%' .$input. '%') -> paginate(6);
+
         return view('admin.user.list',compact('data','input'));
     }
 
@@ -50,9 +100,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //1.接收表单提交过来的参数
+
        //  $input = $request ->all();
        // dd($input);
         $input = $request->except('_token','re-password');
+
         //2.检测表单验证规则
         dd
            $this->validate($request, [
@@ -77,8 +129,7 @@ class UserController extends Controller
                   'email.required' =>' 邮箱不能为空',
                   'avatar.image' =>'请上传一张正确的图片'
              ]);
-
-           //处理上传
+     //处理上传
     if($request->hasFile('avatar'))
     {
         $file = $request->file('avatar');
@@ -104,8 +155,7 @@ class UserController extends Controller
     {
         $input['avatar'] = 'default.jpg';
     }
-       
-    
+
         //3.将提交的数据添加到user表中
         //向数据表中添加数据
         $input['password'] = Crypt::encrypt($input['password']);
@@ -139,9 +189,11 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         //通过传过来的id获取到要修改的用户
         $user = User::find($id);
         return view('admin.user.edit',compact('user'));
+
     }
 
     /**
@@ -153,6 +205,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $input = $request -> except('_token','_method','updated_at');
          //处理上传
     if($request->hasFile('avatar'))
@@ -185,6 +238,7 @@ class UserController extends Controller
         }else{
             return back() -> with('msg', '修改失败');
         }
+
     }
 
     /**
@@ -195,6 +249,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+
         $res = User::find($id) -> delete();
         if($res){
             $data = [
@@ -209,5 +264,6 @@ class UserController extends Controller
             ];
         }
             return $data;
+
     }
 }

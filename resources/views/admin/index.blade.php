@@ -11,7 +11,7 @@
                 <small>advanced tables</small>
             </h1>
             <ol class="breadcrumb">
-                <li>管理员: {{ session('user') }}</li>
+                <li>管理员: {{ session('user')->nickname }}</li>
                 <li><a href="#">修改密码</a></li>
                 <li><a href="{{ url('admin/logout') }}">退出</a></li>
             </ol>

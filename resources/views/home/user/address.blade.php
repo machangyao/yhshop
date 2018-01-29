@@ -14,22 +14,23 @@
 				</div>
 				<hr/>
 				<ul class="am-avg-sm-1 am-avg-md-3 am-thumbnails">
-					@foreach ($addr as $k=>$v)
 
+					@foreach ($addr as $k=>$v)
 					@if ($v->addr_status == 1)
 					<li class="user-addresslist defaultAddr">
 					@else
 					<li class="user-addresslist">
 					@endif
 							<span class="new-option-r" id="daddr" onclick="daddr({{$v->id}})"><i class="am-icon-check-circle"></i>默认地址</span>
-
 						<p class="new-tit new-p-re">
 							<span class="new-txt">{{$v->addr_name}}</span>
 							<span class="new-txt-rd2">{{$v->addr_tel}}</span>
+
 						</p>
 						<div class="new-mu_l2a new-p-re">
 							<p class="new-mu_l2cw">
 								<span class="title">地址：</span>
+
 								<span class="province">{{$v->addr}}</span>
 								<span class="province">{{$v->addrdetail}}</span>
 								
@@ -42,6 +43,7 @@
 
 					</li>
 					@endforeach
+
 				</ul>
 				<div class="clear"></div>
 				<a class="new-abtn-type" data-am-modal="{target: '#doc-modal-1', closeViaDimmer: 0}">添加新地址</a>
@@ -55,6 +57,7 @@
 							<div class="am-fl am-cf"><strong class="am-text-danger am-text-lg">新增地址</strong> / <small>Add&nbsp;address</small></div>
 						</div>
 						<hr/>
+
 						@if (count($errors) > 0)
 						    <div class="alert alert-danger" >
 						        <ul>
@@ -71,23 +74,29 @@
 									<label for="user-name" class="am-form-label">收货人</label>
 									<div class="am-form-content">
 										<input type="text" id="name" placeholder="收货人" name='addr_name'>
+
 									</div>
 								</div>
 
 								<div class="am-form-group">
 									<label for="user-phone" class="am-form-label">手机号码</label>
 									<div class="am-form-content">
+
 										<input id="tel" placeholder="手机号必填" type="email" name='addr_tel'>
+
 									</div>
 								</div>
 								<div class="am-form-group">
 									<label for="user-address" class="am-form-label">所在地</label>
 									<div class="am-form-content address">
+
 										<select id='s' >
+
 											@foreach ($sheng as $v)
 											<option value="{{$v->id}}">{{$v->Name}}</option>
 											@endforeach
 										</select>
+
 										<select id='shi' >
 											<option value="{{$shi['id']}}">{{$shi['Name']}}</option>
 										</select>
@@ -95,6 +104,7 @@
 											@foreach ($qu as $v)
 											<option value="{{$v->id}}">{{$v->Name}}</option>
 											@endforeach
+
 										</select>
 									</div>
 								</div>
@@ -102,14 +112,18 @@
 								<div class="am-form-group">
 									<label for="user-intro" class="am-form-label">详细地址</label>
 									<div class="am-form-content">
+
 										<textarea class="" rows="3" id="user-intro" placeholder="输入详细地址" name='addrdetail'></textarea>
+
 										<small>100字以内写出你的详细地址...</small>
 									</div>
 								</div>
 
 								<div class="am-form-group">
 									<div class="am-u-sm-9 am-u-sm-push-3">
+
 										<a class="am-btn am-btn-danger" id='submit'>保存</a>
+
 										<a href="javascript: void(0)" class="am-close am-btn am-btn-danger" data-am-modal-close>取消</a>
 									</div>
 								</div>
@@ -138,6 +152,7 @@
 				$(function(){
   					$("#province").ProvinceCity();
   				});
+
 
 				$('#s').on('change',function(){
 					var val = $(this).val();
@@ -191,8 +206,6 @@
 					});
 
 				});
-
-
 				function daddr(id) {
                     $.ajax({
                         url:'{{url("/user/daddr")}}',
@@ -202,7 +215,6 @@
                     }
                     });
                 }
-
 
 			</script>
 

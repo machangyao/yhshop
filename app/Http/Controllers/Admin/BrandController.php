@@ -4,19 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use DB;
 use App\Http\Models\Admin\Brands;
-
+use DB;
 
 class BrandController extends Controller
-
-
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 品牌列表
+    * @author taidmin
+    * @return 返回品牌列表视图
+    */
     public function index(Request $request)
     {
 
@@ -29,44 +26,40 @@ class BrandController extends Controller
         $data = Brands::where('name','like','%'. $keyword .'%')->paginate($num);
         return view('admin.brand.index',['title'=>$title,'data'=>$data,'where'=>['keyword'=>$keyword,'num'=>$num]]);
 
+
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 添加品牌
+    * @author taidmin
+    * @return 返回添加品牌视图
+    */
     public function create()
     {
 
         //添加
         $title = "添加品牌";
         return view('admin.brand.create',['title'=>$title]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行添加品牌
+    * @author taidmin
+    */
     public function store(Request $request)
     {
         //
+
         $input = $request->except('_token');
         $data = new Brands;
-        $data -> name = $input['name'];
-        $data -> url = $input['url'];
-        $res = $data -> save();
-        if($res)
-        {
-            return redirect('/brand')->with('info','添加成功');
-        }else{
-            return back()->with('info','添加失败');
-        }   
-
+        $data->name = $input['name'];
+        $data->url = $input['url'];
+        $res = $data->save();
+        if ($res) {
+            return redirect('/brand')->with('info', '添加成功');
+        }
     }
-
 
     /**
      * Display the specified resource.
@@ -79,12 +72,11 @@ class BrandController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 修改品牌
+    * @author taidmin
+    * @return 返回修改品牌视图
+    */
     public function edit($id)
     {
         //
@@ -93,13 +85,10 @@ class BrandController extends Controller
         return view('admin.brand.edit',['title'=>$title,'data'=>$data]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 执行更新
+    * @author taidmin
+    */
     public function update(Request $request, $id)
     {
         //
@@ -114,12 +103,11 @@ class BrandController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    * 删除品牌
+    * @author taidmin
+    * @return 返回状态数组
+    */
     public function destroy($id)
     {
         //删除

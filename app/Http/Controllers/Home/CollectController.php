@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class CollectController extends Controller
 {
     //
@@ -31,7 +32,12 @@ class CollectController extends Controller
     public function index(){
 
         $data = User::find(session('user_info')['id'])->collects;
-        return view('home.user.collect',compact('data'));
+
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();        
+        return view('home.user.collect',compact('data','site','link'));
 
     }
 

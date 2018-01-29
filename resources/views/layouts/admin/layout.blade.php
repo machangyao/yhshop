@@ -7,16 +7,20 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
+
     <link rel="stylesheet" href="{{ asset('/yh/admin/bootstrap/css/bootstrap.min.css') }}">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
+
     <link rel="stylesheet" href="{{ asset('/yh/admin/dist/css/AdminLTE.min.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('/yh/admin/dist/css/skins/_all-skins.min.css') }}">
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,8 +28,10 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
     <script type="text/javascript" src="{{ asset('/yh/layer/jquery-1.8.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/yh/layer/layer.js') }}"></script>
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -349,6 +355,30 @@
                 </li>
                 <li class="treeview">
                     <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>角色管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/role/create') }}"><i class="fa fa-circle-o"></i>添加角色</a></li>
+                        <li><a href="{{ url('/admin/role') }}"><i class="fa fa-circle-o"></i>角色列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>权限管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/permission/create') }}"><i class="fa fa-circle-o"></i>添加权限</a></li>
+                        <li><a href="{{ url('/admin/permission') }}"><i class="fa fa-circle-o"></i>权限列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
                         <i class="fa fa-dashboard"></i> <span>分类管理</span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -383,8 +413,6 @@
                         <li><a href="{{ url('/brand') }}"><i class="fa fa-circle-o"></i>浏览品牌</a></li>
                     </ul>
                 </li>
-
-
                 <li class="treeview">
                         <a href="#">
                             <i class="fa fa-dashboard"></i> <span>订单管理</span>
@@ -396,9 +424,6 @@
                             <li><a href="{{url('/admin/order')}}"><i class="fa fa-circle-o"></i>浏览订单</a></li>
                         </ul>
                 </li>
-
-
-
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-dashboard"></i> <span>轮播图管理</span>
@@ -467,6 +492,63 @@
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/article') }}"><i class="fa fa-circle-o"></i>浏览文章</a></li>
                         <li><a href="{{ url('/admin/article/create') }}"><i class="fa fa-circle-o"></i>添加文章</a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>支付管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/pay') }}"><i class="fa fa-circle-o"></i>支付管理</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>评论管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('admin/comment') }}"><i class="fa fa-circle-o"></i>评论列表</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>活动管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/activity') }}"><i class="fa fa-circle-o"></i>商品活动详情</a></li>
+                        <li><a href="{{ url('/admin/activity/create') }}"><i class="fa fa-circle-o"></i>添加活动</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>配送管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/admin/dispatchs') }}"><i class="fa fa-circle-o"></i>配送详情</a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-dashboard"></i> <span>推荐管理</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ url('/good') }}"><i class="fa fa-circle-o"></i>开启|关闭</a></li>
                     </ul>
                 </li>
 

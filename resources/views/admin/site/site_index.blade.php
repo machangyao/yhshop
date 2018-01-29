@@ -34,9 +34,11 @@
 
 
 
+
                             <div class="row"><div class="col-sm-12">
 
                             <table id="example1" class="table table-bordered table-striped dataTable" role="grid" aria-describedby="example1_info"> 
+
                                 <thead>
                                 <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 163px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">ID</font></font></th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 202px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">关键字</font></font></th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 178px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网站描述</font></font></th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 139px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">版权声明</font></font></th><th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending" style="width: 100px;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">网站logo</font></font></th></tr>
                                 </thead>
@@ -51,6 +53,7 @@
                                     <td ><font style="vertical-align: inherit;">{{ $v->site_keyword }}</font></td>
                                     <td><font style="vertical-align: inherit;">{{ $v->site_describe }}</font></td>
                                     <td ><font style="vertical-align: inherit;">{{ $v->site_copyright }}</font></td>
+
                                     <td><font style="vertical-align: inherit;"><img src="{{ $v->site_logo }}" alt=""></font></td>
 
                                     </tr>

@@ -8,11 +8,11 @@ use App\Http\Models\Home\User;
 use Illuminate\Support\Facades\Crypt;
 use Gregwar\Captcha\CaptchaBuilder; 
 use Gregwar\Captcha\PhraseBuilder;
-
 use Illuminate\Support\Facades\Input;
-
 use Session;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Models\Home\Site_config;
+use App\Http\Models\Admin\Links;
 class UserController extends Controller
 {
     /**
@@ -39,7 +39,11 @@ class UserController extends Controller
      * @param null
      * @return 返回一个前台的注册页面视图
      */
-        return view('home.register');
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
+        return view('home.register',compact('site','link'));
     }
 
     /**
@@ -57,10 +61,11 @@ class UserController extends Controller
      * @param 用户注册信息
      * @return 返回一个前台的提交注册
      */
+
         if(strlen($request->input('user_tel')) != 11){
             return back()->with('size','手机号必须11位');
         }
-        
+
         $this->validate($request, [
             'user_password' => 'required|',
             'user_email' => 'required|email',
@@ -163,15 +168,19 @@ class UserController extends Controller
         //     Session::put('user_info',Cookie::get('user_info'));
         //     return back();
         // }
+        //获取网站配置信息
+        $site = Site_config::all();
+        //获取友情连接
+        $link = Links::all();
         if(session('user_info')){
             return redirect('/');
         }
 
+
         if(!session('back')){
             Session::put('back',Input::get('url'));
         }
-
-        return view('Home.login');
+        return view('Home.login',compact('site','link'));
     }
 
     public function dologin(Request $request){
@@ -183,6 +192,7 @@ class UserController extends Controller
          * @param 用户登陆
          * @return 返回一个前台的提交登陆
          */
+
         $data = $request->except('_token','captcha');
         $this->validate($request, [
                 'user_name' => 'required|',
@@ -207,9 +217,9 @@ class UserController extends Controller
                     cookie::queue("user_password",$data['user_password'],time()+3600*24*365);
                 }
                 Session::put('user_info',$res);
-
-
-
+                if(session('gocart')){
+                    return redirect('/addcart?id='.session('gocart')['id'].'&num='.session('gocart')['num']);
+                }
                 if(session('back')){
                     return redirect(session('back'));
                 }else{
