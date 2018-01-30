@@ -38,11 +38,11 @@
 
     <header class="main-header">
         <!-- Logo -->
-        <a href="{{url('/admin')}}" class="logo">
+        <a href="{{url('/admin/index')}}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>{{ config('app.name') }}</b></span>
+            <span class="logo-lg"><b>优货YH</b></span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
@@ -273,7 +273,7 @@
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="/uploads/{{session('user')['avatar']}}" class="img-circle" alt="User Image">
+                                <img src="/uploads/{{session('user')->avatar}}" class="img-circle" alt="User Image">
 
                                 <p>
                                     {{ session('user')->nickname }}
@@ -441,7 +441,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="{{ url('/admin/site') }}"><i class="fa fa-circle-o"></i>浏览网站配置信息</a></li>
-                        <li><a href="{{ url('/admin/site/edit') }}"><i class="fa fa-circle-o"></i>编辑网站配置信息</a></li>
+                        <li><a href="{{ url('/admin/site/add') }}"><i class="fa fa-circle-o"></i>添加网站配置信息</a></li>
                     </ul>
                 </li>
 

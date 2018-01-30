@@ -11,7 +11,8 @@
 |
 */
 
-
+////后台
+//Route::get('/admin','Admin\IndexController@index');
 
 //授权页面
 Route::get('admin/auth','Admin\LoginController@auth');
@@ -37,20 +38,53 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>'islogin'],f
 
     Route::post('/user/dopass','UserController@dopass');
 
-//用户模块
-     Route::resource('user','UserController');
 
-//用户授权页面
-    Route::get('user/auth/{id}','UserController@auth');
+
+
 
 //添加用户授权逻辑
     Route::post('user/doauth','UserController@doAuth');
 
-    Route::get('role/auth/{id}','RoleController@auth');
+
 
     Route::post('role/doauth','RoleController@doAuth');
 //权限相关路由
     Route::resource('permission','PermissionController');
+
+// 分类路由
+    Route::resource('category','CategoryController');
+
+// 商品路由
+    Route::resource('good','GoodController');
+
+// 品牌路由route
+    Route::resource('brand','BrandController');
+
+//后台修改订单状态
+    Route::get('order/status','OrderController@status');
+
+//轮播图路由
+    Route::resource('slide', 'SlideController');
+
+//网站配置
+    Route::get('site', 'SiteController@index');
+
+//广告
+    Route::resource('ads', 'AdsController');
+
+//有请链接
+    Route::resource('link', 'LinkController');
+
+//文章
+    Route::resource('article', 'ArticleController');
+    // 分类路由
+    Route::resource('/category','CategoryController');
+    // 商品路由
+    Route::resource('/good','GoodController');
+    //商品上下架
+    Route::get('/good/jia/{id}','GoodController@jia');
+    // 品牌路由
+    Route::resource('/brand','BrandController');
 });
 
 Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','hasRole']],function(){
@@ -59,60 +93,41 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin', 'middleware'=>['islogin','
 //后台首页
     Route::get('index','LoginController@index');
 
+    //用户模块
+    Route::resource('user','UserController');
+
+
+//首页
+//Route::get('/admin','Admin\IndexController@index');
+
 //角色相关的路由
-	Route::resource('role','RoleController');
-	
+    Route::resource('role','RoleController');
 });
 
+//用户授权页面
+Route::get('admin/user/auth/{id}','admin\UserController@auth');
 
-
-//后台
-
-Route::get('/admin','Admin\IndexController@index');
-
-
-//状态
-Route::get('/admin/slide/state','Admin\SlideController@state');
-//图片
-Route::post('/admin/slide/upload','Admin\SlideController@upload');
-
-
-
-//后台修改订单状态
-Route::get('/admin/order/status','Admin\OrderController@status');
 //前台确认收货
 Route::get('/order/status','Home\UserOrderController@status');
 //订单管理
 Route::resource('/admin/order','Admin\OrderController');
 
 
-//首页
-Route::get('/admin','Admin\IndexController@index');
 
-//轮播图路由
-Route::resource('/admin/slide', 'Admin\SlideController');
 
-//网站配置
-Route::get('/admin/site', 'Admin\SiteController@index');
 //编辑网站配置信息
 Route::get('/admin/site/edit' , 'Admin\SiteController@edit');
 Route::post('/admin/site', 'Admin\SiteController@syore');
 
-//有请链接
-Route::resource('/admin/link', 'Admin\LinkController');
+Route::get('/admin/site/add','Admin\SiteController@add');
+Route::post('/admin/site/doadd','Admin\SiteController@doadd');
 
-//广告
-Route::resource('admin/ads', 'Admin\AdsController');
-
-//文章
-Route::resource('admin/article', 'Admin\ArticleController');
-
-
-
+//状态
+Route::get('/admin/slide/state','Admin\SlideController@state');
+//图片
+Route::post('/admin/slide/upload','Admin\SlideController@upload');
 
 //前台
-
-
 //个人订单
 
 Route::resource('/user/order','home\UserOrderController')->middleware('homeIsLogin');
@@ -129,14 +144,11 @@ Route::resource('/user/password','home\UserPasswordController')->middleware('hom
 //个人地址管理
 Route::post('/user/daddr','home\UserAddrController@daddr')->middleware('homeIsLogin');
 Route::resource('/user/addr','home\UserAddrController')->middleware('homeIsLogin');
-
 //城市联动ajax
 Route::post('/city/ajax','home\UserAddrController@ajax');
 //用户退出
 Route::get('/user/lgout','home\UserDetailController@lgout');
 //用户资源路由
-
-
 Route::resource('/user','home\UserController');
 //注册账号ajax路由
 Route::post('/user/ajax','home\UserController@ajax');
@@ -160,6 +172,32 @@ Route::resource('/userdetail','home\UserDetailController')->middleware('homeIsLo
 //个人头像上传ajax
 Route::post('/userdetail/upload','home\UserDetailController@upload');
 
+// 前台
+// 首页路由
+Route::get('/','Home\IndexController@index');
+// 商品列表页路由
+Route::get('/list/{id}','Home\ListController@index');
+// 商品详情页
+Route::get('/show/{id}','Home\ShowController@show');
+//购物车页面
+Route::get('/cart','Home\CartController@index');
+
+//商品上下架
+Route::get('/good/jia/{id}','Admin\GoodController@jia');
+
+
+
+// 后台
+ Route::group(['namespace'=>'Admin','middleware'=>'islogin'],function(){
+     // 分类路由
+     Route::resource('/category','CategoryController');
+     // 商品路由
+     Route::resource('/good','GoodController');
+     //商品上下架
+     Route::get('/good/jia/{id}','GoodController@jia');
+     // 品牌路由
+     Route::resource('/brand','BrandController');
+ });
 
 // 前台
 // 首页路由
@@ -192,28 +230,3 @@ Route::post('/orderminnum','Home\OrderController@orderminnum');
 Route::post('/pay','Home\PayController@index');
 //下单成功
 Route::get('/success/{id}','Home\SuccessController@index');
-
-
-// 后台
-// Route::group(['namespace'=>'Admin','middleware'=>['islogin','hasRole']],function(){
-//     // 分类路由
-//     Route::resource('/category','CategoryController');
-//     // 商品路由
-//     Route::resource('/good','GoodController');
-//     //商品上下架
-//     Route::get('/good/jia/{id}','GoodController@jia');
-//     // 品牌路由
-//     Route::resource('/brand','BrandController');
-// });
-
-
-// // 分类路由
-// Route::resource('/category','Admin\CategoryController');
-// // 商品路由
-// Route::resource('/good','Admin\GoodController');
-// //商品上下架
-// Route::get('/good/jia/{id}','Admin\GoodController@jia');
-// // 品牌路由
-// Route::resource('/brand','Admin\BrandController');
-
-

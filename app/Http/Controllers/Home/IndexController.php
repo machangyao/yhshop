@@ -10,6 +10,7 @@ use App\Http\Models\Admin\Articles;
 use App\Http\Models\Home\Slides;
 use App\Http\Models\Home\Site_config;
 use App\Http\Models\Admin\Links;
+use App\Http\Models\Home\Goods;
 
 class IndexController extends Controller
 {
@@ -22,12 +23,12 @@ class IndexController extends Controller
     public function index()
     {
     	//获取所有一级父类
-    	// $cates = Categorys::where('pid',0)->get();
-    	// dd($cate);
     	$cate = Categorys::all();
-    	
     	$cates = $this->findSubTree($cate,0,0);
-    	// dd($cates[0]);
+    	
+        //获取商品
+        $data = Goods::where('cid',34)->orderBy('id','asc')->take(6)->get();
+        $data1 = Goods::where('cid',34)->orderBy('id','desc')->take(6)->get();
 
         //获取轮播图
         $slide = Slides::all();
@@ -39,7 +40,7 @@ class IndexController extends Controller
         $site = Site_config::all();
         //获取友情连接
         $link = Links::all();
-    	return view('home.index',compact('cates','slide','ads','article','link','site'));
+    	return view('home.index',compact('cates','slide','ads','article','link','site','data','data1'));
     }
 
 

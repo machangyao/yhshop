@@ -532,5 +532,9 @@
 		var num = $('#text_box').val();
 		window.location.href = '{{ url('addcart/?id=') }}'+id+'&num='+num;
 	});
+
+
+
+
 </script>
 @stop

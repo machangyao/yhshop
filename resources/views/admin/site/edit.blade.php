@@ -44,7 +44,7 @@
                             </div>
                         @endif
 
-                        <form role="form" action="{{ url('/admin/site') }}" method="post" id="form_upload"  enctype="multipart/form-data">
+                        <form role="form" action="{{ url('/admin/site') }}?id={{$site->site_id}}" method="post" id="form_upload"  enctype="multipart/form-data">
                         {{ csrf_field() }}
                             <div class="box-body">
                                 <div class="col-sm-5">
@@ -75,7 +75,7 @@
 
                                   
                                     <input type="file" multiple="true" name="site_logo" id="file_upload">
-                                    <img src="{{ $site->site_logo }}" id="file_upload_img">
+                                    <img src="/uploads/{{ $site->site_logo }}" id="file_upload_img">
                                     
 
                             </div>

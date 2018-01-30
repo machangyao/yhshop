@@ -24,7 +24,7 @@
 			@foreach($site as $v)
 				
 				<div class="logoBig">
-					<li><img src="{{ $v->site_logo }}" /></li>
+					<li><img src="/uploads/{{ $v->site_logo }}" /></li>
 				</div>
 				@endforeach
 

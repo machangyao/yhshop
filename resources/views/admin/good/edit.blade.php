@@ -43,7 +43,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="inputEmail3" class="col-sm-2 control-label">分类</label>
-                                    <div class="col-sm-2">
+                                    <div class="col-sm-3">
                                         <select name="cid" class="form-control">
                                             <option value="0">==请选择==</option>
                                             @foreach($cates as $v)

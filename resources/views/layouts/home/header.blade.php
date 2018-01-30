@@ -31,7 +31,6 @@
 			</div>
 			</div>
 			<div class="topMessage favorite">
-				<div class="menu-hd"><a href="#" target="_top"><i class="am-icon-heart am-icon-fw"></i><span>收藏夹</span></a></div>
 		</ul>
 		</div>
 
@@ -42,7 +41,7 @@
 			<div class="logo"><img src="{{ $v->site_logo }}" /></div>
 			
 			<div class="logoBig">
-				<li><img src="{{ $v->site_logo }}" /></li>
+				<li><a href="{{url('/')}}"><img src="/uploads/{{ $v->site_logo }}" /></a></li>
 			</div>
 
 			@endforeach

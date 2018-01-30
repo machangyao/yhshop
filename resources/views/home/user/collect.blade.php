@@ -41,7 +41,7 @@
                                     <div class="s-tp">
                                         <span class="ui-btn-loading-before">找相似</span>
                                         <i class="am-icon-shopping-cart"></i>
-                                        <a href="{{url('addcart')}}"><span class="ui-btn-loading-before buy">加入购物车</span></a>
+                                        <a href="{{url('addcart')}}?id={{$v->goods->id}}&num=1"><span class="ui-btn-loading-before buy">加入购物车</span></a>
                                         <p>
                                             <a href="{{url('/user/collect/del')}}?cid={{$v->id}}" class="c-nodo J_delFav_btn">取消收藏</a>
                                         </p>

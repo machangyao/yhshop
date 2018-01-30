@@ -22,10 +22,10 @@ class CollectController extends Controller
         $data['user_id'] = session('user_info')['id'];
         $res = collects::where('user_id',$data['user_id'])->where('gid',$data['gid'])->first();
         if($res){
-            return back();
+            return back()->with('b',true);
         }
         collects::insert($data);
-        return back();
+        return back()->with('a',true);
 
     }
 

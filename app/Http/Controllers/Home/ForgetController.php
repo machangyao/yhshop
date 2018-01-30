@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Home;
 
+use App\Http\Models\Admin\Links;
+use App\Http\Models\Home\Site_config;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Home\User;
@@ -11,7 +13,12 @@ class ForgetController extends Controller
 {
     //
 	public function forget(){
-        return view('home.forget');
+        //获取网站配置信息
+        $site = Site_config::all();
+
+        //获取友情连接
+        $link = Links::all();
+        return view('home.forget',compact('site','link'));
     }
 
     public function doforget(Request $request){
